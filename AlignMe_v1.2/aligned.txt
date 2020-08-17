@@ -1,0 +1,6 @@
+CLUSTAL W formatted alignment obtained with AlignMe 1.1
+
+1H2S_________   -------------MVGLTTLFWLGAIGMLVGTL
+2EI4_________   QAGFDLLNDGRPETLWLGIGTLLMLIGTFY---
+                                *     *  **      
+
