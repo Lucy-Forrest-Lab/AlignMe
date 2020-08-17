@@ -5,7 +5,7 @@ Alignment of membrane proteins
 - boost library headers (boost.org), namely shared_ptr.hpp 
 
 ## How to install:
-- enter this folder in your terminal
+- change directory to the appropriate folder in your terminal (either AlignMe1.1/ or AlignMe1.2/)
 - type "make"
 - the executable is created in this folder and ready to use 
 
