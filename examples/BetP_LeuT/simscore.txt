@@ -1,0 +1,2 @@
+weight: 2.6 type: ScaleSimilarity scale: ../scales/HWvH.txt windowtype: triangular windowsize: 13 
+weight: 0.5 type: SequenceSimilarity matrix: ../matrices/vtml.mat 

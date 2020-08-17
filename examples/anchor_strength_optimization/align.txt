@@ -1,0 +1,12 @@
+../../alignme1.2.exe \
+	-fasta_file1 ../a.fa \
+	-fasta_file2 ../b.fa \
+	-similarity_score_file simscore.txt \
+	-below_threshold_gap_opening_penalty  18.0 \
+	-above_threshold_gap_opening_penalty  11.0 \
+	-below_threshold_gap_extension_penalty 1.3 \
+	-above_threshold_gap_extension_penalty 4.4 \
+	-termini_gap_opening_penalty 13.1 \
+	-termini_gap_extension_penalty 0.9 \
+	-thresholds_for_penalties 0 \
+	-anchors anchors.txt
