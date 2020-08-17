@@ -27,6 +27,9 @@ If you have used AlignMe in your work, please cite:
 
 ## Release Notes:
 
+#### Version 1.2
+Inclusion of anchors as constraints
+
 #### Version 1.1
 - Position Specific Subsititution Matrices (PSSMs) supported as an alignment input
 - ClustalW and Fasta-Format output of the aligned sequences supported
