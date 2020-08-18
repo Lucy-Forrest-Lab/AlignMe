@@ -52,6 +52,32 @@ std::vector< t_DATA> &operator *= ( std::vector< t_DATA> &VEC, const double &FAC
 
 template< typename t_DATA>
 inline
+std::vector< t_DATA> operator * ( const std::vector< t_DATA> &VEC, const double &FACTOR)
+{
+	DebugWrite( __PRETTY_FUNCTION__);
+	std::vector< t_DATA> tmp( VEC);
+	for( typename std::vector< t_DATA>::iterator itr = tmp.begin(); itr != tmp.end(); ++itr)
+	{
+		*itr *= FACTOR;
+	}
+	return tmp;
+}
+
+template< typename t_DATA>
+inline
+std::vector< t_DATA> operator * ( const double &FACTOR, const std::vector< t_DATA> &VEC)
+{
+//	DebugWrite( __PRETTY_FUNCTION__);
+	std::vector< t_DATA> tmp( VEC);
+	for( typename std::vector< t_DATA>::iterator itr = tmp.begin(); itr != tmp.end(); ++itr)
+	{
+		*itr *= FACTOR;
+	}
+	return tmp;
+}
+
+template< typename t_DATA>
+inline
 std::string GetStdVectorClassName( const std::vector< t_DATA> &VEC)
 { return "std::vector<t_DATA>";}
 
@@ -73,18 +99,34 @@ std::istream& operator >> ( std::istream &STREAM, std::vector< t_DATA> &VEC)
 
 template< typename t_DATA>
 inline
-std::ostream& operator << ( std::ostream &STREAM, const std::vector< t_DATA> &VEC)
+std::vector< t_DATA> MinPerElement(const std::vector< t_DATA> &VEC1, const std::vector< t_DATA> &VEC2)
 {
-  STREAM << GetStdVectorClassName<t_DATA>( VEC) << "\n";
-  STREAM << VEC.size() << "\n";
-  if( VEC.size() > 0)
-    {
-      for( typename std::vector< t_DATA>::const_iterator itr( VEC.begin()); itr != VEC.end(); ++itr)
-	{ STREAM << "<" << *itr << ">  ";}
-      STREAM << "\n";
-    }
-  return STREAM;
+	std::vector< t_DATA> vec (VEC1.size());
+
+	typename std::vector< t_DATA>::iterator vec_itr = vec.begin();
+	typename std::vector< t_DATA>::const_iterator vec1_itr = VEC1.begin(), vec2_itr = VEC2.begin();
+
+	for (; vec_itr != vec.end(); ++vec_itr, ++vec1_itr, ++vec2_itr)
+	{
+		*vec_itr = std::min( *vec1_itr, *vec2_itr);
+	}
+	return vec;
 }
+
+//template< typename t_DATA>
+//inline
+//std::ostream& operator << ( std::ostream &STREAM, const std::vector< t_DATA> &VEC)
+//{
+//	STREAM << GetStdVectorClassName<t_DATA>( VEC) << "\n";
+//	STREAM << VEC.size() << "\n";
+//	if( VEC.size() > 0)
+//    {
+//      for( typename std::vector< t_DATA>::const_iterator itr( VEC.begin()); itr != VEC.end(); ++itr)
+//	{ STREAM << "<" << *itr << ">  ";}
+//      STREAM << "\n";
+//    }
+//	return STREAM;
+//}
 
 template< typename t_FIRST, typename t_SECOND>
 inline
@@ -97,15 +139,15 @@ std::ostream& operator << ( std::ostream &STREAM, const std::pair< t_FIRST, t_SE
 
 template< typename t_DATA>
 inline
-std::ostream& operator << ( std::ostream &STREAM, const std::list< t_DATA> &LIST)
+std::ostream& operator << ( std::ostream &STREAM, const std::vector< t_DATA> &LIST)
 {
-  STREAM << "std::list" << "\n";
+  STREAM << "std::vector" << "\n";
   STREAM << LIST.size() << "\n";
   if( LIST.size() == 0)
   {
 	  return STREAM;
   }
-  for( typename std::list< t_DATA>::const_iterator itr( LIST.begin()); itr != LIST.end(); ++itr)
+  for( typename std::vector< t_DATA>::const_iterator itr( LIST.begin()); itr != LIST.end(); ++itr)
   {
 	  STREAM  << *itr << "  ";
   }
@@ -209,12 +251,58 @@ std::ostream& operator << ( std::ostream &STREAM, const std::vector< size_t> &VE
 
 template< typename t_TYPE>
 inline
-std::vector< t_TYPE> operator += ( const std::vector< t_TYPE> &V1, const std::vector< t_TYPE> &V2)  // todo rename this!!! might get mixed up with mathematical operator
+std::vector< t_TYPE> operator + ( const std::vector< t_TYPE> &V1, const std::vector< t_TYPE> &V2)
 {
 //	DebugWrite( __PRETTY_FUNCTION__);
 	std::vector< t_TYPE> vec( V1);
-	vec.insert( vec.end(), V2.begin(), V2.end());
-	return vec;
+	return vec += V2;
+}
+
+template< typename t_TYPE>
+inline
+std::vector< t_TYPE> operator += ( std::vector< t_TYPE> &V1, const std::vector< t_TYPE> &V2)
+{
+	if( V1.size() != V2.size())
+	{
+		std::cout << "ERROR: adding two vectors makes only sense if the two vectors are of equal size! " << std::endl;
+		exit(-1);
+	}
+	typename std::vector< t_TYPE>::const_iterator vitr = V2.begin();
+	typename std::vector< t_TYPE>::iterator itr = V1.begin();
+	for(  ;itr != V1.end(); ++itr, ++vitr)
+	{
+		*itr += *vitr;
+	}
+	return V1;
+}
+
+
+
+template< typename t_TYPE>
+inline
+std::vector< t_TYPE> operator - ( const std::vector< t_TYPE> &V1, const std::vector< t_TYPE> &V2)
+{
+//	DebugWrite( __PRETTY_FUNCTION__);
+	std::vector< t_TYPE> vec( V1);
+	return vec -= V2;
+}
+
+template< typename t_TYPE>
+inline
+std::vector< t_TYPE> operator -= ( std::vector< t_TYPE> &V1, const std::vector< t_TYPE> &V2)
+{
+	if( V1.size() != V2.size())
+	{
+		std::cout << "ERROR: adding two vectors makes only sense if the two vectors are of equal size! " << std::endl;
+		exit(-1);
+	}
+	typename std::vector< t_TYPE>::const_iterator vitr = V2.begin();
+	typename std::vector< t_TYPE>::iterator itr = V1.begin();
+	for(  ;itr != V1.end(); ++itr, ++vitr)
+	{
+		*itr -= *vitr;
+	}
+	return V1;
 }
 
 

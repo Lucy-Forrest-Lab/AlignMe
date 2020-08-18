@@ -56,7 +56,7 @@ public:
 
 	virtual double operator()( const std::vector< double> &PROFILES)
 	{
-		short size = m_Thresholds.size();
+		size_t size = m_Thresholds.size();
 #ifdef SECURE
 		if( size > PROFILES.size())
 		{
@@ -64,7 +64,7 @@ public:
 			exit( 1);
 		}
 #endif
-		for( short i = 0; i < size; ++i)
+		for( size_t i = 0; i < size; ++i)
 		{
 			if( PROFILES[i] < m_Thresholds[i])
 			{

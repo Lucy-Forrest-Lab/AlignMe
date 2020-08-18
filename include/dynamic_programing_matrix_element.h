@@ -16,6 +16,7 @@
 //  GNU General Public License for more details.
 //!
 //!
+//!  NEEDS CLEANUP
 //! Beside the similarity value in a matrix element the DynamicProgrammingMatrixElement
 //! contains links to previous elements for determining the gap penalty.
 //!
@@ -28,7 +29,8 @@
 #define DYNAMIC_PROGRAMMING_MATRIX_ELEMENT_H
 
 #include <cstddef>
-#include <fstream>
+
+#include <boost/shared_ptr.hpp>
 
 #include "pearson_correlation.h"
 
@@ -37,7 +39,7 @@ class DynamicProgrammingMatrixElement
 private:
 	double                                  m_Value;                                 //!<  the total similarity score at this element of the dynamic programming matrix
 	std::pair< size_t, size_t>              m_PreviousElementIndices;                //!<  indices of the previous element, the one with the best score
-	boost::shared_ptr< PearsonCorrelation>  m_Correlation;
+	ShPtr< PearsonCorrelation>  m_Correlation;
 	std::vector<double>                     m_AffinePathWays;                          //!<  needed for Needleman Wunsch Affine Gap (2 shells)
 
 public:
@@ -67,7 +69,7 @@ public:
 	{}
 
     // construct from data (for convenience)
-    DynamicProgrammingMatrixElement( const double &VALUE, const size_t &INDEX_I, const size_t &INDEX_J, const boost::shared_ptr< PearsonCorrelation> &CORRELATION)
+    DynamicProgrammingMatrixElement( const double &VALUE, const size_t &INDEX_I, const size_t &INDEX_J, const ShPtr< PearsonCorrelation> &CORRELATION)
 	: m_Value( VALUE),
 	m_PreviousElementIndices( std::make_pair( INDEX_I, INDEX_J)),
 	m_Correlation( CORRELATION),
@@ -85,7 +87,7 @@ public:
 
     
 	// destructor
-	~DynamicProgrammingMatrixElement(){}
+	~DynamicProgrammingMatrixElement(){/*std::cout << __FUNCTION__ << std::endl;*/}
 
 	//! add the total similarity VALUE to the path way given by INDEX
 	void AddValue(const int &INDEX, const double &VALUE)
@@ -147,20 +149,25 @@ public:
 
 	std::ostream &Write( std::ostream &STREAM) const
 	  {
-	    STREAM << m_Value << "   " << m_PreviousElementIndices.first << " " << m_PreviousElementIndices.second << "\n";
+	    STREAM  << m_Value;
+//	    STREAM << "(" << m_Value << "   " << m_PreviousElementIndices.first << " " << m_PreviousElementIndices.second << " " << m_AffinePathWays << ")" << std::endl;
 	    return STREAM;
 	  }
 
-	const boost::shared_ptr< PearsonCorrelation> &GetCorrelation() const
+	const ShPtr< PearsonCorrelation> &GetCorrelation() const
 	{
 		return m_Correlation;
 	}
 
-	void SetCorrelation( const boost::shared_ptr< PearsonCorrelation> &CORRELATION)
+	void SetCorrelation( const ShPtr< PearsonCorrelation> &CORRELATION)
 	{
 		m_Correlation = CORRELATION;
 	}
 
+	double operator *= ( const double &VALUE)
+	{
+		return (m_Value *= VALUE);
+	}
 };
 
 
@@ -168,6 +175,18 @@ inline
 std::ostream &operator << ( std::ostream &STREAM, const DynamicProgrammingMatrixElement &ELEMENT)
 {
   return ELEMENT.Write( STREAM);
+}
+
+inline
+double operator *( const double &VALUE, const DynamicProgrammingMatrixElement &ELEMENT)
+{
+	return VALUE * ELEMENT.GetValue();
+}
+
+inline
+double operator *( const DynamicProgrammingMatrixElement &ELEMENT, const double &VALUE)
+{
+	return VALUE * ELEMENT.GetValue();
 }
 
 #endif

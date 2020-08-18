@@ -16,9 +16,9 @@
 //  GNU General Public License for more details.
 //!
 //!
-//!  Smith Waterman algorithm for local alignments.
-//! As described in "Biological sequence analysis"
-//! from Durbin, Eddy, Krogh, Mitchison
+//!  The algorithm for local alignments.
+//!
+//!
 //!
 //!
 //! @author: Rene Staritzbichler, Kamil Khafizov, Marcus Stamm
@@ -29,24 +29,25 @@
 #ifndef SMITH_WATERMAN_H
 #define SMITH_WATERMAN_H
 
-#include <boost/shared_ptr.hpp>
-
-#include "definitions.h"
-#include "dynamic_programing_matrix_element.h"
-#include "../include/function.t.h"
-#include "matrix.t.h"
-#include "macro_functions_read_write.h"
 #include <list>
 #include <limits>
+
+#include <boost/shared_ptr.hpp>
+
+#include "sequence.h"
+#include "dynamic_programing_matrix_element.h"
+#include "function.t.h"
+#include "matrix.t.h"
+#include "macro_functions_read_write.h"
 
 class SmithWaterman
 {
 private:
 	double                                            m_GapOpeningPenalty;
 	double                                            m_GapExtensionPenalty;
-	AASequence                                        m_FirstSequence;
-	AASequence                                        m_SecondSequence;
-	boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >   m_Score;
+	Sequence                                        m_FirstSequence;
+	Sequence                                        m_SecondSequence;
+	ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >   m_Score;
 	Matrix< DynamicProgrammingMatrixElement>          m_Matrix;
 	std::pair< size_t, size_t>                        m_BestScoringElement;
 
@@ -60,9 +61,9 @@ public:
 	(
 			const double &GAP_OPENING_PENALTY,
 			const double &GAP_EXTENSION_PENALTY,
-			const AASequence &FIRST_SEQUENCE,
-			const AASequence &SECOND_SEQUENCE,
-			const boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
+			const Sequence &FIRST_SEQUENCE,
+			const Sequence &SECOND_SEQUENCE,
+			const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
 			Matrix< DynamicProgrammingMatrixElement> &MATRIX
 	);
 
@@ -73,7 +74,7 @@ public:
 	void CalculateMatrix();
     
 	//! identifies the actual alignment (highest scoring pathway) after matrix has been calculated
-	std::pair< double, std::list< std::pair< int, int> > >
+	std::pair< double, std::vector< std::pair< int, int> > >
 	TraceBack() const;
 
 private:

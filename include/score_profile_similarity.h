@@ -30,7 +30,7 @@
 #define SCORE_PROFILE_SIMILARITY_H
 
 #include "function.t.h"
-#include "amino_acid.h"
+#include "sequence.h"
 
 #include <list>
 
@@ -43,58 +43,85 @@ class ScoreProfileSimilarity
 
  public:
   
-  ScoreProfileSimilarity()
-    : m_IdInProfile( std::numeric_limits< size_t>::max())
-    {}
+  ScoreProfileSimilarity();
 
-  ScoreProfileSimilarity( const size_t &ID)
-    : m_IdInProfile( ID)
-    {
-      DebugWrite( __FUNCTION__);
-    }
+  ScoreProfileSimilarity( const size_t &ID);
 
-  virtual ~ScoreProfileSimilarity(){}
+  virtual ~ScoreProfileSimilarity();
 
+  virtual double operator()( const std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid> &AA);
 
-  virtual double operator()( const std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid> &AA)
-  {
-    double d = -fabs( AA.first.GetProfiles()[ m_IdInProfile] - AA.second.GetProfiles()[ m_IdInProfile]);
- //   DebugWrite( __FUNCTION__ << "  " << d);
-    return d;
-  }
+  virtual std::ostream &Write( std::ostream &STREAM) const;
 
-  virtual std::ostream &Write( std::ostream &STREAM) const
-    {
-      STREAM << "ScoreProfileSimilarity::Write()" << "\n";
-      STREAM << "profile-id: " << m_IdInProfile << "\n";
-      return STREAM;
-    }
-};
+}; // end class
 
 
-int NrAligned( const std::list< std::pair< int, int> > &ALIGNMENT)
-{
-	int count = 0;
-	for( std::list< std::pair< int, int> >::const_iterator itr = ALIGNMENT.begin(); itr != ALIGNMENT.end(); ++itr)
-	{
-		if( itr->first != std::numeric_limits< int>::max() && itr->second != std::numeric_limits< int>::max())
-		{
-			++count;
-		}
-	}
-	return count;
-}
+
+int NrAligned( const std::vector< std::pair< int, int> > &ALIGNMENT);
+
+int LengthAligned( const std::vector< std::pair< int, int> > &ALIGNMENT);
+
+// VERSION 1.1================================ till end of file !
+//This score is good when aligning sequences of similar length and when profiles match well. Do not care explicitly about gaps.
+double PdsScoreAlignmentLength
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &RATIO = 0.4
+);
+
+//This score is good when profiles match well and do not care of differences in length. Do not care explicitly about gaps.
+double PdsScoreAligned
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &RATIO = 0.1
+);
 
 
-int LengthAligned( const std::list< std::pair< int, int> > &ALIGNMENT)
-{
-	int length = 0;
-	for( std::list< std::pair< int, int> >::const_iterator itr = ALIGNMENT.begin(); itr != ALIGNMENT.end(); ++itr)
-	{
-		++length;
-	}
-	return length;
-}
+//This score is good when profiles match well and few gaps were found.
+double PdsScoreAlignedAndGaps
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &RATIO = 0.1
+);
+
+
+double PdsScoreAlignedMin( const std::vector< std::pair< int, int> > &ALIGNMENT, const Sequence &FIRST, const Sequence &SECOND);
+
+double PdsScoreAlignedMax( const std::vector< std::pair< int, int> > &ALIGNMENT, const Sequence &FIRST, const Sequence &SECOND);
+
+//This score is good when aligning sequences of similar length (because of gaps!) and when profiles match well. Mean value for gaps.
+double PdsScore
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &GAP_EXTENSION_PENALTY = 0.0,
+		const double &RATIO = 0.1
+);
+
+
+double PdsFixedGaps
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &GAP_EXTENSION_PENALTY
+);
+
+
+std::vector< double> CalculatePearsonCorrelations
+(
+		const std::vector< std::pair< int, int> > &ALIGNMENT,
+		const Sequence &FIRST,
+		const Sequence &SECOND,
+		const double &RATIO = 0.2
+);
 
 
 #endif

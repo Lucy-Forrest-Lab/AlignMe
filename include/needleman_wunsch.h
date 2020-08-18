@@ -17,9 +17,8 @@
 //!
 //!
 //! 
-//!  Needleman Wunsch algorithm.
-//! As described in "Biological sequence analysis"
-//! from Durbin, Eddy, Krogh, Mitchison
+//!
+//!
 //!
 //!
 //! @author: Rene Staritzbichler, Kamil Khafizov, Marcus Stamm
@@ -30,7 +29,7 @@
 #ifndef NEEDLMAN_WUNSCH_H
 #define NEEDLMAN_WUNSCH_H
 
-#include "definitions.h"
+#include "sequence.h"
 #include "dynamic_programing_matrix_element.h"
 #include "function.t.h"
 #include "matrix.t.h"
@@ -47,9 +46,9 @@ private:
 	double                                            m_GapExtensionPenalty;
 	double                                            m_TerminiGapOpeningPenalty;
 	double                                            m_TerminiGapExtensionPenalty;
-	AASequence                                        m_FirstSequence;
-	AASequence                                        m_SecondSequence;
-	boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >   m_Score;
+	Sequence                                        m_FirstSequence;
+	Sequence                                        m_SecondSequence;
+	ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >   m_Score;
 	Matrix< DynamicProgrammingMatrixElement> m_Matrix;
 
 public:
@@ -64,9 +63,9 @@ public:
 			const double &GAP_EXTENSION_PENALTY,
 			const double &TERMIN_GAP_OPENING_PENALTY,
 			const double &TERMIN_GAP_EXTENSION_PENALTY,
-			const AASequence &FIRST_SEQUENCE,
-			const AASequence &SECOND_SEQUENCE,
-			const boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
+			const Sequence &FIRST_SEQUENCE,
+			const Sequence &SECOND_SEQUENCE,
+			const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
 			Matrix< DynamicProgrammingMatrixElement> &MATRIX
 	);
 
@@ -78,7 +77,7 @@ public:
     
 	void CalculateMatrix();
     
-	std::pair< double, std::list< std::pair< int, int> > >
+	std::pair< double, std::vector< std::pair< int, int> > >
 	TraceBack() const;
 
 private:

@@ -22,94 +22,70 @@
 //!
 //!
 //! @author: Rene Staritzbichler, Kamil Khafizov, Marcus Stamm
-//! @date: 18.3.2010
+//! @date: @date: 27.5.2011
 /////////////////////////////////////////////////////////////////////////
 
 
-#ifndef SCORE_SEQUENCE_SIMILARITY_H
-#define SCORE_SEQUENCE_SIMILARITY_H
-
-#include <set>
+#ifndef SCORE_SEQUENCE_SIMILARITY_PROFILE_DEPENDENT_H
+#define SCORE_SEQUENCE_SIMILARITY_PROFILE_DEPENDENT_H
 
 #include "function.t.h"
 #include "amino_acid.h"
 #include "macro_functions_read_write.h"
 
 
-class ScoreSequenceSimilarity
+class ScoreProfileDependentSequenceSimilarity
 : public Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double>
 {
  protected:
   // for a pair of aminoacids return substitution score
-  std::map< std::string, double>     m_AAPairToScore;
+	 std::map< std::string, double>     m_Upper;
+	 std::map< std::string, double>     m_Lower;
+	 size_t						        m_ProfileID;
+	 double							    m_Threshold;
 
  public:
   //! default constructor
-  ScoreSequenceSimilarity()
-    :  m_AAPairToScore()
+  ScoreProfileDependentSequenceSimilarity()
+    :  m_Upper(), m_Lower(), m_ProfileID(),m_Threshold()
     {}
 
 
     //! construct from file name of similarity matrix
-    ScoreSequenceSimilarity( const std::map< std::string, double> &MAP)
-      : m_AAPairToScore( MAP)
+    ScoreProfileDependentSequenceSimilarity( const std::map< std::string, double> &UPPER, const std::map< std::string, double> &LOWER, const int &PROFILE_ID, const double &THRESHOLD)
+      : m_Upper( UPPER),
+        m_Lower( LOWER),
+        m_ProfileID( PROFILE_ID),
+        m_Threshold( THRESHOLD)
     {
 		DebugWrite( __FUNCTION__);
     }
 
-    ScoreSequenceSimilarity( const ScoreSequenceSimilarity &ORIG)
-    : m_AAPairToScore( ORIG.m_AAPairToScore)
+    ScoreProfileDependentSequenceSimilarity( const ScoreProfileDependentSequenceSimilarity &ORIG)
+    : m_Upper( ORIG.m_Upper),
+      m_Lower( ORIG.m_Lower),
+      m_ProfileID( ORIG.m_ProfileID),
+      m_Threshold( ORIG.m_Threshold)
       {
 		DebugWrite( __FUNCTION__ << " copy constructor");
       }
 
     //! virtual destructor
-    virtual ~ScoreSequenceSimilarity()
-      {}
+    virtual ~ScoreProfileDependentSequenceSimilarity()
+    {}
     
     //
     virtual double operator()( const std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid> &AA);
 
-    const std::map< std::string, double> &GetSubstitutionMap() const
-    {
-    	return m_AAPairToScore;
-    }
 
-    void SetSubstitutionMap( const std::map< std::string, double> &MAP)
-    {
-    	m_AAPairToScore = MAP;
-    }
-
-
-
-	virtual int GetClassID() const
-	{
-		return e_SequenceSimilarity;
-	}
+	virtual int GetClassID() const;
 
   
-  virtual std::ostream &Write( std::ostream &STREAM) const
-    {
-      STREAM << "ScoreSequenceSimilarity::Write()" << "\n";
-#ifdef DEBUG
-      STREAM << m_AAPairToScore;
-#endif
-      return STREAM;
-    }
+	virtual std::ostream &Write( std::ostream &STREAM) const;
+
+
 
 };
-
-
-
-double MatrixValueRange( const std::map< std::string, double> &MATRIX);
-
-
-std::map< std::string, double>
-ScaleSubstitutionMatrixToUnity( const std::map< std::string, double> &MATRIX, const double &MIN_CUTOFF = std::numeric_limits< double>::max());
-
-// read the substitution matrix into the map
-std::map< std::string, double>
-ReadSubstitutionMatrix( const std::string &FILE, const std::set< char> &DEFINED_AMINO_ACIDS);
 
 
 #endif

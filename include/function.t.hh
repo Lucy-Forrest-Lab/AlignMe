@@ -26,43 +26,11 @@
 /////////////////////////////////////////////////////////////////////////
 
 #ifndef FUNCTION_H
-#define FUNCTION_H
-
-#include <limits>
-#include <iostream>
-
-#include "definitions.h"
-
 /////////////////////////////////////////////////
 // a class to derive all sorts of functions from
 /////////////////////////////////////////////////
 
 template< typename t_INPUT, typename t_RETURN>
-class Function
-{
- public:
-  virtual ~Function(){}
-
-	virtual t_RETURN operator()(const t_INPUT &DATA) = 0; // = 0 means this class is pure virtual, means one cannot create an object of this !! it forces to implement this function in any derived class!!!
-
-	virtual std::ostream &Write( std::ostream &STREAM) const {
-		STREAM << "Function::Write() ... why?" << "\n";
-		return STREAM;
-	}
-
-	virtual int GetClassID() const
-	{
-		return std::numeric_limits< int>::max();
-	}
-
-};
-
-template<typename t_INPUT, typename t_RETURN>
-inline std::ostream & operator << ( std::ostream &STREAM, ShPtr< Function<t_INPUT, t_RETURN> > &FUNCT)
-{
-	STREAM << __FUNCTION__ << "\n";
-	FUNCT->Write(STREAM);
-	return STREAM;
-}
+class Function;
 
 #endif

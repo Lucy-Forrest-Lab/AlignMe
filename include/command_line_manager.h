@@ -58,7 +58,6 @@ class CommandLineManager
 
 	void ReadCommandLine( const size_t ARGC, const char *ARGV[],std::map<std::string,std::string>  ALLOWED_FLAGS)
 	{
-
 		std::vector< std::string>
 			values;
 
@@ -74,13 +73,15 @@ class CommandLineManager
 		{
 			flag = ARGV[1];
 		}
+	
 		// program aborts if no - is set... so the first parameter is always a flag
+#ifdef SECURE
 		if(  flag.substr( 0, 1) != "-")
 		{
 			std::cerr << "ERROR: You have to provide a flag starting with - after the executable file" << "\n";
 			exit(-1);
 		}
-
+#endif
 		bool
 			is_numerical,
 			test_for_allowed_flags;
@@ -114,46 +115,53 @@ class CommandLineManager
 				// to flag the new name which appears after "-" will be assigned and deletes the "-" from the flagname
 				if( (option.substr( 0, 1) == "-" && !is_numerical) || i == ARGC - 1)
 				{
-					if (test_for_allowed_flags && ALLOWED_FLAGS[flag] != "allowed")
+#ifdef SECURE
+					if (test_for_allowed_flags && ALLOWED_FLAGS.find( flag) == ALLOWED_FLAGS.end())
 					{
 						std::cerr << "ERROR: Flag <" << flag << "> is not provided by this program!" << "\n";
 						exit( -1);
 					}
-
+#endif
 					std::map< std::string, std::vector< std::string> >::const_iterator itr = m_FlagsAndValues.find( flag);
+
+#ifdef SECURE
 					if( itr != m_FlagsAndValues.end())
 					{
 						std::cerr << "ERROR: Flag <" << flag << "> was already given - please use each flag only once!" << "\n";
 						exit( -1);
 					}
+#endif
 					m_FlagsAndValues.insert( make_pair( flag, values));
 					flag = option;
 					flag.erase( flag.begin());
 					values.clear();
 				}
 
-				if( option.substr( 0, 1) == "-" && i == ARGC - 1)
+				if( option.substr( 0, 1) == "-" && i == ARGC - 1 && !is_numerical)
 				{
-					if (test_for_allowed_flags && ALLOWED_FLAGS[flag] != "allowed")
+#ifdef SECURE
+					if (test_for_allowed_flags && ALLOWED_FLAGS.find( flag) == ALLOWED_FLAGS.end())
 					{
 						std::cerr << "ERROR: Flag <" << flag << "> is not provided by this program!" << "\n";
 						exit( -1);
 					}
+#endif
 					m_FlagsAndValues.insert( make_pair( flag, values));
 				}
 			}
 		}
 
-		// this loop will only be entered if only one flag withouth any values is set
+		// this loop will only be entered if only one flag without any values is set
 		// in such a case the program will crash ----> sense of this loop????
 		else
 		{
-			if (test_for_allowed_flags && ALLOWED_FLAGS[flag] != "allowed")
+#ifdef SECURE
+			if (test_for_allowed_flags && ALLOWED_FLAGS.find( flag) == ALLOWED_FLAGS.end())
 			{
-				std::cerr << "ERROR: Flag <" << flag << "> is not provided by this program!" << "\n";
+				std::cerr << "ERROR: Flag <" << flag << "> is not provided by this program2!" << "\n";
 				exit( -1);
 			}
-
+#endif
 			m_FlagsAndValues.insert( make_pair( flag, values));
 		}
 	}
@@ -181,10 +189,25 @@ class CommandLineManager
 		std::vector< std::string>::const_iterator str_itr = strings.begin();
 		typename std::vector< TYPE>::iterator val_itr = values.begin();
 
-		for( ; str_itr != strings.end(); ++str_itr, ++val_itr)
+		size_t count = 1;
+		for( ; str_itr != strings.end(); ++str_itr, ++val_itr, ++count)
 		{
+#ifdef SECURE
+			if( !mystr::IsNumerical( *str_itr))
+			{
+				std::cout << "ERROR: The " << count << "-th value after the flag: "  << FLAG << " has to be a numerical value but is " << *str_itr << " \n";
+				exit(-1);
+			}
+#endif
 			*val_itr = mystr::ConvertStringToNumericalValue< TYPE>( *str_itr);
 		}
+#ifdef SECURE
+		if (values.size() == 0)
+		{
+			std::cout << "ERROR: The flag " << FLAG << " is provided but a corresponding value or filename after it is missing. Flags can not be used without corresponding inputs! \n";
+			exit(-1);
+		}
+#endif
 		return values;
 	}
 
@@ -193,7 +216,17 @@ class CommandLineManager
 	// finds a flag and returns the first added value belonging to this flag (which stands directly after the flag)
 	std::string GetFirstArgument( const std::string &FLAG) const
 	{
-		return m_FlagsAndValues.find( FLAG)->second.front();
+		std::vector< std::string>
+			strs = m_FlagsAndValues.find( FLAG)->second;
+#ifdef SECURE
+
+		if( strs.size() == 0)
+		{
+			std::cout << "ERROR: The flag " << FLAG << " is provided but a corresponding value or filename after it is missing. Flags can not be used without corresponding inputs! \n";
+			exit(-1);
+		}
+#endif
+		return strs.front();
 	}
 	
 
@@ -204,7 +237,11 @@ class CommandLineManager
 			STREAM << itr->first << ":  <";
 			for( std::vector< std::string>::const_iterator str_itr = itr->second.begin(); str_itr != itr->second.end(); ++str_itr)
 			{
-				STREAM << *str_itr << ",";
+				STREAM << *str_itr;
+				if( str_itr + 1 != itr->second.end())
+				{
+					STREAM << ",";
+				}
 			}
 			STREAM << ">" << "\n";
 		}

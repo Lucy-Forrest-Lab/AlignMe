@@ -27,6 +27,13 @@
 #ifndef DEFINITIONS_H
 #define DEFINITIONS_H
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <map>
+
+#include <boost/shared_ptr.hpp>
+
 // defining SECURE will enable a lot of security checks:
 #define SECURE
 
@@ -34,10 +41,24 @@
 //#define DEBUG
 
 
-// basic definition of an amino acid sequence as vector of generalized amino acids:
-#include <vector>
-#include "amino_acid.h"
-typedef std::vector< GeneralizedAminoAcid>  AASequence;
+// use when compiling msa_optimizer.cpp:
+#define POSITION_SPECIFIC_SIMILARITY
+
+#define Alignment std::vector< std::pair< int, int> >
+
+#define ShPtr boost::shared_ptr
+
+#define Profile std::vector< std::pair< double, double> >
+
+// for profile values
+#define g_GAP 888888.0
+
+// for alignment indices
+#define g_GapID std::numeric_limits< int>::max()
+
+#define MSA std::vector< Sequence>
+
+enum SimilarityType { e_SequenceSimilarity, e_ProfileSimilarity, e_ProbabilityProfileSimilarity, e_PositionSpecificSimilarity, e_ProfileDependentSequenceSimilarity, e_LinearNormalizedProfileSimilarity};
 
 
 #endif // DEFINITIONS_H

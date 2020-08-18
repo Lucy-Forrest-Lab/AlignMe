@@ -40,6 +40,7 @@
 
 #include "definitions.h"
 
+
 namespace mystr
 {
 
@@ -50,8 +51,6 @@ namespace mystr
 	//! test whether string is numerical (double, float, size_t, int) with '.', '-', leading and tailing spaces are allowed
 	bool IsNumerical( const std::string &STRING);
 
-
-	std::vector< std::string> SplitString( const std::string &STRING, const std::string &SPLITTER = " ");
 
 //    std::string &RemoveSubstr( std::string &STR, const std::string SUBSTR)
 //    { exit( -1); return STR;}
@@ -67,15 +66,40 @@ namespace mystr
 		if( string.empty())
 		{ return std::numeric_limits< T1>::max();}
 
-		if( !IsNumerical( string))
-		{
-			std::cerr << "ERROR: You provided (" << string << ") which is not numerical. Only integers or fractions are allowed (no commas)!" << "\n";
-			exit(-1);
-		}
+//		if( !IsNumerical( string))
+//		{
+//			std::cerr << " ERROR: " << __FUNCTION__ << ": you provided (" << string << ") which is not numerical. Only integers or fractions are allowed (no commas)!" << "\n";
+//			exit(-1);
+//		}
 		T1 new_t;
 		std::stringstream iss( string);
 		iss >> new_t;
 		return new_t;
+	}
+
+	template< class T>
+	std::vector< T>
+	ConvertStringVector( const std::vector< std::string> &VEC)
+	{
+		std::vector< T>
+			transformed( VEC.size());
+		std::vector< std::string>::const_iterator
+			in_itr = VEC.begin();
+		typename std::vector< T>::iterator
+			out_itr = transformed.begin();
+		for( ; in_itr != VEC.end(); ++in_itr, ++out_itr)
+		{
+			*out_itr = ConvertStringToNumericalValue< T>( *in_itr);
+		}
+		return transformed;
+	}
+
+	std::vector< std::string> SplitString( const std::string &STRING, const std::string &SPLITTER = " ");
+
+	template< class T>
+	std::vector< T> SplitAndConvertString( const std::string &STRING, const std::string &SPLITTER = " ")
+	{
+		return ConvertStringVector< T>( SplitString( STRING, SPLITTER));
 	}
 
 	template<class T>

@@ -29,17 +29,18 @@
 #ifndef MATRIX_H
 #define MATRIX_H
 
+#include <cstddef>
 
 template< typename T>
 class Matrix
 {
  protected:
-  T **const m_Matrix;
+  T ** m_Matrix;
   size_t m_NrRows;
   size_t m_NrCols;
 
  public:
-  Matrix( const size_t &NR_ROWS, const size_t &NR_COLS)
+  Matrix( const size_t &NR_ROWS = 0, const size_t &NR_COLS = 0)
     : m_Matrix( new T*[NR_ROWS]),
     m_NrRows( NR_ROWS),
     m_NrCols( NR_COLS)
@@ -76,28 +77,104 @@ class Matrix
     	delete [] m_Matrix;
     }
 
+
     const T& operator()( const size_t &I, const size_t &J) const
     {
     	return m_Matrix[I][J];
     }
+
 
     T& operator()( const size_t &I, const size_t &J)
     {
     	return m_Matrix[I][J];
     }
 
+
     const size_t &GetNumberOfColumns() const
     {
     	return m_NrCols;
     }
+
 
     const size_t &GetNumberOfRows() const
     {
     	return m_NrRows;
     }
 
-};
 
+    Matrix<T> & operator = ( const Matrix<T> &MATRIX)
+    {
+    	std::cout << __FUNCTION__ << " better avoid this, seems slow!" << std::endl;
+    	for( size_t i = 0; i < m_NrRows; ++i)
+    	{
+			delete [] m_Matrix[i];
+		}
+    	delete [] m_Matrix;
+
+    	m_Matrix = new T*[MATRIX.m_NrRows]; // no soft copy because of destructor!!!
+    	m_NrRows = MATRIX.m_NrRows;
+    	m_NrCols = MATRIX.m_NrCols;
+    	for( size_t i = 0; i < m_NrRows; ++i)
+    	{
+    		m_Matrix[i] = new T[ m_NrCols];
+    		for( size_t j = 0; j < m_NrCols; ++j)
+    		{
+    			m_Matrix[i][j] = MATRIX( i, j);
+    		}
+    	}
+    	return *this;
+    }
+
+
+    void Set( const size_t &I, const size_t &J)
+    {
+    	if( m_NrRows > 0 && m_NrCols > 0)
+    	{
+        	for( size_t i = 0; i < m_NrRows; ++i)
+        	{
+    			delete [] m_Matrix[i];
+    		}
+        	delete [] m_Matrix;
+    	}
+
+    	m_NrRows = I;
+    	m_NrCols = J;
+    	m_Matrix = new T*[m_NrRows];
+       	for( size_t i = 0; i < m_NrRows; ++i)
+       	{
+       		m_Matrix[i] = new T[m_NrCols];
+       	}
+    }
+
+    std::ostream &Write( std::ostream &STREAM )const
+    {
+  	  for( size_t i = 0; i < m_NrRows; ++i)
+  	  {
+   		  for( size_t j = 0; j < m_NrCols; ++j)
+  			{
+  			  STREAM << m_Matrix[i][j] << " ";
+  			}
+   		  STREAM << std::endl;
+  	  }
+  	  return STREAM;
+    }
+
+}; // end class Matrix //
+
+
+
+template< typename T>
+inline
+Matrix< T>  operator *( const T &VALUE, const Matrix<T> &MATRIX)
+{
+	Matrix<T> matrix( MATRIX.GetNumberOfRows(), MATRIX.GetNumberOfColumns());
+	for( int i = 0; i < MATRIX.GetNumberOfRows(); ++i)
+		for( int j = 0; j < MATRIX.GetNumberOfColumns(); ++j)
+		{
+			matrix(i,j) = VALUE * MATRIX( i, j);
+		}
+	return matrix;
+}
 
 
 
