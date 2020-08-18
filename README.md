@@ -22,7 +22,7 @@ Alignment of membrane proteins
 - our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
 
 If you have questions about the usage of this program or discovered a 
-bug, then please write to: AlignMe@rzg.mpg.de 
+bug, then please post a message on github or write to: AlignMe@rzg.mpg.de 
 
 ## How can I cite AlignMe?
 If you have used AlignMe in your work, please cite:
