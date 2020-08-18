@@ -2,7 +2,7 @@
 Pairwise alignment of membrane protein sequences
 
 ## Required external libraries
-Boost library headers (boost.org), namely shared_ptr.hpp 
+[Boost](boost.org) library headers, namely shared_ptr.hpp 
 
 ## Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices
