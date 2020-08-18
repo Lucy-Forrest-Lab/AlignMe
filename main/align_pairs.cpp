@@ -27,6 +27,9 @@
 
 
 // CHANGELOG
+// Version 1.2, July 2015
+// - anchors finally included
+//
 // Version 1.1
 // - added option to generate alignments based on PSSM
 // - weights can now be adjusted automatically (<< INCLUDED???????????????????)
@@ -77,6 +80,8 @@
 #include "../include/alignment_write.h"
 #include "../include/reader.h"
 #include "../include/commands_defined.h"
+
+#include "../include/anchor.h"
 
 
 // NOTES:
@@ -138,6 +143,47 @@ int main( const int argc, const char * argv[])
 
   vars.dynamic_programing_matrix.Set( vars.first_sequence.size() + 1, vars.second_sequence.size() + 1);
 
+  /*
+  if( cmd.IsFlagSet( "anchors"))
+    {
+      std::vector< Triplet< int, int, double> >
+	list;
+      int i, j;
+      double x;
+      std::string
+	anchor_file = cmd.GetFirstArgument( "anchors");
+      std::ifstream
+	input;     // read anchor file
+      input.open( anchor_file.c_str());
+      while( input >> i >> j >> x)
+	{
+	  list.push_back( Triplet< int, int, double>( i, j, x));
+	}
+      BuildAnchorMatrix( list, vars.dynamic_programing_matrix);
+      input.close();
+      input.clear();
+    }
+  */
+  if( cmd.IsFlagSet( "anchors"))
+  {
+	  std::string
+	  	  anchor_file = cmd.GetFirstArgument( "anchors");
+	  std::cout << "anchor file: " << anchor_file << std::endl;
+	  std::ifstream
+	  	  input;     // read anchor file
+      input.open( anchor_file.c_str());
+      if( input)
+      {
+    	  BuildAnchorMatrix( input, vars.dynamic_programing_matrix);
+      }
+      else
+      {
+    	  std::cout << "anchor file not opened, ignored" << std::endl;
+      }
+      input.close();
+      input.clear();
+    }
+  
 
   /////////////////////////////////////////////
   ////  PERFORM ALIGNMENT
