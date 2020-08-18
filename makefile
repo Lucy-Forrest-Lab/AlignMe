@@ -1,23 +1,25 @@
 OBJ = \
-source/needleman_wunsch.o \
-source/needleman_wunsch_affine_gaps.o \
-source/smith_waterman.o \
-source/string_functions.o \
-main/align_pairs.o
+./source/needleman_wunsch.o \
+./source/needleman_wunsch_affine_gaps.o \
+./source/reader.o \
+./source/score_profile_similarity.o \
+./source/score_profile_similarity_linear_normalized.o \
+./source/score_sequence_similarity.o \
+./source/score_sequence_similarity_profile_dependent.o \
+./source/sequence.o \
+./source/smith_waterman.o \
+./source/string_functions.o \
+./main/align_pairs.o
 
-COMPILER = g++
+CXX = g++
 
-NAME = alignme1.0.exe
+NAME = alignme1.1.exe
 
-CPPFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated 
+CPPFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated
 
-.o:
-	$(COMPILER) -c $(CPPFLAGS) -o $@  $< 
-
-all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(COMPILER) -o $(NAME) $(OBJ)
+	$(CXX) -o $(NAME) $(OBJ)
 
 clean:
 	rm -f $(NAME)
