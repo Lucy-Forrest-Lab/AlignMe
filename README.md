@@ -31,6 +31,7 @@ If you have used AlignMe in your work, please cite:
 
 For pairwise alignments:
 [Stamm M., Staritzbichler R., Khafizov K. and Forrest L.R. 2013 PLoS ONE](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0057731)
+
 For the alignment of two MSAs:
 [Khafizov K., Staritzbichler R., Stamm M. and Forrest L.R. 2010, Biochemistry](http://pubs.acs.org/doi/abs/10.1021/bi101256x)
 
