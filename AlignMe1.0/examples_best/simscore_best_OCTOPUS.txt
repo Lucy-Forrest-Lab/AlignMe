@@ -1,0 +1,6 @@
+weight: 4.2 type: UniversalProfileSimilarity column: 2 headerlines: 1 file1: ./examples_best/1KPL_B.nnprf file2: ./examples_best/1OTS_A.nnprf
+weight: 0.2 type: SequenceSimilarity file: ./examples_best/vtml.mat
+weight: 1.4 type: UniversalProfileSimilarity column: 5 headerlines: 1 file1: ./examples_best/1KPL_B.fasta.ss2 file2: ./examples_best/1OTS_A.fasta.ss2
+weight: 1.4 type: UniversalProfileSimilarity column: 4 headerlines: 1 file1: ./examples_best/1KPL_B.fasta.ss2 file2: ./examples_best/1OTS_A.fasta.ss2
+weight: 1.4 type: UniversalProfileSimilarity column: 6 headerlines: 1 file1: ./examples_best/1KPL_B.fasta.ss2 file2: ./examples_best/1OTS_A.fasta.ss2
+

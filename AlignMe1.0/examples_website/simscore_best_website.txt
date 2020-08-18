@@ -1,0 +1,5 @@
+weight: 1.0 type: ScaleSimilarity scale: ./examples_website/HWvH.txt windowtype: triangular windowsize: 13 
+weight: 0.2 type: SequenceSimilarity matrix: ./examples_website/vtml.mat 
+weight: 1.4 type: UniversalProfileSimilarity column: 4 headerlines: 1  profile1: ./examples_website/1KPL_B.fasta.ss2 profile2: ./examples_website/1OTS_A.fasta.ss2
+weight: 1.4 type: UniversalProfileSimilarity column: 5 headerlines: 1  profile1: ./examples_website/1KPL_B.fasta.ss2 profile2: ./examples_website/1OTS_A.fasta.ss2
+weight: 1.4 type: UniversalProfileSimilarity column: 6 headerlines: 1  profile1: ./examples_website/1KPL_B.fasta.ss2 profile2: ./examples_website/1OTS_A.fasta.ss2

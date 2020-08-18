@@ -1,0 +1,1 @@
+weight: 1.0 type: SequenceSimilarity file: /home/marcus/AlignMe1.0/examples/blosum62.txt
