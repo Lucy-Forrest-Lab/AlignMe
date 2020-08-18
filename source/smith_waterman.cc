@@ -42,9 +42,9 @@ SmithWaterman::SmithWaterman
 ( 
 		const double &GAP_OPENING_PENALTY,
 		const double &GAP_EXTENSION_PENALTY,
-		const AASequence &FIRST_SEQUENCE,
-		const AASequence &SECOND_SEQUENCE,
-		const boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
+		const Sequence &FIRST_SEQUENCE,
+		const Sequence &SECOND_SEQUENCE,
+		const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
 		Matrix< DynamicProgrammingMatrixElement> &MATRIX
 )
 	:
@@ -157,21 +157,23 @@ SmithWaterman::FindBestScoringPriorNeighbor( const size_t &I, const size_t &J)
 
 			 
 
-std::pair< double, std::list< std::pair< int, int> > >
+std::pair< double, std::vector< std::pair< int, int> > >
 SmithWaterman::TraceBack() const
 {
-	int
+	size_t
 		i( m_BestScoringElement.first),
-		j( m_BestScoringElement.second),
+		j( m_BestScoringElement.second);
+
+	int
 		max( std::numeric_limits< int>::max());
   
 	std::list< std::pair< int, int> >
 		alignment;
 	//DebugWrite ( "best index i: " << i);
 	//DebugWrite ( "best index j: " << j);
-	if( i == std::numeric_limits< int>::max() || j ==  std::numeric_limits< int>::max())
+	if( i == std::numeric_limits< size_t>::max() || j ==  std::numeric_limits< size_t>::max())
 	{
-		return std::make_pair( 0.0, alignment);
+		return std::make_pair( 0.0, std::vector< std::pair< int, int> >());
 	}
   
 	while( m_Matrix( i, j).GetValue() > 0.0)
@@ -196,7 +198,9 @@ SmithWaterman::TraceBack() const
 			--i;
 		}
 	}
-	return std::make_pair( m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1).GetValue(), alignment);
+	std::vector< std::pair< int, int> >
+		converted( alignment.begin(), alignment.end());
+	return std::make_pair( m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1).GetValue(), converted);
 }
 
 

@@ -31,6 +31,7 @@
 #include <limits>
 #include <climits>
 
+
 // default constructor
 NeedlemanWunschAffineGaps::NeedlemanWunschAffineGaps()
   : m_Matrix( 0, 0)
@@ -44,13 +45,13 @@ NeedlemanWunschAffineGaps::NeedlemanWunschAffineGaps()
 
 NeedlemanWunschAffineGaps::NeedlemanWunschAffineGaps
 ( 
-		 const boost::shared_ptr< Function< std::vector< double>, double> > &GAP_OPENING_PENALTY_FCT,
-		 const boost::shared_ptr< Function< std::vector< double>, double> > &GAP_EXTENSION_PENALTY_FCT,
+		 const ShPtr< Function< std::vector< double>, double> > &GAP_OPENING_PENALTY_FCT,
+		 const ShPtr< Function< std::vector< double>, double> > &GAP_EXTENSION_PENALTY_FCT,
 		 const double &TERMIN_GAP_OPENING_PENALTY,
 		 const double &TERMIN_GAP_EXTENSION_PENALTY,
-		 const AASequence &FIRST_SEQUENCE,
-		 const AASequence &SECOND_SEQUENCE,
-		 const boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
+		 const Sequence &FIRST_SEQUENCE,
+		 const Sequence &SECOND_SEQUENCE,
+		 const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
 		 Matrix< DynamicProgrammingMatrixElement> &MATRIX
  )
 :
@@ -67,8 +68,11 @@ NeedlemanWunschAffineGaps::NeedlemanWunschAffineGaps
 
 void NeedlemanWunschAffineGaps::CalculateMatrix()
 {
-	int
-		minvalue = INT_MIN;
+	double
+	  minvalue = double ( INT_MIN); // 100000.0 - std::numeric_limits<double>::max();  //  arbitrary choice, negative value mean penalty, first number makes sure that if summed to negative values that it does not get positive (large value)
+
+//	std::cout << __FUNCTION__ << " minvalue: " << minvalue << std::endl;
+
 	DynamicProgrammingMatrixElement
 		element,
 		* element_ptr,
@@ -81,56 +85,72 @@ void NeedlemanWunschAffineGaps::CalculateMatrix()
 	std::vector< double>
 		profiles;
 
-	for( size_t i = 0; i < 9; ++i)
-	{
-		m_Matrix( 0, 0).AddValue(i, 0);
-	}
+//	for( size_t i = 0; i < 9; ++i)
+//	{
+//		m_Matrix( 0, 0).AddValue(i, 0);
+//	}
 
+	// each dynamic-programing-matrix-element has a 9 element affine-path-way member
+	// first three represent the previous diagonal (times its three possible previous elements)
+	// second three go horizontal previous element, last three vertical previous element
+	// each triplet follows the same structure
+
+
+	// HORIZONTAL = columns // nr rows - 1 = FIRST_SEQUENCE.size()
 	for( size_t i = 1; i < m_Matrix.GetNumberOfRows(); ++i)
 	{
-		for( size_t j = 0 ; j <4; ++j)
-		m_Matrix( i, 0).AddValue(j, minvalue);
-
-		for( size_t j = 4; j < 5; ++j)
-		m_Matrix( i, 0).AddValue(j, -1.0 * m_TerminiGapOpeningPenalty - 1.0 * (i - 1) * m_TerminiGapExtensionPenalty);
-
-		for( size_t j = 5; j < 9; ++j)
-		m_Matrix( i, 0).AddValue(j, minvalue);
-	}
-
-	for( size_t i = 1; i < m_Matrix.GetNumberOfColumns(); ++i)
-	{
-		for( size_t j = 0; j < 8; ++j)
-		m_Matrix( 0, i).AddValue(j, minvalue);
-
-		for( size_t j = 8; j < 9; ++j)
-		m_Matrix( 0, i).AddValue(j, -1.0 * m_TerminiGapOpeningPenalty - 1.0 * (i - 1) * m_TerminiGapExtensionPenalty);
-	}
-
-
-	for( size_t i = 1; i < m_Matrix.GetNumberOfRows() -1; ++i)
-		for( size_t j = 1; j < m_Matrix.GetNumberOfColumns() -1; ++j)
+		for( size_t k = 0 ; k <4; ++k)
 		{
-			element = m_Matrix( i -1, j -1);
-			local_score =  m_Score->operator()( std::make_pair( m_FirstSequence[ i - 1], m_SecondSequence[ j - 1]));
-			m_Matrix( i, j).AddValue( 0, element.BestSubPathWayScore(0) + local_score);
+		  m_Matrix( i, 0).AddValue(k, minvalue);
+		}
+
+		//		for( size_t k = 4; k < 5; ++k)
+		m_Matrix( i, 0).AddValue(4, -m_TerminiGapOpeningPenalty - double(i - 1) * m_TerminiGapExtensionPenalty);
+
+		for( size_t k = 5; k < 9; ++k)
+		m_Matrix( i, 0).AddValue(k, minvalue);
+	}
+
+	// VERTICAL = rows // nr cols - 1 = SECOND_SEQUENCE.size()
+	for( size_t j = 1; j < m_Matrix.GetNumberOfColumns(); ++j)
+	{
+		for( size_t k = 0; k < 8; ++k)
+		m_Matrix( 0, j).AddValue(k, minvalue);
+
+		//		for( size_t k = 8; k < 9; ++k)
+		m_Matrix( 0, j).AddValue(8, -m_TerminiGapOpeningPenalty - double(j - 1) * m_TerminiGapExtensionPenalty);
+	}
+
+
+	for( size_t i = 1; i < m_Matrix.GetNumberOfRows() -1; ++i)  // first sequence
+		for( size_t j = 1; j < m_Matrix.GetNumberOfColumns() -1; ++j)  // second sequence
+		{
+			// DIAGONAL
+			element = m_Matrix( i -1, j -1); // access previous diagonal (aligned) element
+			local_score =  m_Score->operator()( std::make_pair( m_FirstSequence[ i - 1], m_SecondSequence[ j - 1])); // similarity score, note that i is matrix index, matrix has zero in first element, sequence does not, that's why i-1 and j-1 are used here
+			m_Matrix( i, j).AddValue( 0, element.BestSubPathWayScore(0) + local_score); // fill array containing affine path ways, first three values from diagonal step
 			m_Matrix( i, j).AddValue( 1, element.BestSubPathWayScore(1) + local_score);
 			m_Matrix( i, j).AddValue( 2, element.BestSubPathWayScore(2) + local_score);
 
+			// HORIZONTAL
 			element = m_Matrix( i -1, j);
 			max_value = element.BestSubPathWayScore( 0);
-			//profiles = m_FirstSequence[ i].GetProfiles();
-			profiles = m_SecondSequence[ j].GetProfiles();
+			//profiles = m_FirstSequence[ i - 1].GetProfiles();    // considers only left hand value for threshold, TODO: average with m_SecondSequence[j+1].GetProfiles()
+			//profiles = 0.5 * ( m_SecondSequence[ j].GetProfiles() + m_SecondSequence[ j - 1].GetProfiles());
+			profiles = MinPerElement( m_SecondSequence[ j].GetProfiles(),m_SecondSequence[ j - 1].GetProfiles());
+
 			m_Matrix( i, j).AddValue( 3, max_value - m_GapOpeningPenaltyFunction->operator ()( profiles));
 			max_value = element.BestSubPathWayScore( 1);
 			m_Matrix( i, j).AddValue( 4, max_value - m_GapExtensionPenaltyFunction->operator()( profiles));
 			max_value = element.BestSubPathWayScore( 2);
 			m_Matrix( i, j).AddValue( 5, max_value - m_GapOpeningPenaltyFunction->operator ()( profiles));
 
+			// VERTICAL
 			element = m_Matrix( i, j -1);
 			max_value = element.BestSubPathWayScore( 0);
-			profiles = m_FirstSequence[ i].GetProfiles();
-			//profiles = m_SecondSequence[ j].GetProfiles();
+			profiles = MinPerElement( m_FirstSequence[ i].GetProfiles(), m_FirstSequence[ i - 1].GetProfiles());
+			//profiles = 0.5 * ( m_FirstSequence[ i].GetProfiles() +  m_FirstSequence[ i - 1].GetProfiles());
+			//profiles = m_SecondSequence[ j - 1].GetProfiles();
 			m_Matrix( i, j).AddValue( 6, max_value -  m_GapOpeningPenaltyFunction->operator ()( profiles));
 			max_value = element.BestSubPathWayScore( 1);
 			m_Matrix( i, j).AddValue( 7, max_value -  m_GapOpeningPenaltyFunction->operator ()( profiles));
@@ -153,6 +173,10 @@ void NeedlemanWunschAffineGaps::CalculateMatrix()
 		element_ptr->AddValue( 3, element_2.BestSubPathWayScore(0) - m_TerminiGapOpeningPenalty);
 		element_ptr->AddValue( 4, element_2.BestSubPathWayScore(1) - m_TerminiGapExtensionPenalty);
 		element_ptr->AddValue( 5, element_2.BestSubPathWayScore(2) - m_TerminiGapOpeningPenalty);
+
+		profiles = MinPerElement(m_FirstSequence[i].GetProfiles(),m_FirstSequence[i-1].GetProfiles() );
+
+		//profiles = 0.5 * ( m_FirstSequence[ i].GetProfiles() +  m_FirstSequence[ i - 1].GetProfiles()); // TODO : CHECK
 		element_ptr->AddValue( 6, element_3.BestSubPathWayScore(0) - ( *m_GapOpeningPenaltyFunction)( profiles));
 		element_ptr->AddValue( 7, element_3.BestSubPathWayScore(1) - ( *m_GapOpeningPenaltyFunction)( profiles));
 		element_ptr->AddValue( 8, element_3.BestSubPathWayScore(2) - ( *m_GapExtensionPenaltyFunction)( profiles));
@@ -170,6 +194,9 @@ void NeedlemanWunschAffineGaps::CalculateMatrix()
 		element_ptr->AddValue( 0, element_1.BestSubPathWayScore(0) + local_score);
 		element_ptr->AddValue( 1, element_1.BestSubPathWayScore(1) + local_score);
 		element_ptr->AddValue( 2, element_1.BestSubPathWayScore(2) + local_score);
+
+		profiles = MinPerElement(m_SecondSequence[ j].GetProfiles(),m_SecondSequence[ j - 1].GetProfiles());
+		//profiles = 0.5 * ( m_SecondSequence[ j].GetProfiles() + m_SecondSequence[ j - 1].GetProfiles()); // TODO : CHECK
 		element_ptr->AddValue( 3, element_2.BestSubPathWayScore(0) - m_GapOpeningPenaltyFunction->operator ()( profiles));
 		element_ptr->AddValue( 4, element_2.BestSubPathWayScore(1) - m_GapExtensionPenaltyFunction->operator ()( profiles));
 		element_ptr->AddValue( 5, element_2.BestSubPathWayScore(2) - m_GapOpeningPenaltyFunction->operator ()( profiles));
@@ -195,16 +222,17 @@ void NeedlemanWunschAffineGaps::CalculateMatrix()
 	element_ptr->AddValue(8, element_3.BestSubPathWayScore(2)- m_TerminiGapExtensionPenalty);
 }
 
-std::pair< double, std::list< std::pair< int, int> > >
+std::pair< double, std::vector< std::pair< int, int> > >
 NeedlemanWunschAffineGaps:: TraceBack() const
 {
 
 	double
-		best = INT_MIN;
+		best = -std::numeric_limits< double>::max(),
+		best2;
 
 	int
-		max(std::numeric_limits<int>::max()),
-		position,
+		max = std::numeric_limits<int>::max(),
+		position = 0,
 		group,
 		start,
 		end;
@@ -232,36 +260,42 @@ NeedlemanWunschAffineGaps:: TraceBack() const
 	size_t i = m_Matrix.GetNumberOfRows()    - 1;
 	size_t j = m_Matrix.GetNumberOfColumns() - 1;
 	group =  int (double (position) / 3.0);
-	position =  position - (3 * group);
+	position -= 3 * group;
+
+//	std::cout << __FUNCTION__ << ": last element: " << m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1) << "\n";
+//
+//	std::cout << "group: " << group << " position: " << position << std::endl;
 
 	while (i > 0 || j > 0)
 	{
+//	  std::cout << __FUNCTION__ << ": group: " << group << " (position: " << position << ")" << std::endl;
 		if (group == 0)
 		{
 			alignment.push_front(std::make_pair(i - 1, j - 1));
-			i--;
-			j--;
+			--i;
+			--j;
 		}
 
 		else if (group == 1)
 		{
 			alignment.push_front(std::make_pair(i - 1, max));
-			i--;
+			--i;
 		}
 
 		else if (group == 2)
 		{
 			alignment.push_front(std::make_pair(max, j - 1));
-			j--;
+			--j;
 		}
 
 		group = position;
 		start = position * 3;
 		end = (position * 3) + 3;
+//		std::cout << "group: " << group << " position: " << position << " start: " << start << " end: " << end << " i: " << i << " j: " << j << std::endl;
 
-		double best2 = INT_MIN;
+		best2 = -std::numeric_limits< double>::max();
 
-		for (int count = start; count < end; count++)
+		for (int count = start; count < end; ++count)
 		{
 			if (m_Matrix(i, j).GetAffinePathWay( count) > best2)
 			{
@@ -269,11 +303,16 @@ NeedlemanWunschAffineGaps:: TraceBack() const
 				position = count;
 			}
 		}
-		position = position - start;
+//		std::cout << "pos: " << position << std::endl;
+		position -= start;
+//		std::cout << "position: " << position << std::endl << std::endl;
 	}
-	//std::count << "last element: " << m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1) << "\n";
 
-	return std::make_pair( best, alignment);  // return last matrix element as first of pair
+//	std::cout << __FUNCTION__ << ": last element: " << m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1) << "\n";
+
+	std::vector< std::pair< int, int> >
+		converted( alignment.begin(), alignment.end());
+	return std::make_pair( best, converted);  // return last matrix element as first of pair
 }
 
 

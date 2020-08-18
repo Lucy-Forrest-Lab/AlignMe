@@ -48,9 +48,9 @@ NeedlemanWunsch::NeedlemanWunsch
  const double &GAP_EXTENSION_PENALTY,
  const double &TERMIN_GAP_OPENING_PENALTY,
  const double &TERMIN_GAP_EXTENSION_PENALTY,
- const AASequence &FIRST_SEQUENCE,
- const AASequence &SECOND_SEQUENCE,
- const boost::shared_ptr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
+ const Sequence &FIRST_SEQUENCE,
+ const Sequence &SECOND_SEQUENCE,
+ const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORE,
  Matrix< DynamicProgrammingMatrixElement> &MATRIX
  )
   :
@@ -323,12 +323,14 @@ NeedlemanWunsch::FindBestScoringPriorNeighborInLastRow( const size_t &J)
 
 
 
-std::pair< double, std::list< std::pair< int, int> > >
+std::pair< double, std::vector< std::pair< int, int> > >
 NeedlemanWunsch:: TraceBack() const
 {
-	int
+	size_t
 		i( m_Matrix.GetNumberOfRows() - 1),
-		j( m_Matrix.GetNumberOfColumns() - 1),
+		j( m_Matrix.GetNumberOfColumns() - 1);
+
+	int
 		max( std::numeric_limits< int>::max());
   
 	std::list< std::pair< int, int> >
@@ -357,7 +359,9 @@ NeedlemanWunsch:: TraceBack() const
 			--i;
 		}
 	}
-	return std::make_pair( m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1).GetValue(), alignment);
+	std::vector< std::pair< int, int> >
+		converted( alignment.begin(), alignment.end());
+	return std::make_pair( m_Matrix( m_Matrix.GetNumberOfRows() - 1, m_Matrix.GetNumberOfColumns() - 1).GetValue(), converted);
 }
 
 
