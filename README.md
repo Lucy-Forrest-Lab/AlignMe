@@ -1,8 +1,8 @@
 # AlignMe
-Alignment of membrane proteins
+Pairwise alignment of membrane protein sequences
 
-## Required external libraries:
-- boost library headers (boost.org), namely shared_ptr.hpp 
+## Required external libraries
+Boost library headers (boost.org), namely shared_ptr.hpp 
 
 ## Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices
@@ -11,17 +11,17 @@ Alignment of membrane proteins
 
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions
 
-## How to install:
+## How to install
 - change directory to the appropriate folder in your terminal 
 - type "make"
 - the executable is created in this folder and ready to use 
 
-## How to use:
+## How to use
 - have a look at the manual AlignMe_manual.pdf and try out some examples
 - scripts/use_best_parameters.pl can be used for running AlignMePST jobs if PSSM, secondary structure predictions, and transmembrane predictions are available.
 
-## Online server:
-- our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
+## Online server
+Our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
 
 If you have questions about the usage of this program or discovered a 
 bug, then please post a message on github or write to: AlignMe@rzg.mpg.de 
