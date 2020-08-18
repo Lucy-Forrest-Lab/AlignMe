@@ -2,11 +2,11 @@
 Pairwise alignment of membrane protein sequences   
 
 ## Contributors
-René Staritzbichler
-Marcus Stamm
-Kamil Khafizov
-Edoardo Sarti
-Lucy Forrest
+René Staritzbichler  
+Marcus Stamm  
+Kamil Khafizov  
+Edoardo Sarti  
+Lucy Forrest  
 
 ## Required external libraries
 [Boost](boost.org) library headers, namely shared_ptr.hpp  
