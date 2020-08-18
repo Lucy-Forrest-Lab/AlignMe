@@ -6,7 +6,9 @@ Alignment of membrane proteins
 
 ## Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices
+
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions
+
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions
 
 ## How to install:
