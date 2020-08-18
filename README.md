@@ -11,6 +11,7 @@ Alignment of membrane proteins
 
 ## How to use:
 - have a look at the manual AlignMe_manual.pdf and try out some examples
+- scripts/use_best_parameters.pl can be used for running AlignMePST jobs if PSSM, secondary structure predictions, and transmembrane predictions are available.
 
 ## Online server:
 - our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
