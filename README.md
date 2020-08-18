@@ -1,15 +1,21 @@
 # AlignMe
-Pairwise alignment of membrane protein sequences
+Pairwise alignment of membrane protein sequences   
+
+## Contributors
+René Staritzbichler
+Marcus Stamm
+Kamil Khafizov
+Edoardo Sarti
+Lucy Forrest
 
 ## Required external libraries
-[Boost](boost.org) library headers, namely shared_ptr.hpp 
+[Boost](boost.org) library headers, namely shared_ptr.hpp  
 
 ## Optional external code
-[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices
-
-[PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions
-
-[OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions
+[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
+[PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
+[OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
+Refer to docs/INSTALL_all.txt 
 
 ## How to install
 - change directory to the appropriate folder in your terminal 
@@ -27,13 +33,13 @@ If you have questions about the usage of this program or discovered a
 bug, then please post a message on github or write to: AlignMe@rzg.mpg.de 
 
 ## How can I cite AlignMe?
-If you have used AlignMe in your work, please cite:
+If you have used AlignMe in your work, please cite:  
 
-For pairwise alignments:
-[Stamm M., Staritzbichler R., Khafizov K. and Forrest L.R. 2013 PLoS ONE](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0057731)
+For pairwise alignments:  
+[Stamm M., Staritzbichler R., Khafizov K. and Forrest L.R. 2013 PLoS ONE](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0057731)  
 
-For the alignment of two MSAs:
-[Khafizov K., Staritzbichler R., Stamm M. and Forrest L.R. 2010, Biochemistry](http://pubs.acs.org/doi/abs/10.1021/bi101256x)
+For the alignment of two MSAs:  
+[Khafizov K., Staritzbichler R., Stamm M. and Forrest L.R. 2010, Biochemistry](http://pubs.acs.org/doi/abs/10.1021/bi101256x)  
 
 ## Release Notes:
 
