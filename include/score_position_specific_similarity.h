@@ -269,7 +269,7 @@ public:
 
        double d = 0;
 
-        for (std::map< const char, int>::const_iterator itr=AA.first.GetPSSM().begin();  itr != AA.first.GetPSSM().end() ; ++itr )
+        for (std::map< char, int>::const_iterator itr=AA.first.GetPSSM().begin();  itr != AA.first.GetPSSM().end() ; ++itr )
         {
         	d -=  double( abs( itr->second - AA.second.GetPSSMValue(itr->first) ) );
         }
@@ -318,7 +318,7 @@ public:
 
        double d = -1;
 
-        for (std::map< const char, int>::const_iterator itr=AA.first.GetPSSM().begin();  itr != AA.first.GetPSSM().end() ; ++itr )
+        for (std::map< char, int>::const_iterator itr=AA.first.GetPSSM().begin();  itr != AA.first.GetPSSM().end() ; ++itr )
         {
         	d +=  double( itr->second * AA.second.GetPSSMValue(itr->first));
         }

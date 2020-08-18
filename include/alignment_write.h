@@ -155,7 +155,7 @@ void WriteAlignedSequencesInClustalwFormat
 
   if( WRITE_CLUSTAL_HEADER)
   {
-	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.1\n\n";
+	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.2, score:  " << ALIGNMENT.first << "\n\n";
   }
 
   first_header.resize( 13, ' ');
@@ -352,6 +352,7 @@ void WriteAlignedSequencesInClustalwFormat
 	  identity /= double (non_gaps_in_first_seq);
   }
   identity *= 100;
+
 
   write.close();
   write.clear();

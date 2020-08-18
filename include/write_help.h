@@ -29,7 +29,7 @@
 void WriteHelpForAlignPairs()
 {
 	  std::cout << "\n";
-	  std::cout << "This is the usage information for AlignMe Version 1.1\n";
+	  std::cout << "This is the usage information for AlignMe Version 1.2\n";
 	  std::cout << "\n";
 	  std::cout << "Flags for input files:\n";
 	  std::cout << "-similarity_score_file [file]         file containing information about the type \n";
@@ -108,6 +108,12 @@ void WriteHelpForAlignPairs()
 	  std::cout << "                                       and not considered in the alignment\n";
 	  std::cout << "-profile_gap_value_for_plotting        define a value to be assigned to gaps\n";
 	  std::cout << " [value]                               in the output aligned profiles \n";
+	  std::cout << "-anchors [filename]                    file containing positions in both sequences\n";
+	  std::cout << "                                       to be aligned, each line in the file is one anchor,\n";
+	  std::cout << "                                       the first line contains the number of anchors used:\n";
+	  std::cout << "                                       e.g.:  \n";
+	  std::cout << "                                       1              (nr of anchors)\n";
+	  std::cout << "                                       25  36   2.5   (pos in seq A, pos in seq B, strength)\n";
 	  std::cout << "\n";
 	  exit (-1);
 }
