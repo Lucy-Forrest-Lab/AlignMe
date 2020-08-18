@@ -1,0 +1,3 @@
+weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat
+
+

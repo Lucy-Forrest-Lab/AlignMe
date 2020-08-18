@@ -1,0 +1,4 @@
+weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: triangular_msa size 13
+
+
+

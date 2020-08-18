@@ -1,1 +1,0 @@
-weight: 1.0 type: ScaleSimilarity file: ./examples/KD.txt windowtype: triangular windowsize: 13

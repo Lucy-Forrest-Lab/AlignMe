@@ -1,6 +1,0 @@
-weight: 4.2 type: UniversalProfileSimilarity column: 2 headerlines: 1 file1: /home/marcus/gap_optimization_inputfiles/HOMEP2010/OCTOPUS/[PDBNAME1].nnprf file2: /home/marcus/gap_optimization_inputfiles/HOMEP2010/OCTOPUS/[PDBNAME2].nnprf
-weight: 0.2 type: SequenceSimilarity file: /home/marcus/gap_optimization_inputfiles/hydrophobicity_scales/vtml.mat
-weight: 1.4 type: UniversalProfileSimilarity column: 5 headerlines: 1 file1: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME1].fasta.ss2 file2: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME2].fasta.ss2
-weight: 1.4 type: UniversalProfileSimilarity column: 4 headerlines: 1 file1: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME1].fasta.ss2 file2: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME2].fasta.ss2
-weight: 1.4 type: UniversalProfileSimilarity column: 6 headerlines: 1 file1: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME1].fasta.ss2 file2: /home/marcus/HOMEP2010/extended/psipred3.2_new_and_old/[PDBNAME2].fasta.ss2
-

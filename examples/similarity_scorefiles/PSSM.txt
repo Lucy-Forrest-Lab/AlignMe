@@ -1,0 +1,6 @@
+weight: 1.0 type: PositionSpecificSimilarity PSSM1: ./examples/PSSMs/1H2S.pssm PSSM2: ./examples/PSSMs/2EI4.pssm
+
+
+
+
+
