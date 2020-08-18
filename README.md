@@ -13,7 +13,7 @@ Alignment of membrane proteins
 - have a look at the manual AlignMe_manual.pdf and try out some examples
 
 ## Online server:
-- our online server is available at [http://www.forrestlab.org/AlignMe](http://www.forrestlab.org/AlignMe)
+- our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
 
 If you have questions about the usage of this program or discovered a 
 bug, then please write to: AlignMe@rzg.mpg.de 
