@@ -23,7 +23,7 @@ Refer to docs/INSTALL_all.txt
 - the executable is created in this folder and ready to use 
 
 ## How to use
-- have a look at the manual AlignMe_manual.pdf and try out some examples
+- have a look at the manual docs/AlignMe_manual.pdf and try out some examples
 - scripts/use_best_parameters.pl can be used for running AlignMePST jobs if PSSM, secondary structure predictions, and transmembrane predictions are available.
 
 ## Online server
