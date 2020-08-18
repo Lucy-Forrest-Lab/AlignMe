@@ -4,8 +4,13 @@ Alignment of membrane proteins
 ## Required external libraries:
 - boost library headers (boost.org), namely shared_ptr.hpp 
 
+## Optional external code
+[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices
+[PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions
+[OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions
+
 ## How to install:
-- change directory to the appropriate folder in your terminal (either AlignMe1.1/ or AlignMe1.2/)
+- change directory to the appropriate folder in your terminal 
 - type "make"
 - the executable is created in this folder and ready to use 
 
