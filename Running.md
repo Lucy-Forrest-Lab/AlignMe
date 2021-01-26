@@ -1,4 +1,7 @@
-## Running AlignMe
+# Running AlignMe
+
+To get an overview of available options call:
+`./alignme.exe --help`
 
 3. [Required Flags]
 4. [Output Files](Output.md)
@@ -18,36 +21,32 @@ usual '--' symbol and expect a filename or a value to follow. There are
 required flags that have no default values defined and that will cause
 error messages when missing. Optional flags have default values, and
 these are printed as warnings when the flag is not given. Look at
-section 5.1.2 to get more information about warnings. Type '--help'
-after the executable for basic usage information.
+section 5.1.2 to get more information about warnings. 
 
 All modes of AlignMe require a so-called "similarity score file". This
-file contains information about the similarity measures that you wish to
+file contains information about the similarity metrics that you wish to
 use to construct your alignment. These can be any combination of
-sequence, scale or profile similarity.
+sequence, scale, or profile similarity.
 
 Each row in the similarity score file must start with a weight, which
 describes the influence of the chosen parameter on the alignment. If you
 are using only one type of similarity measure, then this value should be
 1.0. An example of a similarity score file for an alignment based on a
-substitution matrix follows:
+substitution matrix is:
+`weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat`
 
-![](media/image2.png){width="6.263888888888889in"
-height="0.4583333333333333in"}
+More details about similarity score files are provided [below].
 
-More details about similarity score files are provided below.
+Together with the \'*-similarity\_score\_file FILE*\' flag,one of the following
+two pairs of flags has to be provided:
 
-Together with \'*-similarity\_score\_file FILE*\' one of the following
-two pairs has to be provided:
-
-\'*-fasta\_file1 FILE1 -fasta\_file2 FILE2*\'
+`--fasta\_file1 FILE1 --fasta\_file2 FILE2`
 
 or
 
-\'*-msa\_file1 FILE1 -msa\_file2 FILE2*\'
+`--msa\_file1 FILE1 --msa\_file2 FILE2`
 
-Each of these files should contain one or more amino acid sequences in
-FASTA format.
+Each of these files should contain one or more amino acid sequences in FASTA format.
 
 4) Optional flags
 =================
