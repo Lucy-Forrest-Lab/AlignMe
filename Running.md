@@ -1,3 +1,13 @@
+## Running AlignMe
+
+3. [Required Flags]
+4. [Output Files](Output.md)
+5. [Using Anchors](Anchors.md)
+6. [Examples](Examples.md)
+7. [File Formats](Formats.md)
+8. [Overview of all flags](Flag_overview.md)
+
+
 3) Required flags 
 ------------------
 
