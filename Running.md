@@ -68,8 +68,8 @@ Correspondingly, AlignMe has a variety of flags to control gap
 penalties.
 
 The basic gap penalty scheme consists of two different penalties:  
-`--gap_opening_penalty <value>  
---gap_extension_penalty <value>`
+`--gap_opening_penalty <value>`
+`--gap_extension_penalty <value>`
 
 Typically, alignments with fewer and longer gaps are preferred over many
 short gaps. Therefore to open a new gap is usually assigned a higher
@@ -81,8 +81,8 @@ fractions (no commas).
 This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
 sequences:  
-`--termini_gap_opening_penalty <value>
---termini_gap_extension_penalty <value>`
+`--termini_gap_opening_penalty <value>`
+`--termini_gap_extension_penalty <value>`
 
 The latter flags allow gaps at the end of a sequence to be treated
 differently from gaps within the sequence. If the lengths of the
@@ -93,11 +93,11 @@ default they are assigned the same values as `gap_open_penalty` and
 fractions (no commas).
 
 Finally, an advanced penalty scheme can be introduced using the flags:  
-`--below_threshold_gap_opening_penalty <value>  
---below_threshold_gap_extension_penalty <value>  
---above_threshold_gap_opening_penalty <value>  
---above_threshold_gap_extension_penalty <value>  
---thresholds_for_penalties <value> <value> ...`  
+`--below_threshold_gap_opening_penalty <value>`
+`--below_threshold_gap_extension_penalty <value>`  
+`--above_threshold_gap_opening_penalty <value>`  
+`--above_threshold_gap_extension_penalty <value>`  
+`--thresholds_for_penalties <value> <value> ...`  
 
 With the last flag one can define thresholds for the scales or profiles.
 The other four flags then allow gaps to be distinguished if they are to
