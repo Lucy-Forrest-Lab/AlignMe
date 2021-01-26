@@ -3,9 +3,9 @@
 Jump to section on:
 1. [Getting Started](#getting-started)
 2. [Required Inputs](#required-inputs)
-3. [Optional Flags](#optional-flags)
-      [Defining gap penalties](#gap-penalties)
-      [Alignment algorithm](#alignment-algorithm)
+3. [Optional Flags](#optional-flags)  
+      [Defining gap penalties](#gap-penalties)  
+      [Alignment algorithm](#alignment-algorithm)  
 4. [Output Files](Output.md)
 5. [Using Anchors](Anchors.md)
 6. [Examples](Examples.md)
