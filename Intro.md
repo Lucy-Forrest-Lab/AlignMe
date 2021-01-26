@@ -1,5 +1,4 @@
 # Introduction to AlignMe
---
 
 AlignMe is a program that allows the user to perform pair-wise alignments for
 - two sequences 
@@ -12,7 +11,7 @@ matrix (*S~A,B~*) or by differences of biochemical profiles, such as
 hydrophobicity or predicted structural values (*\|V~a~ -- V~b~\|*).
 AlignMe can combine any number of input profiles (*n*)
 with any number of input substitution matrices (*m*) and can use different weights
-(*w*) to guide the combination of those inputs in generating the alignment. (section 2.1.1)
+(*w*) to guide the combination of those inputs in generating the alignment. 
 
 This similarity measure is calculated for all amino acid pairs of two
 sequences in the Needleman-Wunsch algorithm. Additionally the user can
@@ -23,14 +22,8 @@ In all modes of usage, the user has to provide two files, containing the
 sequences, and a so-called similarity-score file, containing the
 user-defined composition of the similarity scores (sections 3 and 5 ).
 
-New in Version 1.2:
-
--   The user can define any number of constraints or anchors. The
-    anchors can be tuned in strength from preference to enforcement
-    (section 4.4).
-
--   Pairwise alignments can be performed in a batch mode, which is most
-    relevant for the server
+The user can define any number of constraints or anchors. The anchors can be tuned 
+in strength from preference to enforcement.
 
 To get an overview of available options call:
 
