@@ -3,7 +3,7 @@
 To get an overview of available options call:
 `./alignme.exe --help`
 
-3. [Required Flags]
+3. [Required Flags](#required-flags)
 4. [Output Files](Output.md)
 5. [Using Anchors](Anchors.md)
 6. [Examples](Examples.md)
@@ -11,7 +11,7 @@ To get an overview of available options call:
 8. [Overview of all flags](Flag_overview.md)
 
 
-3) Required flags 
+### Required flags 
 ------------------
 
 Start the program by calling the alignme1.2.exe executable from a
