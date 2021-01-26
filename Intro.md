@@ -5,10 +5,10 @@ AlignMe is a program that allows the user to perform pair-wise alignments for
 - two multiple sequence alignments
 - two profiles
 
-The similarity (*Sim~i,j~*) between two amino acids (*I* and *J*) may be
+The similarity (*Sim(i,j)*) between two amino acids (*I* and *J*) may be
 measured by their evolutionary relationship in terms of a substitution
-matrix (*S~A,B~*) or by differences of biochemical profiles, such as
-hydrophobicity or predicted structural values (*\|V~a~ -- V~b~\|*).
+matrix (*S(A,B)*) or by differences of biochemical profiles, such as
+hydrophobicity or predicted structural values (*\|V(a) -- V(b)\|*).
 AlignMe can combine any number of input profiles (*n*)
 with any number of input substitution matrices (*m*) and can use different weights
 (*w*) to guide the combination of those inputs in generating the alignment. 
