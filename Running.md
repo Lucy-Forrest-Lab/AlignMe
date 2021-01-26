@@ -1,24 +1,24 @@
 # Running AlignMe
 
 Jump to section on:
-1. [Getting Started](#getting-started)
-2. [Required Inputs](#required-inputs)
-3. [Optional Flags](#optional-flags)  
-      [Defining gap penalties](#gap-penalties)  
-      [Alignment algorithm](#alignment-algorithm)  
-4. [Output Files](Output.md)
-5. [Using Anchors](Anchors.md)
-6. [Examples](Examples.md)
-7. [File Formats](Formats.md)
-8. [Overview of all flags](Flag_overview.md)
+- [Getting Started](#getting-started)
+- [Required Inputs](#required-inputs)
+- [Optional Flags](#optional-flags)  
+   - [Defining gap penalties](#gap-penalties)  
+   - [Alignment algorithm](#alignment-algorithm)  
+- [Output Files](Output.md)
+- [Using Anchors](Anchors.md)
+- [Examples](Examples.md)
+- [File Formats](Formats.md)
+- [Overview of all flags](Flag_overview.md)
 
 
 ### Getting started 
 
-To run AlignMe on the command line in a terminal use:
+To run AlignMe on the command line in a terminal use:  
 `alignme.exe`
 
-To get an overview of available options call:
+To get an overview of available options call:  
 `./alignme.exe --help`
 
 The program offers a variety of flags that are explained in
@@ -40,14 +40,13 @@ Each row in the similarity score file must start with a weight, which
 describes the influence of the chosen parameter on the alignment. If you
 are using only one type of similarity measure, then this value should be
 1.0. An example of a similarity score file for an alignment based on a
-substitution matrix is:
+substitution matrix is:  
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat`
 
-More details about similarity score files are provided [below].
+More details about similarity score files are provided [here].
 
 Together with the \'*-similarity\_score\_file FILE*\' flag,one of the following
-two pairs of flags has to be provided:
-
+two pairs of flags has to be provided:  
 `--fasta\_file1 FILE1 --fasta\_file2 FILE2`
 or
 `--msa\_file1 FILE1 --msa\_file2 FILE2`
@@ -69,8 +68,8 @@ Correspondingly, AlignMe has a variety of flags to control gap
 penalties.
 
 The basic gap penalty scheme consists of two different penalties:  
-**--*gap\_opening\_penalty \<value\>***
-**--*gap\_extension\_penalty \<value\>***
+`**--*gap\_opening\_penalty \<value\>***
+**--*gap\_extension\_penalty \<value\>***`
 
 Typically, alignments with fewer and longer gaps are preferred over many
 short gaps. Therefore to open a new gap is usually assigned a higher
@@ -82,8 +81,8 @@ fractions (no commas).
 This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
 sequences:  
-**--*termini\_gap\_opening\_penalty \<value\>***
-**--*termini\_gap\_extension\_penalty \<value\>***
+`**--*termini\_gap\_opening\_penalty \<value\>***
+**--*termini\_gap\_extension\_penalty \<value\>***`
 
 The latter flags allow gaps at the end of a sequence to be treated
 differently from gaps within the sequence. If the lengths of the
@@ -94,11 +93,11 @@ gap\_extension\_penalty. Again, both values must be positive integers or
 fractions (no commas).
 
 Finally, an advanced penalty scheme can be introduced using the flags:  
-**--*below\_threshold\_gap\_opening\_penalty \<value\>***
+`**--*below\_threshold\_gap\_opening\_penalty \<value\>***
 **--*below\_threshold\_gap\_extension\_penalty \<value\>***
 **--*above\_threshold\_gap\_opening\_penalty \<value\>***
 **--*above\_threshold\_gap\_extension\_penalty \<value\>***
-**--*thresholds\_for\_penalties \<value\> \<value\> \.....***
+**--*thresholds\_for\_penalties \<value\> \<value\> \.....***`
 
 With the last flag one can define thresholds for the scales or profiles.
 The other four flags then allow gaps to be distinguished if they are to
@@ -122,9 +121,8 @@ subject to this penalty scheme. In addition, if these five flags are
 provided, both termini gap penalties must also be provided.
 
 #### Alignment Algorithm 
-
-**--*algorithm \<name\>***
+`**--*algorithm \<name\>***`
 
 The user has option to change the algorithm being used for the
-alignment. Currently, only one option is possible, i.e.
+alignment. Currently, only one option is available, i.e.
 "global\_affine", which is also the default value.
