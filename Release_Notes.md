@@ -1,6 +1,7 @@
 ## Version 1.2
 
-Inclusion of anchors as constraints
+- Inclusion of anchors as constraints 
+- Pairwise alignments can be performed in a batch mode (relevant for the server)
 
 ## Version 1.1
 
