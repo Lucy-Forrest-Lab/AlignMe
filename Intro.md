@@ -18,10 +18,10 @@ sequences in the Needleman-Wunsch algorithm. Additionally the user can
 choose between several gap penalty schemes for the treatment of
 mismatching stretches (section 4.2).
 
-In all modes of usage, the user has to provide two files, containing the
-sequences, and a so-called similarity-score file, containing the
-user-defined composition of the similarity scores (sections 3 and 5 ).
+In all modes of usage, the user has to provide two files, one for each of the
+sequences, and a so-called similarity-score file, which contains the
+user-defined combination of inputs that will be used to compute the similarity scores.
 
-The user can also define any number of constraints or anchors. The anchors can be tuned 
+The user can also define any number of constraints or **anchors**. The anchors can be tuned 
 in strength from preference to enforcement.
 
