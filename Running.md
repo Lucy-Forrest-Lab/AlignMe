@@ -1,9 +1,11 @@
 # Running AlignMe
 
-To get an overview of available options call:
-`./alignme.exe --help`
-
-3. [Required Flags](#required-flags)
+Jump to section on:
+1. [Getting Started](#getting-started)
+2. [Required Inputs](#required-inputs)
+3. [Optional Flags](#optional-flags)
+      [Defining gap penalties](#gap-penalties)
+      [Alignment algorithm](#alignment-algorithm)
 4. [Output Files](Output.md)
 5. [Using Anchors](Anchors.md)
 6. [Examples](Examples.md)
@@ -11,17 +13,23 @@ To get an overview of available options call:
 8. [Overview of all flags](Flag_overview.md)
 
 
-### Required flags 
-------------------
+### Getting started 
 
-Start the program by calling the alignme1.2.exe executable from a
-terminal. The program offers a variety of flags that are explained in
+To run AlignMe on the command line in a terminal use:
+`alignme.exe`
+
+To get an overview of available options call:
+`./alignme.exe --help`
+
+The program offers a variety of flags that are explained in
 this manual, and that can be provided in any order. They start with the
 usual '--' symbol and expect a filename or a value to follow. There are
 required flags that have no default values defined and that will cause
-error messages when missing. Optional flags have default values, and
-these are printed as warnings when the flag is not given. Look at
-section 5.1.2 to get more information about warnings. 
+error messages when missing. The optional flags have default values, and
+these are printed as warnings when the flag is not given. (Look at
+section 5.1.2 to get more information about warnings.)
+
+### Required inputs
 
 All modes of AlignMe require a so-called "similarity score file". This
 file contains information about the similarity metrics that you wish to
@@ -41,27 +49,14 @@ Together with the \'*-similarity\_score\_file FILE*\' flag,one of the following
 two pairs of flags has to be provided:
 
 `--fasta\_file1 FILE1 --fasta\_file2 FILE2`
-
 or
-
 `--msa\_file1 FILE1 --msa\_file2 FILE2`
 
 Each of these files should contain one or more amino acid sequences in FASTA format.
 
-4) Optional flags
-=================
+### Optional flags
 
-4.1) Alignment Algorithm 
--------------------------
-
-**--*algorithm \<name\>***
-
-The user has option to change the algorithm being used for the
-alignment. Currently, only one option is possible, i.e.
-"global\_affine", which is also the default value.
-
-4.2) Gap penalty schemes 
--------------------------
+#### Gap penalties 
 
 In any alignment two conditions exist, namely, sections of sequences
 match or they do not match. Mismatches are reflected by the introduction
@@ -73,10 +68,8 @@ or optimization based on knowledge of "correct" alignments.
 Correspondingly, AlignMe has a variety of flags to control gap
 penalties.
 
-The basic gap penalty scheme consists of two different penalties:
-
+The basic gap penalty scheme consists of two different penalties:  
 **--*gap\_opening\_penalty \<value\>***
-
 **--*gap\_extension\_penalty \<value\>***
 
 Typically, alignments with fewer and longer gaps are preferred over many
@@ -88,10 +81,8 @@ fractions (no commas).
 
 This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
-sequences:
-
+sequences:  
 **--*termini\_gap\_opening\_penalty \<value\>***
-
 **--*termini\_gap\_extension\_penalty \<value\>***
 
 The latter flags allow gaps at the end of a sequence to be treated
@@ -102,16 +93,11 @@ default they are assigned the same values as gap\_open\_penalty and
 gap\_extension\_penalty. Again, both values must be positive integers or
 fractions (no commas).
 
-Finally, an advanced penalty scheme can be introduced using the flags:
-
+Finally, an advanced penalty scheme can be introduced using the flags:  
 **--*below\_threshold\_gap\_opening\_penalty \<value\>***
-
 **--*below\_threshold\_gap\_extension\_penalty \<value\>***
-
 **--*above\_threshold\_gap\_opening\_penalty \<value\>***
-
 **--*above\_threshold\_gap\_extension\_penalty \<value\>***
-
 **--*thresholds\_for\_penalties \<value\> \<value\> \.....***
 
 With the last flag one can define thresholds for the scales or profiles.
@@ -125,8 +111,9 @@ threshold of 0.5 and by providing larger values for the 'above'
 penalties than for the 'below' penalties.
 
 Note that the values passed to the threshold flag have to match the
-definitions in the similarity score file. For example:
-'**--**thresholds\_for\_penalties 0.5 0.5' will apply these thresholds
+definitions in the similarity score file. For example:  
+`--thresholds\_for\_penalties 0.5 0.5` 
+will apply these thresholds
 and the according gap penalties to the first two scales/profiles defined
 in the similarity score file, e.g. helix and hydrophobicity
 probabilities. Any scale/profile/matrix defined later in the similarity
@@ -134,3 +121,10 @@ score file, (e.g. coil probability and hydrophobicity) will not be
 subject to this penalty scheme. In addition, if these five flags are
 provided, both termini gap penalties must also be provided.
 
+#### Alignment Algorithm 
+
+**--*algorithm \<name\>***
+
+The user has option to change the algorithm being used for the
+alignment. Currently, only one option is possible, i.e.
+"global\_affine", which is also the default value.
