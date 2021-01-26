@@ -3,13 +3,7 @@
 1. [Introduction to AlignMe](Intro.md)
 2. [Installation](Install.md)
 3. [Running AlignMe](Running.md)
-4. [Output Files](Output.md)
-5. [Using Anchors](Anchors.md)
-6. [Examples](Examples.md)
-7. [File Formats](Formats.md)
-8. [Overview of all flags](Flag_overview.md)
-9. [FAQ](FAQ.md)
-10. [Release Notes](Release_Notes.md)
+4. [Release Notes](Release_Notes.md)
 
 
 ## Web Server
