@@ -1,9 +1,9 @@
 # Introduction to AlignMe
 
 AlignMe is a program that allows the user to perform pair-wise alignments for
-- two sequences 
-- two multiple sequence alignments
-- two profiles
+- two sequences, 
+- two multiple sequence alignments, or
+- two profiles.
 
 The similarity (*Sim(i,j)*) between two amino acids (*i* and *j*) may be
 measured by their evolutionary relationship in terms of a substitution
