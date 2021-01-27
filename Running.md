@@ -6,10 +6,10 @@ Jump to section on:
    - [Sequence Inputs](#sequence-inputs)
    - [Similarity Score File](#similarity-score-file)
 - [Optional Flags](#optional-flags)  
+   - [Setting Anchors](#anchors)
    - [Defining gap penalties](#gap-penalties)  
    - [Alignment algorithm](#alignment-algorithm)  
 - [Output Files](Output.md)
-- [Using Anchors](Anchors.md)
 - [Examples](Examples.md)
 - [File Formats](Formats.md)
 - [Overview of all flags](Flag_overview.md)
@@ -75,7 +75,7 @@ More details about similarity score files can be found in the [examples](#Exampl
 #### Anchors
 Adding a list of positions that will be fixed can be carried out using this flag:
 `-anchors <filename>`
-The format of this file is described [here](#Formats.md).
+The format of this file is described [here](#Formats.md). More detail can be found in the section on [Anchors](#Anchors.md).
 
 #### Gap penalties 
 In any alignment two conditions exist, namely, sections of sequences
