@@ -6,6 +6,9 @@ AlignMe has a number of different modes. Here we provide examples of various sta
 3. [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
 
 
+---
+
+
 ## Sequence-to-sequence alignments
 
 This section refers to alignments based on two protein sequences
@@ -25,64 +28,44 @@ format](Formats.md) and in separate files (FILE1 and FILE2).
 After this flag you have to provide filename of a file containing
 information about the type of alignment you wish to create. This file
 can be set up in 3 different ways depending on the type of alignment:
-1. [Sequence Similarity Matrices](#1.-Using-similarity-matrices)
-2. [Position-specific Similarity Matrices](#Using-position-specific-matrices) or
-3. [Scale Similarity](#Using-Scale-similarity) or 
+1. [Sequence Similarity Matrices](#Using-Similarity-Matrices)
+2. [Position-specific Similarity Matrices](#Using-Position-Specific-Matrices) or
+3. [Scales for Similarity](#Using-Scales-for-Similarity) or 
 4. [Profile Similarity](#Using-Profile-similarity) or 
 5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
 The examples below illustrate the file inputs and commands required to run each of these types of alignment.
 We also provide pre-optimized gap penalties and input files for four different modes: [P](), [PS](), [PST](), and [Fast]() modes.
 
----
-
-### 1. Using Similarity Matrices
+### Using Similarity Matrices
 When using similarity (aka substitution) matrices the corresponding line in the
 similarity score file should have the following format:  
-
 `weight: <double> type: SequenceSimilarity file: <filename>`
 
 for example:
-
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.dat`
 
-The word following "type" describes the kind of alignment you wish to
-create. In this case **SequenceSimilarity** creates an alignment based on a
-substitution matrix. The filename has to contain the complete address of
-the file containing the matrix you want to use (only relative paths are
+The word following "type" describes the kind of alignment you wish to create. In this case **SequenceSimilarity** creates an alignment based on a
+substitution matrix. The filename has to contain the complete address of the file containing the matrix you want to use (only relative paths are
 used in the examples). Example substitution matrices are available [here](https://github.com/Lucy-Forrest-Lab/AlignMe/tree/master/examples/matrices/).
 
-### 2. Using Position Specific Matrices
+### Using Position Specific Matrices
 A similarity score file for a pair-wise sequence alignment based on position-specific substitution matrices (PSSMs) requires the following format:
-
 `weight: <double> type: PostionSpecificSimilarity PSSM1: <filename> PSSM2: <filename>`
 
 for example:
-
 `weight: 1.0 type: PostionSpecificSimilarity PSSM1: ./examples/PSSMs/1H2S.pssm PSSM2: ./examples/PSSMs/2EI4.pssm`
 
-The type **PositionSpecificSimilarity** is used to generated alignments
-based on the PSSMs. The file of PSSM1 has to be based on the sequence provided by the flag -fasta_file1 and
-the file after PSSM2 has to correspond to the sequence of the flag -fasta_file2.
+The type **PositionSpecificSimilarity** is used to generated alignments based on PSSMs. The file of PSSM1 has to be based on the sequence provided by the flag -fasta_file1 and the file after PSSM2 has to correspond to the sequence of the flag -fasta_file2.
 
-The principle of PositionSpecificSimilarity for the replacement of amino
-acid A from sequence 1 by amino acid B from sequence 2 is: From PSSM1
-the value for the replacement of A with B is taken, from PSSM2 the value
-for the replacement of B with A is taken and then the average of those
-values is calculated (their sum divided by 2).
+The principle of PositionSpecificSimilarity for the replacement of amino acid A from sequence 1 by amino acid B from sequence 2 is: From PSSM1 the value for the replacement of A with B is taken, from PSSM2 the value for the replacement of B with A is taken and then the average of those values is calculated (their sum divided by 2). 
 
-Moreover, there is another method of using PSSMs for alignments
-supported by AlignMe called **ProfilePositionSpecificSimilarity**. The syntax is
+Moreover, there is another method of using PSSMs for alignments supported by AlignMe called **ProfilePositionSpecificSimilarity**. The syntax is
 similar to those of "PositionSpecificSimilarity":
-
 `weight: 1.0 type: ProfilePostionSpecificSimilarity PSSM1: ./examples_best/1KPL.pssm PSSM2: ./examples_best/1OTS.pssm`
 
-However, the calculation is different. From PSSM1 all 20 values of amino
-acid A are compared to the corresponding values of amino acid B in PSSM1
-(i.e., likeliness of A->A of PSSM1 with B->A of PSSM2, A->C of 1,
-B->C of 2 and so on), their differences are summed up and then this
-value is divided by 20 (= number of amino acid types). 
+However, the calculation is different. From PSSM1 all 20 values of amino acid A are compared to the corresponding values of amino acid B in PSSM1 (i.e., likeliness of A->A of PSSM1 with B->A of PSSM2, A->C of 1, B->C of 2 and so on), their differences are summed up and then this value is divided by 20 (= number of amino acid types). 
 
-### Using Scale Similarity
+### Using Scales for Similarity
 Similarity Score File for a pair-wise sequence alignment based on scales (e.g. hydrophobicity):
 
 When using scales the corresponding line in the similarity_score_file
