@@ -1,4 +1,4 @@
-## Welcome to the AlignMe Manual
+### Welcome to the AlignMe Manual
 
 1. [Introduction to AlignMe](Intro.md)
 2. [Installation](Install.md)
@@ -6,11 +6,11 @@
 4. [Release Notes](Release_Notes.md)
 
 
-## Web Server
+#### Web Server
 A webserver of AlignMe is available at  
 <http://www.bioinfo.mpg.de/AlignMe>
 
-## Citing AlignMe
+#### Citing AlignMe
 If you use AlignMe for your research and study, please cite the following references:  
 
 ##### For Pairwise Alignments:  
