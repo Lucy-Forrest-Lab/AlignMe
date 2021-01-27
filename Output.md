@@ -1,5 +1,4 @@
 ## Output files
------------------
 
 To specify the filename for an output pairwise sequence alignment, use the following flag:
 
