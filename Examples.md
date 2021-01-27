@@ -2,7 +2,8 @@
 
 AlignMe has a number of different modes. Here we provide examples of various standard alignment types.
 1. [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments)
-2. 
+2. [Alignment of two Multiple Sequence Alignments](#Alignment-of-two-Multiple-Sequence-Alignments)
+3. [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
 
 
 ## Sequence-to-sequence alignments
