@@ -3,6 +3,8 @@
 Jump to section on:
 - [Getting Started](#getting-started)
 - [Required Inputs](#required-inputs)
+   - [Sequence Inputs](#sequence-inputs)
+   - [Similarity Score File](#similarity-score-file)
 - [Optional Flags](#optional-flags)  
    - [Defining gap penalties](#gap-penalties)  
    - [Alignment algorithm](#alignment-algorithm)  
@@ -33,27 +35,33 @@ section 5.1.2 to get more information about warnings.)
 
 ### Required inputs
 
-All modes of AlignMe require a so-called "similarity score file". This
-file contains information about the similarity metrics that you wish to
-use to construct your alignment. These can be any combination of
-sequence, scale, or profile similarity.
+There are three required inputs for every AlignMe calculation:
+1) the first sequence or profile
+2) the second sequence or profile
+3) a file containing the similarity metrics to be used. 
 
-Each row in the similarity score file must start with a weight, which
-describes the influence of the chosen parameter on the alignment. If you
-are using only one type of similarity measure, then this value should be
-1.0. An example of a similarity score file for an alignment based on a
-substitution matrix is:   
+#### Sequence inputs
+To parse the sequence inputs, one of the following two pairs of flags has to be provided:  
+
+`--fasta_file1 FILE1 --fasta_file2 FILE2`  
+or  
+`--msa_file1 FILE1 --msa_file2 FILE2`  
+fasta_file = filename of the file containing a primary sequence in Fasta format.
+msa_file = filename of multiple-sequence alignment that will be converted to a family-averaged hydropathy profile.
+
+### Similarity score file
+The so-called "similarity score file" contains information about the similarity metrics that you wish to
+use to construct your alignment. the file is called from the command line using the following flag:
+
+`--similarity_score_file FILE` 
+
+The similarity score metrics can be any combination of primary sequence, hydropathy scale, or profiles such as from secondary structure or transmembrane predictions. Each row in the similarity score file must start with a weight, which
+describes the influence of the chosen parameter on the alignment. If you are using only one type of similarity measure, then this value should be 1.0. For an alignment based on a substitution matrix, the similarity score file would contain this line:
+
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat`
 
 More details about similarity score files are provided [here].
 
-Together with the `--similarity_score_file FILE` flag, one of the following
-two pairs of flags has to be provided:  
-`--fasta_file1 FILE1 --fasta_file2 FILE2`  
-or  
-`--msa_file1 FILE1 --msa_file2 FILE2`  
-
-Each of these files should contain one or more amino acid sequences in FASTA format.
 
 ### Optional flags
 
