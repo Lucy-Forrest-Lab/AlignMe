@@ -30,8 +30,10 @@ this manual, and that can be provided in any order. Flgas start with the
  '--' symbol and expect a filename or a value to follow. There are
 [required flags](#Required-inputs) that have no default values defined and that will cause
 error messages when missing. The [optional flags](#Optional-flags) have default values, and
-these are printed as warnings when the flag is not given. (Look at
-section 5.1.2 to get more information about warnings.)
+these are printed as warnings when the flag is not given. (Look at the
+[examples section](#Examples.md) for more information about warnings.)
+
+---
 
 ### Required inputs
 
@@ -49,7 +51,7 @@ or
 fasta_file = filename of the file containing a primary sequence in Fasta format.
 msa_file = filename of multiple-sequence alignment that will be converted to a family-averaged hydropathy profile.
 
-### Similarity score file
+#### Similarity score file
 The so-called "similarity score file" contains information about the similarity metrics that you wish to
 use to construct your alignment. The file is called from the command line using the following flag:
 
@@ -66,6 +68,7 @@ Every input line must end with a carriage return/new line, otherwise the entry w
 
 More details about similarity score files can be found in the [examples](#Examples.md).
 
+---
 
 ### Optional flags
 
