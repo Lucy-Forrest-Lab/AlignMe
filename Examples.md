@@ -31,17 +31,20 @@ can be set up in 3 different ways depending on the type of alignment:
 1. [Sequence Similarity Matrices](#Using-Similarity-Matrices)
 2. [Position-specific Similarity Matrices](#Using-Position-Specific-Matrices) or
 3. [Scales for Similarity](#Using-Scales-for-Similarity) or 
-4. [Profile Similarity](#Using-Profile-similarity) or 
+4. [Profile Similarity](#Using-Profiles-for-Similarity) or 
 5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
-The examples below illustrate the file inputs and commands required to run each of these types of alignment.
+The examples below illustrate the file inputs and commands required to run each of these types of alignment, starting with the syntax for the similarity score file for each of the above 5 options. 
+
 We also provide pre-optimized gap penalties and input files for four different modes: [P](), [PS](), [PST](), and [Fast]() modes.
 
 ### Using Similarity Matrices
 When using similarity (aka substitution) matrices the corresponding line in the
 similarity score file should have the following format:  
+
 `weight: <double> type: SequenceSimilarity file: <filename>`
 
-for example:
+for example:  
+
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.dat`
 
 The word following "type" describes the kind of alignment you wish to create. In this case **SequenceSimilarity** creates an alignment based on a
@@ -50,9 +53,11 @@ used in the examples). Example substitution matrices are available [here](https:
 
 ### Using Position Specific Matrices
 A similarity score file for a pair-wise sequence alignment based on position-specific substitution matrices (PSSMs) requires the following format:
+
 `weight: <double> type: PostionSpecificSimilarity PSSM1: <filename> PSSM2: <filename>`
 
 for example:
+
 `weight: 1.0 type: PostionSpecificSimilarity PSSM1: ./examples/PSSMs/1H2S.pssm PSSM2: ./examples/PSSMs/2EI4.pssm`
 
 The type **PositionSpecificSimilarity** is used to generated alignments based on PSSMs. The file of PSSM1 has to be based on the sequence provided by the flag -fasta_file1 and the file after PSSM2 has to correspond to the sequence of the flag -fasta_file2.
@@ -68,8 +73,7 @@ However, the calculation is different. From PSSM1 all 20 values of amino acid A 
 ### Using Scales for Similarity
 Similarity Score File for a pair-wise sequence alignment based on scales (e.g. hydrophobicity):
 
-When using scales the corresponding line in the similarity_score_file
-should have the following format:
+When using scales the corresponding line in the similarity_score_file should have the following format:
 
 `weight: <double> type: ScaleSimilarity file: <filename> windowtype: <string> windowsize: <integer>`
 
@@ -88,37 +92,19 @@ windows provide the option to smooth the scale values by averaging the
 values over a subsequence. These are: none, rectangular, triangular,
 sinoid, and zigzag (see section 5 for detailed information).
 
-#### Using Profile Similarity
-Similarity Score File for a pair-wise sequence alignment based on profiles (e.g. secondary structure predictions)
-
-When aligning using profiles, the similarity score file should have the following format:
+### Using Profiles for Similarity
+When aligning using profiles (e.g. secondary structure predictions), the similarity score file should have the following format:
 
 `weight: <double> type: UniversalProfileSimilarity column: <double> headerlines: <double> profile1: <filename1> profile2: <filename2>`
 
 An example of a similarity score file for an alignment based on profiles:  
 
-`weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2`
+```weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2```
 
-Here, the type UniversalProfileSimilarity is used in order to align
-user-specified profiles. A profile contains values in a certain column
-corresponding to a certain amino acid of the sequence (see [section on formats]()). 
-Therefore, the profiles must have the same length as the
-sequences. If the length of one of the profiles does not match that of
-the corresponding sequence (i.e., profile1 corresponds to fasta_file1,
-and profile2 to fasta_file2), an error message will be given. In
-addition, the column number from which the values will be taken must be
-provided. The number given after the tag "headerlines" describes the
-number of lines that will be skipped at the beginning of the
-profile-file. This option is useful if there are comments or other
-information at the beginning of the profile file that you do not want to
-include in the alignment.
+Here, the type UniversalProfileSimilarity is used in order to align user-specified profiles. A profile contains values in a certain column corresponding to a certain amino acid of the sequence (see [section on formats](Formats.md)). Therefore, the profiles must have the same length as the sequences. If the length of one of the profiles does not match that of the corresponding sequence (i.e., profile1 corresponds to fasta_file1, and profile2 to fasta_file2), an error message will be given. In addition, the column number from which the values will be taken must be provided. The number given after the tag "headerlines" describes the number of lines that will be skipped at the beginning of the profile-file. This option is useful if there are comments or other information at the beginning of the profile file that you do not want to include in the alignment.
 
 ### Combinations of Inputs
-Similarity Score File for a pair-wise sequence alignment based on a combination of matrices, scales or profiles
-
-AlignMe allows combinations of input types. Each input type is defined
-in a separate row of the similarity_score_file. The following is an
-example of a similarity score file containing a combination of inputs:
+Creating a pair-wise sequence alignment based on a combination of matrices, scales or profiles is a powerful feature of AlignMe. The standard Fast, PS, and PST modes use combinations of inputs. Each input type is defined in a separate row of the similarity_score_file. The following is an example of a similarity score file containing a combination of inputs:
 
 ```
 weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat
@@ -126,76 +112,66 @@ weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: tri
 weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2
 ```
 
-### Example commands for Pair-wise Alignments
+## Running Pair-wise Alignments
+The above examples provides the syntax for creating the similarity score file. The next section explains how to call those input files when running AlignMe.  More information concerning optional flags is explained in the [Flag overview](#Flag_overview.md) and [Running AlignMe](#Running.md) sections.
 
-Here, we acquaint you with the basic commands of AlignMe with some
-examples using required flags. More information concerning optional
-flags is explained [here]().
-
-Change directory to the main AlignMe folder to run the following commands.
+The examples can be run by first changing directory to the main AlignMe folder.
 
 #### Pair-wise alignment of 2 sequences based on a substitution matrix
+The simplest alignment uses the BLOSUM substitution matrix to align two sequences
 
-```./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file ./examples/similarity_scorefiles/matrix.txt
+```
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+              -similarity_score_file ./examples/similarity_scorefiles/matrix.txt
 ```
 
 You will receive the following standard warning messages indicating the
-usage of default values:
-
+usage of default values:  
 - No gap opening penalty provided. The default value 10 will be used.
 - No gap extension penalty provided. The default value 1 will be used.
-- No termini extension penalty provided. The default value 1 will be
-used.
+- No termini extension penalty provided. The default value 1 will be used.
 - No termini opening penalty provided. The default value will be used. 
-- You did not provide a filename for the output of the sequence
-alignment. It will be written to **aligned_sequences.aln**
+- You did not provide a filename for the output of the sequence alignment. It will be written to **aligned_sequences.aln**
 
-To modify the default values and to define custom output files, see
-[sections on inputs](#Running.md) and [overview of flags](#Flag_overview.md).
+To modify the default values and to define custom output files, see [sections on inputs](#Running.md) and [overview of flags](#Flag_overview.md).
+This example illustrates usage of the three required input flags, and creates an alignment in the file called **aligned_sequences.aln**.
 
-Only these 3 basic input flags that you have used to create this
-alignment are required flags. The alignment is now stored in
-**aligned_sequences.aln**. This alignment has been created based on the
-BLOSUM substitution matrix.
-
-#### Pair-wise alignment of 2 sequences based on a PositionSpecificSubstitutionMatrix (PSSM)
-
+#### Pair-wise alignment of 2 sequences based on a Position Specific Substitution Matrix
+At the next level of complexity, we compare two sequences using a PSSM.
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file ./examples/similarity_scorefiles/PSSM.txt -output_aligned_profiles my_aligned_PSSMs.aln
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+              -similarity_score_file ./examples/similarity_scorefiles/PSSM.txt \
+              -output_aligned_profiles my_aligned_PSSMs.aln
 ```
 
-With this command, an alignment is generated based on
-"PositionSpecificSimilarity" and the aligned sequences are stored in the
-file **my_aligned_PSSMs.aln**.
-
-However, there is also the scoring type
-"ProfilePositionSpecificSimilarity" available, which has been described
+With this command, an alignment is generated based on "PositionSpecificSimilarity" and the aligned sequences are stored in the
+file **my_aligned_PSSMs.aln**. However, a second scoring type, called "ProfilePositionSpecificSimilarity" is also available, which has been described
 in [section](3.1) and can be used with the following command:
 
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file ./examples/similarity_scorefiles/PSSMprofile.txt -output_aligned_profiles my_aligned_profile_PSSMs.aln
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+              -similarity_score_file ./examples/similarity_scorefiles/PSSMprofile.txt \
+              -output_aligned_profiles my_aligned_profile_PSSMs.aln
 ```
 
-Note that only the file after the flag `-similarity_score_file` differs from the previous example.
+Note that only the file specified by the flag `-similarity_score_file` differs from the previous example.
 
 #### Pair-wise alignment of 2 sequences based on a hydrophobicity scale 
-
+For aligning two sequences based on a hydrophobicity scale, the basic command is as follows:
 ```
-alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file ./examples/similarity_scorefiles/scale.txt
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+              -similarity_score_file ./examples/similarity_scorefiles/scale.txt
 ```
 
 When creating alignments based on scales or profiles, it can be useful
-to use the optional flag --output_aligned_profiles (see sections on [flags]() and [outputs]()
+to use the optional flag --output_aligned_profiles (see sections on [flags](#Flag_overview.md) and [outputs](#Outputs.md)
 for detailed information) to create an additional output file containing
 the aligned values of each sequence position. For example:
 
 ```
 alignme.exe -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file ./examples/similarity_scorefiles/scale.txt -output_aligned_profiles my_aligned_profiles.aln
+        -similarity_score_file ./examples/similarity_scorefiles/scale.txt \
+        **-output_aligned_profiles my_aligned_profiles.aln**
 ```
 
 The aligned profiles are now written to **my_aligned_profiles.aln**, while
@@ -204,15 +180,15 @@ get a better overview of the underlying hydrophobicity of your sequence,
 the profile file can then be plotted, e.g. with xmgrace or gnuplot.
 
 #### Pair-wise alignment of 2 sequences based on secondary-structure predictions
-
-In this example two per-residue predictions are aligned with each other.
+For aligning two per-residue predictions with each other.
 These predictions were obtained with the secondary structure predictor
 PsiPred, but you can use any kind of program that creates a profile
 (i.e., transmembrane predictors, secondary structure predictors etc.).
 
 ```
-alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
--similarity_score_file  ./examples/similarity_scorefiles/profile.txt -output_aligned_profiles my_aligned_profiles.aln
+alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+            -similarity_score_file  ./examples/similarity_scorefiles/profile.txt \
+            -output_aligned_profiles my_aligned_profiles.aln
 ```
 
 ####Pair-wise alignment of 2 sequences based on combined inputs 
