@@ -4,6 +4,7 @@ This section describes the formats of the various inputs read in by AlignMe:
 - [PSSMs](#Position-specific-substitution-matrices)
 - [Scales](#Scales)
 - [Profiles](#Profiles)  
+- [Anchors](#Anchors)
 
 It also describes the types of smoothing methods that can be used with scales for hydropathy (aka family-averaged) alignments. 
 
@@ -145,3 +146,13 @@ calculated by averaging hydrophobicity values at every position in the
 MSA. At every position of the MSA hydrophobicity values are summed up,
 while gaps are ignored. Then the total sum at every position of the MSA
 is divided by the number of non-gaps.
+
+## Anchors
+
+Each anchor has to be given as a line in the anchor file, following this scheme:  
+`position_in_first_sequence   position_in_second_sequence   strength`
+
+e.g.: 
+`25  36 1000`
+
+This would align residue 25 in the first sequence with residue 36 of the second sequence with a relative strength of 1000.
