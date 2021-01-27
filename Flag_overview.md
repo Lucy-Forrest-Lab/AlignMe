@@ -11,7 +11,8 @@
   --msa_file2 FILE                       | file containing a multiple sequence alignment in which all sequences are the same length
 
 Note the following requirements:  
-  `--similarity_score_file` must always be provided. 
+  `--similarity_score_file` must always be provided.  
+  
   `--fasta_file1` and `--fasta_file2` must be provided together.  
   The same is true for `--msa_file1` and `--msa_file2`.
 
