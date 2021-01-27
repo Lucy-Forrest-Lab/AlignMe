@@ -56,11 +56,15 @@ use to construct your alignment. the file is called from the command line using 
 `--similarity_score_file FILE` 
 
 The similarity score metrics can be any combination of primary sequence, hydropathy scale, or profiles such as from secondary structure or transmembrane predictions. Each row in the similarity score file must start with a weight, which
-describes the influence of the chosen parameter on the alignment. If you are using only one type of similarity measure, then this value should be 1.0. For an alignment based on a substitution matrix, the similarity score file would contain this line:
+indicates the influence of the chosen parameter on the alignment. If you are using only one type of similarity measure, then this value should be 1.0. 
+The entry after the option "type:" describes the type of alignment to be created.
+In the simplest example, for  an alignment based on a substitution matrix, the similarity score file would contain this line:
 
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat`
 
-You must ensure that every input line is followed by a carriage return/new line, otherwise that entry will not be read. More details about similarity score files are provided [here].
+Every input line must end with a carriage return/new line, otherwise the entry will not be read. 
+
+More details about similarity score files can be found in the [examples](#Examples.md).
 
 
 ### Optional flags
