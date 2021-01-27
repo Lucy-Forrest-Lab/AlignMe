@@ -1,3 +1,5 @@
+# Release Notes for AlignMe
+
 ## Version 1.2
 
 - Inclusion of anchors as constraints 
