@@ -52,11 +52,11 @@ You can choose one of the following gap penalty sets. A combination is not possi
 
   Flag                               | Description
   ------------------------------------------------- | -------------------------------------------------------------------------------------------------------
-  --thresholds_for_penalties \[values\]             |  defines a threshold according to which gap penalties are assigned to a given position of the sequence
-  --below_threshold_gap_opening_penalty \[value\]   |  penalty for opening gaps opposite to residues with a value below the chosen threshold
-  --below_threshold_gap_extension_penalty \[value\] |  penalty for extending gaps opposite to residues with a value below the chosen threshold
-  --above_threshold_gap_opening_penalty  \[value\]  |  penalty for opening gaps opposite to residues with a value above the chosen threshold
-  --above_threshold_gap_extension_penalty \[value\] |  penalty for extending gaps opposite to residues with a value above the chosen threshold
+  --thresholds_for_penalties \[values\]             |  defines a threshold according to which gap penalties are assigned
+  --below_threshold_gap_opening_penalty \[value\]   |  penalty for opening gaps opposite residues with a value below the  threshold
+  --below_threshold_gap_extension_penalty \[value\] |  penalty for extending gaps opposite residues with a value below the  threshold
+  --above_threshold_gap_opening_penalty  \[value\]  |  penalty for opening gaps opposite residues with a value above the  threshold
+  --above_threshold_gap_extension_penalty \[value\] |  penalty for extending gaps opposite residues with a value above the  threshold
   --termini_gap_opening_penalty \[value\]           |  additional penalty for opening gaps at the end of the sequence
   --termini_gap_extension_penalty \[value\]         |  additional penalty for extending gaps at the end of the sequence
 
