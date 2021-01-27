@@ -25,7 +25,7 @@ format](Formats.md) and in separate files (FILE1 and FILE2).
 After this flag you have to provide filename of a file containing
 information about the type of alignment you wish to create. This file
 can be set up in 3 different ways depending on the type of alignment:
-1. [Sequence Similarity Matrices](#Using-similarity-matrices)
+1. [Sequence Similarity Matrices](#1.-Using-similarity-matrices)
 2. [Position-specific Similarity Matrices](#Using-position-specific-matrices) or
 3. [Scale Similarity](#Using-Scale-similarity) or 
 4. [Profile Similarity](#Using-Profile-similarity) or 
