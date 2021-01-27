@@ -16,9 +16,9 @@ sequence. If more than one '>' symbol is found, only the sequence
 following the first '>' symbol will be used, and an appropriate warning
 will be given. Example of a file in fasta format:
 
-`>Header information and sequence identifier  
+```>Header information and sequence identifier
 ACDEFGIHALALASDFSFEURSTLASSDFSFEURSTLAS  
-QEERSLGITLSSDFSFEURSTLASSDFSFEURSTLASSQ`  
+QEERSLGITLSSDFSFEURSTLASSDFSFEURSTLASSQ```
 
 ## Similarity matrices
 
