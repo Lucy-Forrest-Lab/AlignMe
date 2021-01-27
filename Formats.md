@@ -3,7 +3,8 @@ This section describes the formats of the various inputs read in by AlignMe:
 - [Similarity matrices](#Similarity-matrices) 
 - [PSSMs](#Position-specific-substitution-matrices)
 - [Scales](#Scales)
-- [Profiles](#Profiles)
+- [Profiles](#Profiles)  
+
 It also describes the types of smoothing methods that can be used with scales for hydropathy (aka family-averaged) alignments. 
 
 ## FASTA
