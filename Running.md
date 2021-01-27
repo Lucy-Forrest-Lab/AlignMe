@@ -73,8 +73,8 @@ More details about similarity score files can be found in the [examples](#Exampl
 ### Optional flags
 
 #### Anchors
-Adding a list of positions that will be fixed can be carried out using the -anchors flag:
-`-anchors <filename`
+Adding a list of positions that will be fixed can be carried out using this flag:
+`-anchors <filename>`
 The format of this file is described [here](#Formats.md).
 
 #### Gap penalties 
