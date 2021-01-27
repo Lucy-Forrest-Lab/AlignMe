@@ -1,5 +1,8 @@
-5.1) Pair-wise sequence-to-sequence alignments
-----------------------------------------------
+# Examples of how to run AlignMe
+
+1. [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments)
+
+## Sequence-to-sequence alignments
 
 This section refers to alignments based on two protein sequences
 provided by the user. The sequence properties used for aligning the
