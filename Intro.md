@@ -25,3 +25,5 @@ user-defined combination of inputs that will be used to compute the similarity s
 The user can also define any number of constraints or **anchors**. The anchors can be tuned 
 in strength from preference to enforcement.
 
+For more information see:
+Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. 2013 “Alignment of Helical Membrane Protein Sequences Using AlignMe” [PloS One 8 (3):e57731](https://doi.org/10.1371/journal.pone.0057731)
