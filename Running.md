@@ -25,11 +25,11 @@ To get an overview of available options, see [overview](Flag_overview.md), or ca
 
 `./alignme.exe --help`
 
-The program offers a variety of flags that are explained in
-this manual, and that can be provided in any order. They start with the
-usual '--' symbol and expect a filename or a value to follow. There are
-required flags that have no default values defined and that will cause
-error messages when missing. The optional flags have default values, and
+The program reads a variety of flags that are explained in
+this manual, and that can be provided in any order. Flgas start with the
+ '--' symbol and expect a filename or a value to follow. There are
+[required flags](#Required-inputs) that have no default values defined and that will cause
+error messages when missing. The [optional flags](#Optional-flags) have default values, and
 these are printed as warnings when the flag is not given. (Look at
 section 5.1.2 to get more information about warnings.)
 
@@ -51,7 +51,7 @@ msa_file = filename of multiple-sequence alignment that will be converted to a f
 
 ### Similarity score file
 The so-called "similarity score file" contains information about the similarity metrics that you wish to
-use to construct your alignment. the file is called from the command line using the following flag:
+use to construct your alignment. The file is called from the command line using the following flag:
 
 `--similarity_score_file FILE` 
 
@@ -70,7 +70,6 @@ More details about similarity score files can be found in the [examples](#Exampl
 ### Optional flags
 
 #### Gap penalties 
-
 In any alignment two conditions exist, namely, sections of sequences
 match or they do not match. Mismatches are reflected by the introduction
 of gaps. Therefore, the quality of the alignment will be influenced not
@@ -91,7 +90,7 @@ short gaps. Therefore to open a new gap is usually assigned a higher
 penalty than to extend an existing gap. By default a gap opening penalty
 of 10 and a gap extension penalty of 1 are used. Different values can be
 set using these flags. Both values must be positive integers or
-fractions (no commas).
+fractions (no commas). This basic scheme corresponds to the "2 penalties" option on the webserver.
 
 This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
@@ -102,13 +101,13 @@ sequences:
 
 The latter flags allow gaps at the end of a sequence to be treated
 differently from gaps within the sequence. If the lengths of the
-sequences differ significantly it is probably useful to assign lower
+sequences differ significantly it can be useful to assign lower
 penalties to termini regions. If these values are not set, then by
 default they are assigned the same values as `gap_open_penalty` and
 `gap_extension_penalty`. Again, both values must be positive integers or
-fractions (no commas).
+fractions (no commas). This scheme corresponds to the "4 penalties" option on the webserver, and is used in the AlignMe P mode.
 
-Finally, an advanced penalty scheme can be introduced using the flags:  
+Finally, one may also wish to penalize gap penalties in the core of conserved regions, such as membrane-spanning segments or secondary-structure elements. To this end, a more advanced penalty scheme can be introduced using the flags:  
 
 `--below_threshold_gap_opening_penalty <value>`  
 `--below_threshold_gap_extension_penalty <value>`  
@@ -116,15 +115,12 @@ Finally, an advanced penalty scheme can be introduced using the flags:
 `--above_threshold_gap_extension_penalty <value>`  
 `--thresholds_for_penalties <value> <value> ...`  
 
-With the last flag one can define thresholds for the scales or profiles.
-The other four flags then allow gaps to be distinguished if they are to
-be opened in regions where the profile values are above or below the
-thresholds. This scheme can be used to prevent gap insertion in
-secondary structure elements or transmembrane regions. For example: if a
+With the last flag one can define thresholds for the scales or profiles, above or below which different penalties are applied.
+The other four flags provide the penalties for those different regions. For example: if a
 secondary structure prediction determines a helix probability above 0.5
 one can avoid the introduction of gaps in that helix by defining a
 threshold of 0.5 and by providing larger values for the 'above'
-penalties than for the 'below' penalties.
+penalties than for the 'below' penalties.  
 
 Note that the values passed to the threshold flag have to match the
 definitions in the similarity score file. For example, the flag:  
@@ -136,7 +132,8 @@ in the similarity score file, e.g. helix and hydrophobicity
 probabilities. Any scale/profile/matrix defined later in the similarity
 score file, (e.g. coil probability and hydrophobicity) will not be
 subject to this penalty scheme. In addition, if these five flags are
-provided, both termini gap penalties must also be provided.
+provided, both termini gap penalties must also be provided. 
+This scheme corresponds to the "6 penalties" option on the webserver, and is used in AlignMe Fast, PS, and PST modes.
 
 #### Alignment Algorithm 
 The user has the option to change the algorithm being used for the
@@ -144,5 +141,3 @@ alignment. Currently, only one option is available, i.e.
 "global_affine", which is also the default value.
 
 `--algorithm <name>`  
-
-
