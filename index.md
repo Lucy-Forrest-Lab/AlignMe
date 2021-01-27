@@ -6,10 +6,13 @@ Please follow the links to learn more about how to use AlignMe:
 - [Running AlignMe](Running.md)
 - [Release Notes](Release_Notes.md)
 
+---
 
 #### Web Server
 A webserver of AlignMe is available at  
 <http://www.bioinfo.mpg.de/AlignMe>
+
+---
 
 #### Citing AlignMe
 If you use AlignMe for your research and study, please cite the following references:  
