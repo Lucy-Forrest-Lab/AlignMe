@@ -21,7 +21,7 @@ To run AlignMe on the command line in a terminal use:
 
 `alignme.exe`
 
-To get an overview of available options call:  
+To get an overview of available options, see [overview](Flag_overview.md), or call:  
 
 `./alignme.exe --help`
 
@@ -60,7 +60,7 @@ describes the influence of the chosen parameter on the alignment. If you are usi
 
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat`
 
-More details about similarity score files are provided [here].
+You must ensure that every input line is followed by a carriage return/new line, otherwise that entry will not be read. More details about similarity score files are provided [here].
 
 
 ### Optional flags
