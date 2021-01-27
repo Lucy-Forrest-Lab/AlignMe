@@ -15,15 +15,15 @@ with any number of input substitution matrices (*m*) and can use different weigh
 
 This similarity measure is calculated for all amino acid pairs of two
 sequences in the Needleman-Wunsch algorithm. Additionally the user can
-choose between several gap penalty schemes for the treatment of
-mismatching stretches (section 4.2).
+choose between several [gap penalty schemes](#Running.md) for the treatment of
+mismatching stretches.
 
 In all modes of usage, the user has to provide two files, one for each of the
 sequences, and a so-called similarity-score file, which contains the
 user-defined combination of inputs that will be used to compute the similarity scores.
 
-The user can also define any number of constraints or **anchors**. The anchors can be tuned 
-in strength from preference to enforcement.
+The user can also define any number of constraints or [**anchors**](#Anchors.md). The anchors can be tuned 
+in strength from preference to enforcement. 
 
 For more information see:
 Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. 2013 “Alignment of Helical Membrane Protein Sequences Using AlignMe” [PloS One 8 (3):e57731](https://doi.org/10.1371/journal.pone.0057731)
