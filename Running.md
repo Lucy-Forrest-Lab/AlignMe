@@ -16,9 +16,11 @@ Jump to section on:
 ### Getting started 
 
 To run AlignMe on the command line in a terminal use:  
+
 `alignme.exe`
 
 To get an overview of available options call:  
+
 `./alignme.exe --help`
 
 The program offers a variety of flags that are explained in
@@ -48,7 +50,7 @@ More details about similarity score files are provided [here].
 Together with the `--similarity_score_file FILE` flag, one of the following
 two pairs of flags has to be provided:  
 `--fasta_file1 FILE1 --fasta_file2 FILE2`  
-or
+or  
 `--msa_file1 FILE1 --msa_file2 FILE2`  
 
 Each of these files should contain one or more amino acid sequences in FASTA format.
@@ -68,6 +70,7 @@ Correspondingly, AlignMe has a variety of flags to control gap
 penalties.
 
 The basic gap penalty scheme consists of two different penalties:  
+
 `--gap_opening_penalty <value>`  
 `--gap_extension_penalty <value>`  
 
@@ -81,6 +84,7 @@ fractions (no commas).
 This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
 sequences:  
+
 `--termini_gap_opening_penalty <value>`  
 `--termini_gap_extension_penalty <value>` 
 
@@ -93,6 +97,7 @@ default they are assigned the same values as `gap_open_penalty` and
 fractions (no commas).
 
 Finally, an advanced penalty scheme can be introduced using the flags:  
+
 `--below_threshold_gap_opening_penalty <value>`  
 `--below_threshold_gap_extension_penalty <value>`  
 `--above_threshold_gap_opening_penalty <value>`  
@@ -110,8 +115,10 @@ threshold of 0.5 and by providing larger values for the 'above'
 penalties than for the 'below' penalties.
 
 Note that the values passed to the threshold flag have to match the
-definitions in the similarity score file. For example:  
+definitions in the similarity score file. For example, the flag:  
+
 `--thresholds_for_penalties 0.5 0.5`  
+
 will apply these thresholds and the according gap penalties to the first two scales/profiles defined
 in the similarity score file, e.g. helix and hydrophobicity
 probabilities. Any scale/profile/matrix defined later in the similarity
@@ -120,8 +127,10 @@ subject to this penalty scheme. In addition, if these five flags are
 provided, both termini gap penalties must also be provided.
 
 #### Alignment Algorithm 
-`--algorithm <name>`  
-
-The user has option to change the algorithm being used for the
+The user has the option to change the algorithm being used for the
 alignment. Currently, only one option is available, i.e.
 "global_affine", which is also the default value.
+
+`--algorithm <name>`  
+
+
