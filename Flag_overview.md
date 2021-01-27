@@ -19,26 +19,15 @@ The same is true for `--msa_file1` and `--msa_file2`.
 
 Flag                               | Description
 -----------------------------------| -----------------------------------
- --output_aligned_sequences FILE   | file to which the aligned amino   
-                                   | acid sequences are printed        
------------------------------------|-----------------------------------
- --output_aligned_profiles         | -   file to which the aligned     
-                                   |     profile values are printed    
------------------------------------|-----------------------------------
- -extract_from_MSA_sequences       | -   from each averaged multiple   
- _with_ids  \[value1\] \[value2\]  |     sequence alignment a sequence 
-                                   |     is extraced. Value1 is i-th   
-                                   |     sequence from msa_file1 and   
-                                   |     value2 the j-th sequence from 
-                                   |     msa_file2                     
------------------------------------|-----------------------------------
- -output_extracted_sequences FILE  | file to which the sequences that  
-                                   | are extracted from the averaged   
-                                   | MSA are written.                  
+ --output_aligned_sequences FILE   | file to which the aligned amino acid sequences are printed
+ --output_aligned_profiles         | file to which the aligned profile values are printed     
+ -extract_from_MSA_sequences_with_ids  \[value1\] \[value2\]    | from each averaged multiple sequence alignment, a sequence is extracted. Value1 = i-th sequence from msa_file1. Value2 = j-th sequence from msa_file2
+ -output_extracted_sequences FILE  | file to which the sequences that are extracted from the averaged MSA are written
 
-You can choose one of the following gap penalty sets.
 
-A combination is not possible!
+## Gap penalty settings
+
+You can choose one of the following gap penalty sets. A combination is not possible.
 
 ### Flags for a set of 2 gap penalties:
 
