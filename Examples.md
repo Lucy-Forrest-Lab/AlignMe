@@ -1,30 +1,25 @@
 # Examples of how to run AlignMe
 
+AlignMe has a number of different modes. Here we provide examples of various standard alignment types.
 1. [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments)
+2. 
+
 
 ## Sequence-to-sequence alignments
 
 This section refers to alignments based on two protein sequences
 provided by the user. The sequence properties used for aligning the
-sequences can vary. For such an alignment two sequence files and a
+sequences can vary. For such an alignment, two sequence files and a
 similarity score file must be provided.
 
-The flags for the fasta files are:
+The flags for the fasta files are:  
+`--fasta_file1 FILE1`  
+`--fasta_file2 FILE1`  
 
-**--*fasta\_file1 \<filename1\>***
+The two amino acid sequences that you want to align must be in [fasta
+format](Formats.md) and in separate files (FILE1 and FILE2). 
 
-**--*fasta\_file2 \<filename2\>***
-
-The two amino acid sequences that you want to align must be in fasta
-format and in separate files (filename1 and filename2). For fasta format
-the first line of each file has to start with '\>' symbol followed by a
-header (which is usually the name of the sequence but can also be left
-blank). All other text in these files is taken to be the amino acid
-sequence. If more than one '\>' symbol is found, only the sequence
-following the first '\>' symbol will be used, and an appropriate warning
-will be given.
-
-**--*similarity\_score\_file \<filename\>***
+`--similarity_score_file FILE`
 
 After this flag you have to provide filename of a file containing
 information about the type of alignment you wish to create. This file
