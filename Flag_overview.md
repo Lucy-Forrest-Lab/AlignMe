@@ -63,7 +63,8 @@ You can choose one of the following gap penalty sets. A combination is not possi
 ### Other flags
 
   Flag                               | Description
-  ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  -------------------------- | -----------
+  --anchors FILE             | filename of the file containing a list of anchors, e.g. anchors.txt
   --fraction_allowed_gaps \[value\]           | columns of the MSA in which more than \[value\] positions are gaps are skipped and not considered in the alignment
   --profile_gap_value_for_plotting \[value\]  | define a value to be assigned to gaps in the output aligned profiles; default is ?0
   --alignment_output_format                   | Formatting type of the output alignment. Allowed types are ClustalW and fasta. By default, alignments are written in ClustalW format.
