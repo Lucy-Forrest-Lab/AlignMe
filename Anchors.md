@@ -1,3 +1,5 @@
+# Anchoring positions in AlignMe alignments
+
 Alignments can be optimized by including expert knowledge. Any number of anchors can be defined for positions in pairs of sequences that are known to belong together. 
 
 Each anchor has to be given as a line in the anchor file, following this scheme:  
