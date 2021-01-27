@@ -33,9 +33,11 @@ can be set up in 3 different ways depending on the type of alignment:
 ##### Using Similarity Matrices
 When using similarity (aka substitution) matrices the corresponding line in the
 similarity_score_file should have the following format:  
+
 `weight: <double> type: SequenceSimilarity file: <filename>`
 
 for example:
+
 `weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.dat`
 
 The word following "type" describes the kind of alignment you wish to
@@ -48,8 +50,7 @@ b) Similarity Score File for a pair-wise sequence alignment based on Position Sp
 
 `weight: <double> type: PostionSpecificSimilarity PSSM1: <filename> PSSM2: <filename>`
 
-An example of a similarity score file for an alignment based on Position
-Specific Matrices:
+An example of a similarity score file for an alignment based on Position Specific Matrices:
 
 `weight; 1.0 type: PostionSpecificSimilarity PSSM1: ./examples/PSSMs/1H2S.pssm PSSM2: ./examples/PSSMs/2EI4.pssm`
 
@@ -68,15 +69,13 @@ values is calculated (their sum divided by 2).
 Moreover, there is another method of using PSSMs for alignments
 supported by AlignMe called "PositionSpecificSimilarity". The syntax is
 similar to those of "PositionSpecificSimilarity":
-
-![](media/image4.png){width="6.305555555555555in"
-height="0.3194444444444444in"}
+`weight: 1.0 type: ProfilePostionSpecificSimilarity PSSM1: ./examples_best/1KPL.pssm PSSM2: ./examples_best/1OTS.pssm`
 
 However, the calculation is different. From PSSM1 all 20 values of amino
 acid A are compared to the corresponding values of amino acid B in PSSM1
-(i.e., likeliness of A->A of PSSM1 with B-> A of PSSM2, A->C of 1,
+(i.e., likeliness of A->A of PSSM1 with B->A of PSSM2, A->C of 1,
 B->C of 2 and so on), their differences are summed up and then this
-value is divided by 20 (= number of amino acids types).
+value is divided by 20 (= number of amino acid types).
 
 ### Using Scale Similarity
 Similarity Score File for a pair-wise sequence alignment based on scales (e.g. hydrophobicity):
@@ -84,13 +83,11 @@ Similarity Score File for a pair-wise sequence alignment based on scales (e.g. h
 When using scales the corresponding line in the similarity_score_file
 should have the following format:
 
-`Weight <double> type ScaleSimilarity file <filename> windowtype <string> windowsize <integer>`
+`weight: <double> type: ScaleSimilarity file: <filename> windowtype: <string> windowsize: <integer>`
 
-An example of a similarity score file for an alignment based on a
-matrix:
+An example of a similarity score file for an alignment based on a matrix:
 
-![](media/image5.png){width="6.263888888888889in"
-height="0.3611111111111111in"}
+`weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: triangular windowsize: 13`
 
 The type ScaleSimilarity is used to create an alignment based on a
 scale. The filename refers to the file containing the scale you wish to
@@ -106,15 +103,13 @@ sinoid, and zigzag (see section 5 for detailed information).
 #### Using Profile Similarity
 Similarity Score File for a pair-wise sequence alignment based on profiles (e.g. secondary structure predictions)
 
-When aligning using profiles, the similarity score file should have
-the following format:
+When aligning using profiles, the similarity score file should have the following format:
 
 `weight: <double> type: UniversalProfileSimilarity column: <double> headerlines: <double> profile1: <filename1> profile2: <filename2>`
 
-An example of a similarity score file for an alignment based on
-profiles:
+An example of a similarity score file for an alignment based on profiles:  
 
-![](media/image6.png)
+`weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2`
 
 Here, the type UniversalProfileSimilarity is used in order to align
 user-specified profiles. A profile contains values in a certain column
@@ -137,7 +132,11 @@ AlignMe allows combinations of input types. Each input type is defined
 in a separate row of the similarity_score_file. The following is an
 example of a similarity score file containing a combination of inputs:
 
-![](media/image7.png)
+```
+weight: 1.0 type: SequenceSimilarity file: ./examples/matrices/blosum62.mat
+weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: triangular windowsize: 13
+weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2
+```
 
 ### Example commands for Pair-wise Alignments
 
