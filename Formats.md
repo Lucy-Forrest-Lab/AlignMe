@@ -46,7 +46,7 @@ like „Last position-specific\..." in the first line, followed by the 20
 standard amino acids in the second line and all other amino acids in the
 next lines:
 
-![](media/image11.png){width="4.75in" height="2.0833333333333335in"}
+![](media/pssm.png){width="4.75in" height="2.0833333333333335in"}
 
 ## Scales 
 
@@ -54,10 +54,10 @@ For aligning two sequences according to a scale such as a hydrophobicity
 scale, the ScaleSimilarity mode is used. This requires an input file in
 which each of the two amino-acid types is assigned a value on the scale.
 Thus, the similarity between two amino acids is the difference between
-their scale values. The following is an example input scale file (i.e.
-Kyte-Doolittle hydrophobicity
-scale.![](media/image12.png){width="0.9305555555555556in"
-height="2.8472222222222223in"}
+their scale values. Note that, in order for the threshold gap penalty scheme to work, these scales have to be reversed in sign from their original values. That is, the original scales consider that hydrophobic amino acids have a negative free energy for insertion in the membrane. However, we wish to treat membrane regions as conserved, so we reverse the sign of the values. 
+The following is an example input scale file (i.e. Kyte-Doolittle hydrophobicity scale), with reversed sign.
+
+![](media/hf.png){width="0.9305555555555556in" height="2.8472222222222223in"}
 
 ## Profiles
 
@@ -66,11 +66,10 @@ structure predictions obtained from PsiPred (left) or membrane
 predictions from OCTOPUS (right). The user has to choose the column from
 which the values should be taken from and it is possible to skip
 commented lines using the "headerlines" option in the
-*similarity\_score\_file*.
+similarity score file.
 
-![](media/image13.png){width="2.0555555555555554in"
-height="1.7638888888888888in"} ![](media/image14.png){width="3.75in"
-height="1.7361111111111112in"}
+![](media/ss2.png){width="2.0555555555555554in" height="1.7638888888888888in"} 
+![](media/nnprf.png){width="3.75in"height="1.7361111111111112in"}
 
 ### Smoothing methods
 
@@ -78,8 +77,9 @@ Alignments with hydrophobicity scales allow the usage of sliding windows
 to generate a smoothed hydrophobicity plot that is not based on
 single amino acid positions only but also takes neighboring amino acids
 into account. The supported sliding window types are: 
-None, [triangular](#triangular), [rectangular](#rectangular),
+- For sequence-sequence alignments: None, [triangular](#triangular), [rectangular](#rectangular),
 [sinusoidal](#sinusoidal) and [zigzag](#zigzag).
+- For msa-msa alignments: [triangular_msa](#triangular_msa).
 
 #### rectangular
 
@@ -90,7 +90,7 @@ at the window centre, so that the values of the neighboring residues are
 effectively used to smooth out the profile. This option may be used in
 combination with a 6 gap-penalty set to subdivide the sequence into two
 regions with different gap penalties according to a threshold value (see
-section 4.2).
+section on [gap penalties](#Running.md)).
 
 #### triangular
 
@@ -100,7 +100,7 @@ centre of the window, whereas the contribution of values either side
 decreases linearly from the central position. Thus, profiles become
 smoothed, but less drastically than in the case of the rectangular
 window. This option is may be useful in combination with a 6 gap-penalty
-set and a threshold value (see section 4.2).
+set and a threshold value (see section on [gap penalties](#Running.md)).
 
 #### sinusoidal
 
@@ -126,20 +126,15 @@ Example for a window size of 5:
 Positions i-2, i, i-2 contribute to the average, whereas positions i-1
 and i+1 have no effect on the average.
 
-Currently, only one averaging type is supported for alignments of
-averaged multiple sequence alignments:
-
 #### triangular_msa
 
-To create average hydropathy profiles based on the MSAs, a triangular
-sliding window can be used. There are two main steps in this procedure.
-
+To create average hydropathy profiles based on two MSAs, a triangular
+sliding window can be used. There are two main steps in this procedure:
 1. For every sequence in the MSA its own window-averaged hydropathy
-profile is calculated first. Due to a presence of gaps in the MSA, the
+profile is calculated first. Due to the presence of gaps in the MSA, the
 sliding window in this case is flexible, i.e. its length can be extended
 by a number of gaps found on every side of the window, so that the
 window of a specified length N still covers N non-gappy positions.
-
 2. After average hydropathy profiles have been calculated for every
 sequence in the MSA, the average hydropathy profile of the entire MSA is
 calculated by averaging hydrophobicity values at every position in the
