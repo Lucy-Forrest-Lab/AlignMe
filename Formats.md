@@ -30,8 +30,7 @@ SequenceSimilarity option, requires a similarity or substitution matrix that def
 of substituting one amino acid type with another. The following is an
 example of a matrix file in the correct format (i.e. BLOSUM62)
 
-![](media/blosum62.png){width="4.319444444444445in"
-height="2.9444444444444446in"}
+![](media/blosum62.png)
 
 ## Position Specific Substitution Matrices
 
@@ -46,7 +45,7 @@ like „Last position-specific\..." in the first line, followed by the 20
 standard amino acids in the second line and all other amino acids in the
 next lines:
 
-![](media/pssm.png){width="4.75in" height="2.0833333333333335in"}
+![](media/pssm.png)
 
 ## Scales 
 
@@ -57,7 +56,7 @@ Thus, the similarity between two amino acids is the difference between
 their scale values. Note that, in order for the threshold gap penalty scheme to work, these scales have to be reversed in sign from their original values. That is, the original scales consider that hydrophobic amino acids have a negative free energy for insertion in the membrane. However, we wish to treat membrane regions as conserved, so we reverse the sign of the values. 
 The following is an example input scale file (i.e. Kyte-Doolittle hydrophobicity scale), with reversed sign.
 
-![](media/hf.png){width="0.9305555555555556in" height="2.8472222222222223in"}
+![](media/hf.png)
 
 ## Profiles
 
@@ -68,8 +67,8 @@ which the values should be taken from and it is possible to skip
 commented lines using the "headerlines" option in the
 similarity score file.
 
-![](media/ss2.png){width="2.0555555555555554in" height="1.7638888888888888in"} 
-![](media/nnprf.png){width="3.75in"height="1.7361111111111112in"}
+![](media/ss2.png)
+![](media/nnprf.png)
 
 ### Smoothing methods
 
