@@ -18,7 +18,8 @@ will be given. Example of a file in fasta format:
 
 ```>Header information and sequence identifier
 ACDEFGIHALALASDFSFEURSTLASSDFSFEURSTLAS  
-QEERSLGITLSSDFSFEURSTLASSDFSFEURSTLASSQ```
+QEERSLGITLSSDFSFEURSTLASSDFSFEURSTLASSQ
+```
 
 ## Similarity matrices
 
