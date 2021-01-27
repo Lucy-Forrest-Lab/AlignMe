@@ -45,8 +45,8 @@ You can choose one of the following gap penalty sets. A combination is not possi
   ---------------------------------------------- | -----------------------------------------------------------------
   -gap_opening_penalty \[value\]                 |  penalty for opening gaps within the sequence
   -gap_extension_penalty \[value\]               |  penalty for extending gaps within the sequence
-  --termini_gap_opening_penalty \[value\]        |  additional penalty for opening gaps at the end of the sequence
-  --termini_gap_extension_penalty \[value\]      |  additional penalty for extending gaps at the end of the sequence
+  -termini_gap_opening_penalty \[value\]         |  additional penalty for opening gaps at the end of the sequence
+  -termini_gap_extension_penalty \[value\]       |  additional penalty for extending gaps at the end of the sequence
 
 ### Flags for a set of 6 gap penalties:
 
