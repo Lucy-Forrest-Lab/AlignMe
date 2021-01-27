@@ -23,11 +23,11 @@ To run AlignMe on the command line in a terminal use:
 
 To get an overview of available options, see [overview](Flag_overview.md), or call:  
 
-`./alignme.exe --help`
+`./alignme.exe -help`
 
 The program reads a variety of flags that are explained in
 this manual, and that can be provided in any order. Flgas start with the
- '--' symbol and expect a filename or a value to follow. There are
+ '-' symbol and expect a filename or a value to follow. There are
 [required flags](#Required-inputs) that have no default values defined and that will cause
 error messages when missing. The [optional flags](#Optional-flags) have default values, and
 these are printed as warnings when the flag is not given. (Look at the
@@ -45,9 +45,9 @@ There are three required inputs for every AlignMe calculation:
 #### Sequence inputs
 To parse the sequence inputs, one of the following two pairs of flags has to be provided:  
 
-`--fasta_file1 FILE1 --fasta_file2 FILE2`  
+`-fasta_file1 <filename1> -fasta_file2 <filename2>`  
 or  
-`--msa_file1 FILE1 --msa_file2 FILE2`  
+`-msa_file1 <filename1> -msa_file2 <filename2>`  
 fasta_file = filename of the file containing a primary sequence in Fasta format.
 msa_file = filename of multiple-sequence alignment that will be converted to a family-averaged hydropathy profile.
 
@@ -55,7 +55,7 @@ msa_file = filename of multiple-sequence alignment that will be converted to a f
 The so-called "similarity score file" contains information about the similarity metrics that you wish to
 use to construct your alignment. The file is called from the command line using the following flag:
 
-`--similarity_score_file FILE` 
+`-similarity_score_file <filename>` 
 
 The similarity score metrics can be any combination of primary sequence, hydropathy scale, or profiles such as from secondary structure or transmembrane predictions. Each row in the similarity score file must start with a weight, which
 indicates the influence of the chosen parameter on the alignment. If you are using only one type of similarity measure, then this value should be 1.0. 
@@ -72,6 +72,11 @@ More details about similarity score files can be found in the [examples](#Exampl
 
 ### Optional flags
 
+#### Anchors
+Adding a list of positions that will be fixed can be carried out using the -anchors flag:
+`-anchors <filename`
+The format of this file is described [here](#Formats.md).
+
 #### Gap penalties 
 In any alignment two conditions exist, namely, sections of sequences
 match or they do not match. Mismatches are reflected by the introduction
@@ -85,8 +90,8 @@ penalties.
 
 The basic gap penalty scheme consists of two different penalties:  
 
-`--gap_opening_penalty <value>`  
-`--gap_extension_penalty <value>`  
+`-gap_opening_penalty <value>`  
+`-gap_extension_penalty <value>`  
 
 Typically, alignments with fewer and longer gaps are preferred over many
 short gaps. Therefore to open a new gap is usually assigned a higher
@@ -99,8 +104,8 @@ This basic scheme can be extended by the use of 2 additional gap
 penalties, which control gaps at the ends (N- and C-termini) of the
 sequences:  
 
-`--termini_gap_opening_penalty <value>`  
-`--termini_gap_extension_penalty <value>` 
+`-termini_gap_opening_penalty <value>`  
+`-termini_gap_extension_penalty <value>` 
 
 The latter flags allow gaps at the end of a sequence to be treated
 differently from gaps within the sequence. If the lengths of the
@@ -112,11 +117,11 @@ fractions (no commas). This scheme corresponds to the "4 penalties" option on th
 
 Finally, one may also wish to penalize gap penalties in the core of conserved regions, such as membrane-spanning segments or secondary-structure elements. To this end, a more advanced penalty scheme can be introduced using the flags:  
 
-`--below_threshold_gap_opening_penalty <value>`  
-`--below_threshold_gap_extension_penalty <value>`  
-`--above_threshold_gap_opening_penalty <value>`  
-`--above_threshold_gap_extension_penalty <value>`  
-`--thresholds_for_penalties <value> <value> ...`  
+`-below_threshold_gap_opening_penalty <value>`  
+`-below_threshold_gap_extension_penalty <value>`  
+`-above_threshold_gap_opening_penalty <value>`  
+`-above_threshold_gap_extension_penalty <value>`  
+`-thresholds_for_penalties <value> <value> ...`  
 
 With the last flag one can define thresholds for the scales or profiles, above or below which different penalties are applied.
 The other four flags provide the penalties for those different regions. For example: if a
@@ -128,7 +133,7 @@ penalties than for the 'below' penalties.
 Note that the values passed to the threshold flag have to match the
 definitions in the similarity score file. For example, the flag:  
 
-`--thresholds_for_penalties 0.5 0.5`  
+`-thresholds_for_penalties 0.5 0.5`  
 
 will apply these thresholds and the according gap penalties to the first two scales/profiles defined
 in the similarity score file, e.g. helix and hydrophobicity
@@ -143,4 +148,4 @@ The user has the option to change the algorithm being used for the
 alignment. Currently, only one option is available, i.e.
 "global_affine", which is also the default value.
 
-`--algorithm <name>`  
+`-algorithm <name>`  
