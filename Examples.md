@@ -114,7 +114,7 @@ the following format:
 An example of a similarity score file for an alignment based on
 profiles:
 
-![](media/image6.png){width="6.25in" height="0.20833333333333334in"}
+![](media/image6.png)
 
 Here, the type UniversalProfileSimilarity is used in order to align
 user-specified profiles. A profile contains values in a certain column
@@ -137,7 +137,7 @@ AlignMe allows combinations of input types. Each input type is defined
 in a separate row of the similarity_score_file. The following is an
 example of a similarity score file containing a combination of inputs:
 
-![](media/image7.png){width="6.25in" height="0.4027777777777778in"}
+![](media/image7.png)
 
 ### Example commands for Pair-wise Alignments
 
@@ -172,7 +172,10 @@ BLOSUM substitution matrix.
 
 #### Pair-wise alignment of 2 sequences based on a PositionSpecificSubstitutionMatrix (PSSM)
 
-```./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa -similarity_score_file ./examples/similarity_scorefiles/PSSM.txt -output_aligned_profiles my_aligned_PSSMs.aln```
+```
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
+-similarity_score_file ./examples/similarity_scorefiles/PSSM.txt -output_aligned_profiles my_aligned_PSSMs.aln
+```
 
 With this command, an alignment is generated based on
 "PositionSpecificSimilarity" and the aligned sequences are stored in the
@@ -182,20 +185,29 @@ However, there is also the scoring type
 "ProfilePositionSpecificSimilarity" available, which has been described
 in [section](3.1) and can be used with the following command:
 
-```./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa -similarity_score_file ./examples/similarity_scorefiles/PSSMprofile.txt -output_aligned_profiles my_aligned_profile PSSMs.aln```
+```
+./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
+-similarity_score_file ./examples/similarity_scorefiles/PSSMprofile.txt -output_aligned_profiles my_aligned_profile_PSSMs.aln
+```
 
 Note that only the file after the flag `-similarity_score_file` differs from the previous example.
 
 #### Pair-wise alignment of 2 sequences based on a hydrophobicity scale 
 
-```alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa -similarity_score_file ./examples/similarity_scorefiles/scale.txt```
+```
+alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
+-similarity_score_file ./examples/similarity_scorefiles/scale.txt
+```
 
 When creating alignments based on scales or profiles, it can be useful
 to use the optional flag --output_aligned_profiles (see sections on [flags]() and [outputs]()
 for detailed information) to create an additional output file containing
 the aligned values of each sequence position. For example:
 
-```alignme.exe -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa -similarity_score_file ./examples/similarity_scorefiles/scale.txt -output_aligned_profiles my_aligned_profiles.aln```
+```
+alignme.exe -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
+-similarity_score_file ./examples/similarity_scorefiles/scale.txt -output_aligned_profiles my_aligned_profiles.aln
+```
 
 The aligned profiles are now written to **my_aligned_profiles.aln**, while
 the sequence alignment is still written to **aligned_sequences.aln**. To
@@ -209,11 +221,17 @@ These predictions were obtained with the secondary structure predictor
 PsiPred, but you can use any kind of program that creates a profile
 (i.e., transmembrane predictors, secondary structure predictors etc.).
 
-```alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 -similarity_score_file  ./examples/similarity_scorefiles/profile.txt -output_aligned_profiles my_aligned_profiles.aln```
+```
+alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa 
+-similarity_score_file  ./examples/similarity_scorefiles/profile.txt -output_aligned_profiles my_aligned_profiles.aln
+```
 
 ####Pair-wise alignment of 2 sequences based on combined inputs 
 
-```alignme.exe -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa -similarity_score_file ./examples/similarity_scorefiles/combined.txt -output_aligned_profiles my_aligned_profiles.aln```
+```
+alignme.exe -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa 
+-similarity_score_file ./examples/similarity_scorefiles/combined.txt -output_aligned_profiles my_aligned_profiles.aln
+```
 
 This alignment is built using three different input types, i.e.
 amino-acid substitution (matrix), hydrophobicity (scale) and secondary
@@ -223,7 +241,10 @@ than one input alone.
 
 ## Anchoring a pairwise alignment
 To introduce fixed positions in the alignment, you can call a list of anchors using the following syntax:
-```alignme -similarity_score_file <similarityscorefile> -fasta_file1 <file> -fasta_file2 <file> -anchors <anchorsfile>```
+```
+alignme -similarity_score_file <similarityscorefile> -fasta_file1 <filename> -fasta_file2 <filename> 
+-anchors <anchorsfile>
+```
 
 ---
 
@@ -272,7 +293,7 @@ have the following format:
 
 A valid example of a similarity score file:
 
-![](media/image8.png){width="6.25in" height="0.4444444444444444in"}
+![](media/image8.png)
 
 In the above example the filename refers to the file containing the
 scale with which you wish to create an alignment. If amino acids of the
@@ -291,7 +312,8 @@ otherwise the program will quit with an error.
 Enter the folder AlignMe main folder and test the following command:
 
 ```
-alignme.exe -msa_file1 ./examples/bcct.fa -msa_file2 ./examples/deda.fa -similarity_score_file ./examples/simscore_msa.txt -fraction_allowed_gaps 0.5
+alignme.exe -msa_file1 ./examples/bcct.fa -msa_file2 ./examples/deda.fa 
+-similarity_score_file ./examples/simscore_msa.txt -fraction_allowed_gaps 0.5
 ```
 
 Warnings are shown about default values; these can be ignored. Take a
@@ -318,18 +340,19 @@ The similarity_score_file has to look like:
 `weight: <double> type: UniversalProfileSimilarity column: <double> headerlines: <double> profile1: <filename1> profile2: <filename2>`
 
 Two profiles have to be provided. A profile contains corresponding
-values in a certain column (for more details see section 1) and you have
+values in a certain column (for more details see [section on something]()) and you have
 to choose the column that will be used. Headerlines describes the number
 of lines that will be skipped at the beginning of the profile-file. This
 option is useful if there are comments or other information at the
 beginning of a file you do not want to include for the alignment.
 
-### Example command
+##### Example command
 
 Enter the folder AlignMe main folder and test the following command:
 
 ```
-alignme.exe -similarity_score_file ./examples/similarity_score_files/profile.txt -output_aligned_profiles  my_aligned_profiles.aln
+alignme.exe -similarity_score_file ./examples/similarity_score_files/profile.txt 
+-output_aligned_profiles  my_aligned_profiles.aln
 ```
 
 You should have a look at your aligned profiles that will be written to **my_aligned_profiles.aln**.
