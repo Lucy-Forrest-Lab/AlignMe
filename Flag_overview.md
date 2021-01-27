@@ -11,8 +11,8 @@
   --msa_file2 FILE                       | file containing a multiple sequence alignment in which all sequences are the same length
 
 Note the following requirements:  
-  `--similarity_score_file` must always be provided  
-  `--fasta_file1` and `--fasta_file2` must be provided together  
+  `--similarity_score_file` must always be provided. 
+  `--fasta_file1` and `--fasta_file2` must be provided together.  
   The same is true for `--msa_file1` and `--msa_file2`.
 
 
@@ -66,4 +66,4 @@ You can choose one of the following gap penalty sets. A combination is not possi
   ------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------
   --fraction_allowed_gaps \[value\]           | columns of the MSA in which more than \[value\] positions are gaps are skipped and not considered in the alignment
   --profile_gap_value_for_plotting \[value\]  | define a value to be assigned to gaps in the output aligned profiles; default is ?0
-  --alignment_output_format                   | Formatting type of the alignment to be generated. Allowed types are: ClustalW and fasta. If this flag is not provided, alignments are written in ClustalW format.
+  --alignment_output_format                   | Formatting type of the output alignment. Allowed types are ClustalW and fasta. By default, alignments are written in ClustalW format.
