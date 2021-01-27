@@ -1,9 +1,10 @@
 ### Welcome to the AlignMe Manual
 
-1. [Introduction to AlignMe](Intro.md)
-2. [Installation](Install.md)
-3. [Running AlignMe](Running.md)
-4. [Release Notes](Release_Notes.md)
+Please follow the links to learn more about how to use AlignMe:
+- [Introduction to AlignMe](Intro.md)
+- [Installation](Install.md)
+- [Running AlignMe](Running.md)
+- [Release Notes](Release_Notes.md)
 
 
 #### Web Server
