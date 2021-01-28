@@ -9,8 +9,7 @@ The flags for the fasta files are:
 `-fasta_file1 <filename1>`  
 `-fasta_file2 <filename2>`  
 
-The two amino acid sequences that you want to align must be in [fasta
-format](Formats.md) and in separate files (FILE1 and FILE2). 
+The two amino acid sequences that you want to align must be in [fasta format](Formats.md) and in separate files (filename1 and filename2). 
 
 `-similarity_score_file <filename>`
 
