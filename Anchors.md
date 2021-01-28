@@ -12,4 +12,4 @@ This would align residue 25 in the first sequence with residue 36 of the second 
  
 The anchor file is then called using the following flag:
 
-`-anchors FILENAME`
+`-anchors \<filename\>`
