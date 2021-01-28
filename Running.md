@@ -11,6 +11,9 @@ Jump to section on:
    - [Alignment algorithm](#alignment-algorithm)  
 - [Output Files](Output.md)
 - [Examples](Examples.md)
+   - [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments). 
+   - [Alignment of two Multiple Sequence Alignments](#Alignment-of-two-Multiple-Sequence-Alignments)
+   - [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
 - [File Formats](Formats.md)
 - [Overview of all flags](Flag_overview.md)
 
@@ -38,11 +41,16 @@ these are printed as warnings when the flag is not given. (Look at the
 ### Required inputs
 
 There are three required inputs for every AlignMe calculation:
-1) the first sequence or profile
-2) the second sequence or profile
-3) a file containing the similarity metrics to be used. 
+1) the first [sequence or profile](#sequence-or-profile-inputs)
+2) the second [sequence or profile](#sequence-or-profile-inputs)
+3) a file containing the similarity metrics to be used, or ["similarity score file"](#similarity-score-file)
+These inputs can be combined to run AlignMe in a number of different modes. Examples of various standard alignment types can be found here:
+1. [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments). These are the most common.
+2. [Alignment of two Multiple Sequence Alignments](#Alignment-of-two-Multiple-Sequence-Alignments)
+3. [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
+General information about the required inputs is given below.
 
-#### Sequence inputs
+#### Sequence or profile inputs
 To parse the sequence inputs, one of the following two pairs of flags has to be provided:  
 
 `-fasta_file1 <filename1> -fasta_file2 <filename2>`  
