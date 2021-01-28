@@ -1,25 +1,12 @@
 ## Sequence-to-sequence alignments
 
-This section refers to alignments based on two protein sequences
-provided by the user. The sequence properties used for aligning the
-sequences can vary. For such an alignment, two sequence files and a
-similarity score file must be provided.
-
-The flags for the fasta files are:  
-`-fasta_file1 <filename1>`  
-`-fasta_file2 <filename2>`  
-
-The two amino acid sequences that you want to align must be in [fasta format](Formats.md) and in separate files (filename1 and filename2). 
-
-`-similarity_score_file <filename>`
-
-After this flag you have to provide filename of a file containing information about the type of alignment you wish to create. This file can be set up in 3 different ways depending on the type of alignment. The similarity score file syntax for each of these options can be found here:
+This section refers to alignments based on two protein sequences provided by the user. The sequence properties used for aligning the
+sequences can vary. Aside from the [input sequence files](./Running.md#required-inputs), which must be in [fasta format](./Formats.md) a similarity score file must be provided. The formatting and content of this file depends on the type of alignment being requested. The syntax for the various options are described here:
 1. [Sequence similarity matrices](#Using-similarity-matrices)
 2. [Position-specific similarity matrices](#Using-position\-specific-matrices) or
 3. [Scales for similarity](#Using-scales-for-similarity) or 
 4. [Profile similarity](#Using-profiles-for-similarity) or 
 5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
-The linked examples below illustrate the file inputs required to run each of these types of alignment, starting with the syntax for the similarity score file for each of the above 5 options. 
 
 The commands to [run](#launching-pairwise-alignments) these examples can be found here:
 1. [Sequence similarity matrices](#Using-similarity-matrices)
@@ -27,7 +14,6 @@ The commands to [run](#launching-pairwise-alignments) these examples can be foun
 3. [Scales for similarity](#Using-scales-for-similarity) or 
 4. [Profile similarity](#Using-profiles-for-similarity) or 
 5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
-
 
 We also provide pre-optimized gap penalties and input files for four different modes: [P](), [PS](), [PST](), and [Fast]() modes.
 
