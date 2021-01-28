@@ -8,12 +8,7 @@ sequences can vary. Aside from the [input sequence files](./Running.md#required-
 4. [Profile similarity](#Using-profiles-for-similarity) or 
 5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
 
-The commands to [run](#launching-pairwise-alignments) these examples can be found here:
-1. [Sequence similarity matrices](#Using-similarity-matrices)
-2. [Position-specific similarity matrices](#Using-position\-specific-matrices) or
-3. [Scales for similarity](#Using-scales-for-similarity) or 
-4. [Profile similarity](#Using-profiles-for-similarity) or 
-5. any [combination](#Combinations-of-inputs) of (a), (b) and (c).
+The commands to run these examples can be found on the section below on [Launching pairwise alignments](#launching-pairwise-alignments) 
 
 We also provide pre-optimized gap penalties and input files for four different modes: [P](), [PS](), [PST](), and [Fast]() modes.
 
