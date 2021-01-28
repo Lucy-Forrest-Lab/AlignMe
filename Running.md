@@ -1,20 +1,20 @@
 # Running AlignMe
 
 Jump to section on:
-- [Getting Started](#getting-started)
-- [Required Inputs](#required-inputs)
-   - [Sequence Inputs](#sequence-inputs)
-   - [Similarity Score File](#similarity-score-file)
-- [Optional Flags](#optional-flags)  
-   - [Setting Anchors](#anchors)
+- [Getting started](#getting-started)
+- [Required inputs](#required-inputs)
+   - [Sequence inputs](#sequence-inputs)
+   - [Similarity score file](#similarity-score-file)
+- [Optional flags](#optional-flags)  
+   - [Setting anchors](#anchors)
    - [Defining gap penalties](#gap-penalties)  
    - [Alignment algorithm](#alignment-algorithm)  
-- [Output Files](./Output.md)
+- [Output files](./Output.md)
 - Examples
-   - [Pair-wise Sequence-to-sequence](./Examples/S2S_example.md). 
-   - [Alignment of two Multiple Sequence Alignments](./Examples/MSA-2-MSA_example.md)
+   - [Pair-wise sequence-to-sequence](./Examples/S2S_example.md) 
+   - [Alignment of two multiple sequence alignments](./Examples/MSA-2-MSA_example.md)
    - [Pair-wise profile-to-profile alignments](./Examples/prof-prof_example.md)
-- [File Formats](Formats.md)
+- [File formats](Formats.md)
 - [Overview of all flags](Flag_overview.md)
 
 
