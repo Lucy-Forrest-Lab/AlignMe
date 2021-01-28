@@ -96,8 +96,7 @@ weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: tri
 weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2
 ```
 
----
----
+===
 
 ## Launching pairwise alignments
 The above example provides the syntax for creating the similarity score file. The next section explains how to call those input files when running AlignMe.  More information concerning optional flags is explained in the [Flag overview](#Flag_overview.md) and [Running AlignMe](#Running.md) sections.
@@ -132,6 +131,8 @@ usage of default values:
 To modify the default values and to define custom output files, see [sections on inputs](#Running.md) and [overview of flags](#Flag_overview.md).
 This example illustrates usage of the three required input flags, and creates an alignment in the file called **aligned_sequences.aln**.
 
+---
+
 #### Pairwise alignment of 2 sequences based on a position specific substitution matrix
 At the next level of complexity, we compare two sequences using a PSSM.
 ```
@@ -151,6 +152,8 @@ in [section](3.1) and can be used with the following command:
 ```
 
 Note that only the file specified by the flag `-similarity_score_file` differs from the previous example.
+
+---
 
 #### Pairwise alignment of 2 sequences based on a hydrophobicity scale 
 For aligning two sequences based on a hydrophobicity scale, the basic command is as follows:
@@ -175,8 +178,10 @@ the sequence alignment is still written to **aligned_sequences.aln**. To
 get a better overview of the underlying hydrophobicity of your sequence,
 the profile file can then be plotted, e.g. with xmgrace or gnuplot.
 
+---
+
 #### Pairwise alignment of 2 sequences based on secondary-structure predictions
-For aligning two per-residue predictions with each other.
+This example aligns two per-residue predictions with each other.
 These predictions were obtained with the secondary structure predictor
 PsiPred, but you can use any kind of program that creates a profile
 (i.e., transmembrane predictors, secondary structure predictors etc.).
@@ -186,6 +191,8 @@ alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fas
             -similarity_score_file  ./examples/similarity_scorefiles/profile.txt \
             -output_aligned_profiles my_aligned_profiles.aln
 ```
+
+---
 
 #### Pairwise alignment of 2 sequences based on combined inputs 
 
@@ -200,7 +207,9 @@ structure (profile). For difficult alignments involving sequences with
 low sequence similarity, such combinations are usually more accurate
 than one input alone.
 
-## Anchoring a pairwise alignment
+---
+
+### Anchoring a pairwise alignment
 To introduce fixed positions in the alignment, you can call a list of anchors using the following syntax:
 ```
 alignme -similarity_score_file <similarityscorefile> -fasta_file1 <filename> -fasta_file2 <filename> 
