@@ -284,6 +284,8 @@ Warnings are shown about default values; these can be ignored. Take a
 look at the aligned profiles, which have been written by default to
 **aligned_profiles.aln**.
 
+---
+
 ## Pair-wise profile-to-profile alignments
 
 This section is about alignments based only on profiles. In contrast to
