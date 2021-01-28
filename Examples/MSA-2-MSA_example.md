@@ -45,6 +45,8 @@ window types).
 The length of the sequence must be longer than the chosen window size;
 otherwise the program will quit with an error.
 
+---
+
 ### Example command
 
 Enter the folder AlignMe main folder and test the following command:
