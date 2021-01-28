@@ -23,6 +23,9 @@ ACDEFGIHALALASDFSFEURSTLASSDFSFEURSTLAS
 QEERSLGITLSSDFSFEURSTLASSDFSFEURSTLASSQ
 ```
 
+In a multiple-sequence alignment file, all sequences must have the same length, including gaps. This is because it is assumed that the sequences have been aligned.
+
+
 ## Similarity matrices
 
 To align sequences in the traditional manner, i.e. with the
