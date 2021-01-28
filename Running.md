@@ -9,11 +9,11 @@ Jump to section on:
    - [Setting Anchors](#anchors)
    - [Defining gap penalties](#gap-penalties)  
    - [Alignment algorithm](#alignment-algorithm)  
-- [Output Files](Output.md)
-- [Examples](Examples.md)
-   - [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments). 
-   - [Alignment of two Multiple Sequence Alignments](#Alignment-of-two-Multiple-Sequence-Alignments)
-   - [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
+- [Output Files](./Output.md)
+- Examples
+   - [Pair-wise Sequence-to-sequence](./Examples/S2S_example.md). 
+   - [Alignment of two Multiple Sequence Alignments](./Examples/MSA-2-MSA_example.md)
+   - [Pair-wise profile-to-profile alignments](./Examples/prof-prof_example.md)
 - [File Formats](Formats.md)
 - [Overview of all flags](Flag_overview.md)
 
