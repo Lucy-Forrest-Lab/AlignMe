@@ -17,13 +17,13 @@ sequences can vary. For such an alignment, two sequence files and a
 similarity score file must be provided.
 
 The flags for the fasta files are:  
-`-fasta_file1 \<filename1\>`  
-`-fasta_file2 \<filename2\>`  
+`-fasta_file1 <filename1>`  
+`-fasta_file2 <filename2>`  
 
 The two amino acid sequences that you want to align must be in [fasta
 format](Formats.md) and in separate files (FILE1 and FILE2). 
 
-`-similarity_score_file \<filename\>`
+`-similarity_score_file <filename>`
 
 After this flag you have to provide filename of a file containing
 information about the type of alignment you wish to create. This file
@@ -41,7 +41,7 @@ We also provide pre-optimized gap penalties and input files for four different m
 When using similarity (aka substitution) matrices the corresponding line in the
 similarity score file should have the following format:  
 
-`weight: \<double\> type: SequenceSimilarity file: \<filename\>`
+`weight: <double> type: SequenceSimilarity file: <filename>`
 
 for example:  
 
@@ -53,7 +53,7 @@ substitution matrix. Example substitution matrices are available [here](https://
 ### Using Position Specific Matrices
 A similarity score file for a pair-wise sequence alignment based on position-specific substitution matrices (PSSMs) requires the following format:
 
-`weight: \<double\> type: PostionSpecificSimilarity PSSM1: \<filename\> PSSM2: \<filename\>`
+`weight: <double> type: PostionSpecificSimilarity PSSM1: <filename> PSSM2: <filename>`
 
 for example:
 
@@ -74,7 +74,7 @@ Similarity Score File for a pair-wise sequence alignment based on scales (e.g. h
 
 When using scales the corresponding line in the similarity_score_file should have the following format:
 
-`weight: \<double\> type: ScaleSimilarity file: \<filename\> windowtype: \<string\> windowsize: \<integer\>`
+`weight: <double> type: ScaleSimilarity file: <filename> windowtype: <string> windowsize: <integer>`
 
 An example of a similarity score file for an alignment based on a matrix:
 
@@ -94,7 +94,7 @@ sinoid, and zigzag (see section 5 for detailed information).
 ### Using Profiles for Similarity
 When aligning using profiles (e.g. secondary structure predictions), the similarity score file should have the following format:
 
-`weight: \<double\> type: UniversalProfileSimilarity column: \<double\> headerlines: \<double\> profile1: \<filename1\> profile2: \<filename2\>`
+`weight: <double> type: UniversalProfileSimilarity column: <double> headerlines: <double> profile1: <filename1> profile2: <filename2>`
 
 An example of a similarity score file for an alignment based on profiles:  
 
