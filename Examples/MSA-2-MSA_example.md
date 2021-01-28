@@ -8,6 +8,7 @@ also referred to as family-averaged profile alignment.
 In addition to the [required flags](./Running.md#required-inputs), which includes:  
 - the filenames of the multiple-sequence alignments in [fasta format](Formats.md), with all sequences having the same length (including gaps), and  
 - the [similarity score file](#Similarity-score-file-for-an-alignment-of-two-MSAs),   
+
 the following flag is required:
 
 `-fraction_allowed_gaps <double>`
