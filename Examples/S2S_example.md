@@ -96,7 +96,7 @@ weight: 1.0 type: ScaleSimilarity file: ./examples/scales/KD.txt windowtype: tri
 weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: ./examples/profiles/1H2S_A.ss2 profile2: ./examples/profiles/2EI4_A.ss2
 ```
 
-===
+---
 
 ## Launching pairwise alignments
 The above example provides the syntax for creating the similarity score file. The next section explains how to call those input files when running AlignMe.  More information concerning optional flags is explained in the [Flag overview](#Flag_overview.md) and [Running AlignMe](#Running.md) sections.
