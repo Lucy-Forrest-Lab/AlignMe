@@ -4,11 +4,11 @@
 
   Flag                                  | Description
   ------------------------------------- | ------------------------------------------------------------------------------------------
-  -similarity_score_file <filename>     | file containing information about the type of alignment to be run
-  -fasta_file1 <filename>               | file containing an amino acid sequence in fasta format
-  -fasta_file2 <filename>               | file containing an amino acid sequence in fasta format
-  -msa_file1 <filename>                 | file containing a multiple sequence alignment, with entries all the same length
-  -msa_file2 <filename>                 | file containing a multiple sequence alignment, with entries all the same length
+  -similarity_score_file \<filename\>     | file containing information about the type of alignment to be run
+  -fasta_file1 \<filename\>               | file containing an amino acid sequence in fasta format
+  -fasta_file2 \<filename\>               | file containing an amino acid sequence in fasta format
+  -msa_file1 \<filename\>                 | file containing a multiple sequence alignment, with entries all the same length
+  -msa_file2 \<filename\>                 | file containing a multiple sequence alignment, with entries all the same length
 
 Note the following requirements:  
   `-similarity_score_file` must always be provided.  
