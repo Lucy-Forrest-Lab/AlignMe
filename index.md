@@ -9,7 +9,7 @@ Please follow the links to learn more about how to use AlignMe:
 ---
 
 #### Web Server
-A webserver of AlignMe is available at  
+A webserver for running the AlignMe code, including transmembrane and secondary structure predictions, is available at: 
 <http://www.bioinfo.mpg.de/AlignMe>
 
 ---
