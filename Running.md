@@ -57,7 +57,8 @@ To parse the sequence inputs, one of the following two pairs of flags has to be 
 `-fasta_file1 <filename1> -fasta_file2 <filename2>`  
 or  
 `-msa_file1 <filename1> -msa_file2 <filename2>`  
-fasta_file = filename of the file containing a primary sequence in Fasta format.
+
+where fasta_file = filename of the file containing a primary sequence in Fasta format, and   
 msa_file = filename of multiple-sequence alignment that will be converted to a family-averaged hydropathy profile.
 
 #### Similarity score file
