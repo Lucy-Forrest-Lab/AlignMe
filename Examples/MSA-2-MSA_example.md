@@ -1,45 +1,32 @@
-## Alignment of two Multiple Sequence Alignments 
+## Alignment of two multiple sequence alignments 
 
 This section describes alignments based on two multiple sequence
 alignments (MSAs) provided by the user. Currently, MSAs can only be used
-with scales. The scale values are averaged to generate an averaged
-profile, and then the two profiles are pair-wise aligned. This method is
+with hydrophobicity scales. The scale values at each position in the each MSA are averaged to generate two "family-averaged" profiles, and then the two profiles are pair-wise aligned. This method is
 also referred to as family-averaged profile alignment.
 
-The flags for the input alignments are:
-
-`-msa_file1 <filename1>`  
-`-msa_file2 <filename2>`
-
-The sequences you want to align must be in fasta format in separate
-files (filename1 and filename2). Each of these files must contain one or
-more sequences. Each sequence in the file must start with the '\>'
-symbol, followed by a header (it can also be left empty). All sequences
-of a file need to have the same length (including gaps), because it is
-assumed that these sequences are all aligned with each other. At least
-one sequence has to be provided per file.
+In addition to the [required flags](./Running.md#required-inputs), which includes:  
+- the filenames of the multiple-sequence alignments in [fasta format](Formats.md), with all sequences having the same length (including gaps), and  
+- the [similarity score file](#Similarity-score-file-for-an-alignment-of-two-MSAs),   
+the following flag is required:
 
 `-fraction_allowed_gaps <double>`
 
 Each column of the multiple sequence alignment is checked for the
 fraction of gaps that it contains. If the fraction of gaps in a given
-column is higher than this "fraction of gaps" threshold value, this
+column is higher than this "fraction of gaps" threshold value (in the range of 0 to 1), this
 column will not be considered in the alignment. Default value = 0.5,
 i.e. columns in which more than 50 % of all positions are gaps are
 skipped and are not considered in the alignment.
 
-`-similarity_score_file <filename>`
+The command for launching an example MSA-MSA alignment is provided [below](#Example-command)
 
-This flag requires you to provide a file containing information about
-the type of alignment you want to do. Currently, only alignments based
-on (hydrophobicity) scales, and using a triangular window are supported
-for alignment of two averaged multiple sequence alignments.
+---
 
-### Similarity Score File for an alignment of two MSAs
+### Similarity score file for an alignment of two MSAs
 
-For aligning two MSAs the line in the similarity score file should
-have the following format:  
-`Weight <double> type ScaleSimilarity file <filename> windowtype msa_triangular windowsize <integer>`
+For aligning two MSAs the line in the similarity score file should have the following format:  
+`weight: <double> type: ScaleSimilarity file: <filename> windowtype: msa_triangular windowsize: <integer>`
 
 A valid example of a similarity score file:
 
@@ -50,7 +37,7 @@ scale with which you wish to create an alignment. If amino acids of the
 submitted sequences are not in the corresponding scale, an error message
 will be given.
 
-In the current version of AlignMe only the triangular\_msa window type
+In the current version of AlignMe only the triangular_msa window type
 is supported (see section 5 for detailed information about sliding
 window types).
 
