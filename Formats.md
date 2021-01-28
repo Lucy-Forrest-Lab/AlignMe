@@ -64,11 +64,9 @@ The following is an example input scale file (i.e. Kyte-Doolittle hydrophobicity
 ## Profiles
 
 AlignMe allows for alignments of any kind of profiles like secondary
-structure predictions obtained from PsiPred (left) or membrane
-predictions from OCTOPUS (right). The user has to choose the column from
-which the values should be taken from and it is possible to skip
-commented lines using the "headerlines" option in the
-similarity score file.
+structure predictions obtained from [PSIPRED](http://bioinf.cs.ucl.ac.uk/psipred/) and from membrane
+predictions from [OCTOPUS](https://octopus.cbr.su.se). The user has to choose the column from
+which the values should be taken, and it is possible to skip over commented lines using the "headerlines" option in the similarity score file [see example](./Examples/prof-prof_example.md). 
 
 ![](media/ss2.png)
 ![](media/nnprf.png)
