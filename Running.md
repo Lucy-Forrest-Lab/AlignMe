@@ -45,11 +45,11 @@ There are three required inputs for every AlignMe calculation:
 2) the second [sequence or profile](#sequence-or-profile-inputs)
 3) a file containing the similarity metrics to be used, or ["similarity score file"](#similarity-score-file)
 
-These inputs can be combined to run AlignMe in a number of different modes. Examples of various standard alignment types can be found here:
+These inputs can be combined to run AlignMe in a number of different modes. General information about the required inputs is given below. Specific examples of various standard alignment types are provided here:
 1. [Pair-wise Sequence-to-sequence](#sequence\-to\-sequence-alignments). These are the most common.
 2. [Alignment of two Multiple Sequence Alignments](#Alignment-of-two-Multiple-Sequence-Alignments)
 3. [Pair-wise profile-to-profile alignments](#Pair\-wise-profile\-to\-profile-alignments)
-General information about the required inputs is given below.
+
 
 #### Sequence or profile inputs
 To parse the sequence inputs, one of the following two pairs of flags has to be provided:  
