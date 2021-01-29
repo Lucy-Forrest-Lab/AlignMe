@@ -99,7 +99,7 @@ weight: 1.0 type: UniversalProfileSimilarity column: 5 headerlines: 1 profile1: 
 ---
 
 ## Launching pairwise alignments
-The above example provides the syntax for creating the similarity score file. The next section explains how to call those input files when running AlignMe.  More information concerning optional flags is explained in the [Flag overview](#Flag_overview.md) and [Running AlignMe](#Running.md) sections.
+The section above provides the syntax for similarity score files. Here, we provide examples of how to call those input files when running AlignMe.  More information concerning optional flags is explained in the [Flag overview](#Flag_overview.md) and [Running AlignMe](#Running.md) sections.
 
 The following examples can be run by first changing directory to the main AlignMe folder, or by copying the Examples/ folder and its contents to your working directory.
 The examples are:
