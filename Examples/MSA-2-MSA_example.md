@@ -1,6 +1,6 @@
 ## Alignment of two multiple sequence alignments 
 
-This section describes alignments based on two multiple sequence
+This section provides examples of alignments based on two multiple sequence
 alignments (MSAs) provided by the user. Currently, MSAs can only be used
 with hydrophobicity scales. The scale values at each position in the each MSA are averaged to generate two "family-averaged" profiles, and then the two profiles are pair-wise aligned. This method is
 also referred to as family-averaged profile alignment.
