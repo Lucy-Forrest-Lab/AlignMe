@@ -1,6 +1,6 @@
 ## Pairwise profile-to-profile alignments
 
-This section is about alignments based only on 1-dimensional profiles. In contrast to the pairwise sequence-to-sequence or pairwise MSA-to-MSA alignments, an amino acid sequence is not required, which improves the speed of the alignment. Moreover, this option allows alignments of any kind of profile and is therefore not restricted to sequence alignments.
+This section provides examples of alignments based only on 1-dimensional profiles. In contrast to the pairwise sequence-to-sequence or pairwise MSA-to-MSA alignments, an amino acid sequence is not required, which improves the speed of the alignment. Moreover, this option allows alignments of any kind of profile and is therefore not restricted to sequence alignments.
 
 The first section below describes the expected content of the [similarity score file](#Similarity-score-file-for-a-pairwise-profile\-to\-profile-alignment).  
 The command for launching an example profile-profile alignment is provided [below](#Example-command).
