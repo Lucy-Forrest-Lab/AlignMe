@@ -197,8 +197,9 @@ alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fas
 #### Pairwise alignment of 2 sequences based on combined inputs 
 
 ```
-alignme.exe -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa 
--similarity_score_file ./examples/similarity_scorefiles/combined.txt -output_aligned_profiles my_aligned_profiles.aln
+alignme.exe -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa \
+            -similarity_score_file ./examples/similarity_scorefiles/combined.txt \
+            -output_aligned_profiles my_aligned_profiles.aln
 ```
 
 This alignment is built using three different input types, i.e.
