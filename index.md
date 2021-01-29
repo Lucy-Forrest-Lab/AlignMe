@@ -1,4 +1,4 @@
-### Welcome to the AlignMe Manual
+### Welcome to the AlignMe manual
 
 Please follow the links to learn more about how to use AlignMe:
 - [Introduction to AlignMe](Intro.md)
