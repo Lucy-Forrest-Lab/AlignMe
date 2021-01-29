@@ -17,10 +17,10 @@ A webserver for running the AlignMe code, including transmembrane and secondary 
 #### Citing AlignMe
 If you use AlignMe for your research and study, please cite the following references:  
 
-##### For Pairwise Alignments:  
+##### For pairwise alignments:  
 Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. **2013** "Alignment of Helical Membrane Protein Sequences Using AlignMe" [*PloS One* 8 (3):e57731](https://doi.org/10.1371/journal.pone.0057731)
 
-##### For The Server or Alignments using "Fast mode":  
+##### For the server or alignments using "Fast mode":  
 Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. **2014** "AlignMe\--a Membrane Protein Sequence Alignment Web Server" [*Nucleic Acids Research* 42 (Web Server issue): W246-51](https://doi.org/10.1093/nar/gku291)
 
 ##### For the alignment of two multiple-sequence alignments:  
