@@ -3,7 +3,7 @@
 This section provides examples of alignments based only on 1-dimensional profiles. In contrast to the pairwise sequence-to-sequence or pairwise MSA-to-MSA alignments, an amino acid sequence is not required, which improves the speed of the alignment. Moreover, this option allows alignments of any kind of profile and is therefore not restricted to sequence alignments.
 
 The first section below describes the expected content of the [similarity score file](#Similarity-score-file-for-a-pairwise-profile\-to\-profile-alignment).  
-The command for launching an example profile-profile alignment is provided [below](#Example-command).
+The command for launching an example profile-profile alignment is provided [below](#Launching-profile\-to\-profile-alignments).
 
 ---
 
@@ -26,7 +26,7 @@ beginning of a file that you do not want to include for the alignment.
 
 ---
 
-##### Example command
+### Launching profile-to-profile alignments
 
 Change directory to the main AlignMe folder, or copy the Examples/ folder to your working directory and test the following command:
 
