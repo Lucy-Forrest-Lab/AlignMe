@@ -170,7 +170,7 @@ the aligned values of each sequence position. For example:
 ```
 alignme.exe -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
         -similarity_score_file ./examples/similarity_scorefiles/scale.txt \
-        **-output_aligned_profiles my_aligned_profiles.aln**
+        -output_aligned_profiles my_aligned_profiles.aln
 ```
 
 The aligned profiles are now written to **my_aligned_profiles.aln**, while
