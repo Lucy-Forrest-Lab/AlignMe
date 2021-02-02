@@ -48,6 +48,12 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 	for( size_t r = 0; r < nr; ++r)
 	{
 		STREAM >> ii >> jj >> shift_penalty;
+		if( ii == 0 || jj == 0)
+		{
+			std::cout << "Counting of the amino acids start with '1'." << std::endl;
+			std::cout << "anchors for the first residue have to be indicated by '1' " << std::endl;
+			exit( 2);
+		}
 		anchors.push_back( Triplet<int,int,double>( ii, jj, shift_penalty));
 //		ii -= 1;
 //		jj -= 1;
@@ -58,9 +64,9 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 		if( ii >= MATRIX.GetNumberOfRows() || jj >= MATRIX.GetNumberOfColumns())
 		{
 			std::cout << "provide pairs of values that match the lengths of the sequences:" << "\n";
-			std::cout << ii << " should be smaller: " << MATRIX.GetNumberOfRows() << "\n";
-			std::cout << jj << " should be smaller: " << MATRIX.GetNumberOfColumns() << "\nbye\n\n";
-			exit( -1);
+			std::cout << ii << " should not exceed the max value: " << MATRIX.GetNumberOfRows() - 1 << "\n";
+			std::cout << jj << " should not exceed the max value: " << MATRIX.GetNumberOfColumns() - 1 << "\nbye\n\n";
+			exit( 2);
 		}
 		//std::cout << "anchors: " << ii << "  " << jj << "  " << shift_penalty << "\n";
 
