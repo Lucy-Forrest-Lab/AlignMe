@@ -32,8 +32,9 @@
 
 #include "matrix.t.h"
 #include "dynamic_programing_matrix_element.h"
+#include "triplet.t.h"
 
-void
+std::vector< Triplet< int, int, double> >
 BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement> &MATRIX, const double &PENALTY = -1.0)
 {
 	// anchors need to be given in usual vector notation
@@ -41,13 +42,13 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 		shift_penalty;
 	size_t
 		nr, ii, jj;
-
+	std::vector< Triplet<int,int,double> >
+		anchors;
 	STREAM >> nr;
 	for( size_t r = 0; r < nr; ++r)
 	{
 		STREAM >> ii >> jj >> shift_penalty;
-		std::cout << "anchor: " << ii << " " << jj << " " << shift_penalty << std::endl;
-
+		anchors.push_back( Triplet<int,int,double>( ii, jj, shift_penalty));
 //		ii -= 1;
 //		jj -= 1;
 		ii += 1;  // first residue id is 0
@@ -86,6 +87,7 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 			//std::cout << "\n"; debug
 		}
 	}
+	return anchors;
 
 	//Kamil was playing here
 //	for( size_t i = 0; i < MATRIX.GetNumberOfRows(); ++i)
@@ -98,6 +100,42 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 //		std::cout << "\n";
 //	}
 //	//Kamil finished playing here
+}
+
+bool
+Contains( const std::vector< Triplet< int, int, double> > &ANCHORS, int A, int B)
+{
+	bool
+		contains = false;
+	for( std::vector< Triplet< int, int, double> >::const_iterator itr = ANCHORS.begin(); itr != ANCHORS.end(); ++itr )
+	{
+		if( itr->First() == A && itr->Second() == B){ return true;}
+	}
+	return contains;
+}
+
+bool
+ContainsFirst( const std::vector< Triplet< int, int, double> > &ANCHORS, int A)
+{
+	bool
+		contains = false;
+	for( std::vector< Triplet< int, int, double> >::const_iterator itr = ANCHORS.begin(); itr != ANCHORS.end(); ++itr )
+	{
+		if( itr->First() == A){ return true;}
+	}
+	return contains;
+}
+
+bool
+ContainsSecond( const std::vector< Triplet< int, int, double> > &ANCHORS, int B)
+{
+	bool
+		contains = false;
+	for( std::vector< Triplet< int, int, double> >::const_iterator itr = ANCHORS.begin(); itr != ANCHORS.end(); ++itr )
+	{
+		if( itr->Second() == B){ return true;}
+	}
+	return contains;
 }
 
 
