@@ -9,7 +9,7 @@ Edoardo Sarti
 Lucy Forrest  
 
 ## Required external libraries
-[Boost](boost.org) library headers, namely shared_ptr.hpp  
+[Boost](https://www.boost.org) library headers, namely shared_ptr.hpp
 
 ## Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
