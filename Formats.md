@@ -56,7 +56,7 @@ For aligning two sequences according to a scale such as a hydrophobicity
 scale, the ScaleSimilarity mode is used. This requires an input file in
 which each of the two amino-acid types is assigned a value on the scale.
 Thus, the similarity between two amino acids is the difference between
-their scale values. Note that, in order for the threshold gap penalty scheme to work, these scales have to be reversed in sign from their original values. That is, the original scales consider that hydrophobic amino acids have a negative free energy for insertion in the membrane. However, we wish to treat membrane regions as conserved, so we reverse the sign of the values. 
+their scale values. **Note that, in order for the threshold gap penalty scheme to work, these scales have to be reversed in sign from their original values. That is, the original scales consider that hydrophobic amino acids have a negative free energy for insertion in the membrane. However, we wish to treat membrane regions as conserved, so we reverse the sign of the values.** 
 The following is an example input scale file (i.e. Kyte-Doolittle hydrophobicity scale), with reversed sign.
 
 ![](media/hf.png)
