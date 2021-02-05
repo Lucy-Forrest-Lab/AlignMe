@@ -13,10 +13,11 @@ OBJ = \
 
 CXX = g++
 
-NAME = alignme1.1.exe
+NAME = alignme1.2.exe
 
-CPPFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated
+CPPFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated -I /usr/local/
 
+LDLIBS = -L /usr/local/lib
 
 $(NAME): $(OBJ)
 	$(CXX) -o $(NAME) $(OBJ)

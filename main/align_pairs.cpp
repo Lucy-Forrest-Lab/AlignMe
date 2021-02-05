@@ -27,9 +27,10 @@
 
 
 // CHANGELOG
+// Version 1.2.1, 2020
+// - extended write, including anchors
 // Version 1.2, July 2015
-// - anchors finally included
-//
+// - anchors
 // Version 1.1
 // - added option to generate alignments based on PSSM
 // - weights can now be adjusted automatically (<< INCLUDED???????????????????)
@@ -56,6 +57,7 @@
 #include "../include/score_position_specific_similarity.h"
 #endif
 
+#include "../include/triplet.t.h"
 #include "../include/amino_acid.h"
 #include "../include/sum_function.t.h"
 #include "../include/needleman_wunsch.h"
@@ -164,22 +166,18 @@ int main( const int argc, const char * argv[])
       input.clear();
     }
   */
+
   if( cmd.IsFlagSet( "anchors"))
-  {
-	  std::string
-	  	  anchor_file = cmd.GetFirstArgument( "anchors");
-	  std::cout << "anchor file: " << anchor_file << std::endl;
-	  std::ifstream
-	  	  input;     // read anchor file
+    {
+      std::string
+	anchor_file = cmd.GetFirstArgument( "anchors");
+      std::ifstream
+	input;     // read anchor file
       input.open( anchor_file.c_str());
       if( input)
-      {
-    	  BuildAnchorMatrix( input, vars.dynamic_programing_matrix);
-      }
-      else
-      {
-    	  std::cout << "anchor file not opened, ignored" << std::endl;
-      }
+	{
+	  vars.anchors = BuildAnchorMatrix( input, vars.dynamic_programing_matrix);
+	}
       input.close();
       input.clear();
     }

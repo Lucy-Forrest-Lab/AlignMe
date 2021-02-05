@@ -30,6 +30,7 @@
 #define ALIGNMENT_WRITE_H
 
 #include <cstdlib>
+#include "anchor.h"
 
 void WriteAlignmentIndices( const std::pair< double, std::vector< std::pair< int, int> > > &ALIGNMENT, const std::string &FILE, const size_t &LINE_LENGTH)
 {
@@ -129,6 +130,7 @@ void WriteAlignedSequencesInClustalwFormat
 		const std::string &FILE,
 		const size_t &LINE_LENGTH,
 		const double &GAP_EXTENSION_PENALTY,
+		const std::vector< Triplet<int,int,double> > &ANCHORS,
 		const bool WRITE_CLUSTAL_HEADER = true
 )
 {
@@ -155,7 +157,7 @@ void WriteAlignedSequencesInClustalwFormat
 
   if( WRITE_CLUSTAL_HEADER)
   {
-	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.2, score:  " << ALIGNMENT.first << "\n\n";
+	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.2\n\n";
   }
 
   first_header.resize( 13, ' ');
@@ -230,7 +232,11 @@ void WriteAlignedSequencesInClustalwFormat
       {
     	  if (   itr->first != std::numeric_limits< int>::max() && itr->second != std::numeric_limits< int>::max() && itr->first != std::numeric_limits< int>::max() -1 && itr->second != std::numeric_limits< int>::max() -1 )
     	  {
-    		  if( FIRST[ itr->first].GetType() == SECOND[ itr->second].GetType())
+    		  if( Contains( ANCHORS, itr->first+1, itr->second+1) )
+    		  {
+    			  write << "a";
+    		  }
+    		  else if( FIRST[ itr->first].GetType() == SECOND[ itr->second].GetType())
     		  {
     			  write << "*";
     		  }
@@ -298,7 +304,11 @@ void WriteAlignedSequencesInClustalwFormat
   {
 	  if (   itr->first != std::numeric_limits< int>::max() && itr->second != std::numeric_limits< int>::max() && itr->first != std::numeric_limits< int>::max() -1 && itr->second != std::numeric_limits< int>::max() -1 )
 	  {
-		  if( FIRST[ itr->first].GetType() == SECOND[ itr->second].GetType())
+		  if( Contains( ANCHORS, itr->first+1, itr->second+1) )
+		  {
+			  write << "a";
+		  }
+		  else if( FIRST[ itr->first].GetType() == SECOND[ itr->second].GetType())
 		  {
 			  write << "*";
 		  }
@@ -352,7 +362,6 @@ void WriteAlignedSequencesInClustalwFormat
 	  identity /= double (non_gaps_in_first_seq);
   }
   identity *= 100;
-
 
   write.close();
   write.clear();
@@ -541,6 +550,7 @@ void WriteAlignedProfiles
 		const std::string &GAP_VALUE,
 		const double &LAST_ELEMENT,
 		const ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> > &SCORES,
+		const std::vector< Triplet<int,int,double> > &ANCHORS,
 		const std::vector<std::string> &WRITE_PROFILES_HEADER1 = std::vector<std::string>(),
 		const std::vector<std::string> &WRITE_PROFILES_HEADER2 = std::vector<std::string>()
 )
@@ -572,7 +582,7 @@ void WriteAlignedProfiles
   DebugWrite("First profiles size " << FIRST[0].GetProfiles().size());
   DebugWrite("Second profiles size " << SECOND[0].GetProfiles().size());
 
-  cc = 0;
+  cc = 1;
   write << "#Column " << cc++ << " is the position within the alignment.\n";
 
   SumFunction< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> *
@@ -617,12 +627,19 @@ void WriteAlignedProfiles
   {
 	  write << "#Column " << cc++ << " " << WRITE_PROFILES_HEADER2[i];
   }
-
-  write << "#Please note that gaps are represented by: "<< GAP_VALUE << "\n";
+  write << "#Column " << cc++ << " is the residue id within the first sequence.\n";
+  write << "#Column " << cc++ << " is the one letter amino acid type of the first sequence.\n";
+  write << "#Column " << cc++ << " is the residue id within the second sequence.\n";
+  write << "#Column " << cc++ << " is the one letter amino acid type of the second sequence.\n";
+  write << "#Column " << cc++ << " denotes positions with identical amino acids by '*'\n";
+  write << "#Column " << cc++ << " denotes anchors as 'a' for the first sequence  - IF ANY.\n";
+  write << "#Column " << cc++ << " denotes anchors as 'a' for the second sequence - IF ANY.\n";
+  write << "#Please note that gaps are represented by: "<< GAP_VALUE << "\n  " << std::endl;
 
   cc = 0;
   for( ; itr != alignment.end(); ++itr, ++cc)
   {
+	  write.width(4);
 	  write << cc << "  ";
 /*
 	  if( itr->first != std::numeric_limits< int>::max() &&  itr->second != std::numeric_limits< int>::max())
@@ -674,7 +691,9 @@ void WriteAlignedProfiles
 		  DebugWriteNoFlush( FIRST[ itr->first].GetType());
 		  for( std::vector< double>::const_iterator vitr = first_vector.begin(); vitr != first_vector.end(); ++vitr)
 		  {
-			  write.width( 14);
+			  write.setf( std::ios_base::fixed, std::ios_base::floatfield );
+			  write.precision(3);
+			  write.width( 8);
 			  write << *vitr << "  ";
 		  }
 	  }
@@ -683,7 +702,7 @@ void WriteAlignedProfiles
 		  DebugWriteNoFlush( "gap");
 		  for( size_t i = 0; i < number_profiles; ++i)
 		  {
-			  write.width( 14);
+			  write.width( 8);
 			  write << GAP_VALUE << "  ";
 		  }
 	  }
@@ -693,7 +712,8 @@ void WriteAlignedProfiles
 		  DebugWrite( SECOND[ itr->second].GetType());
 		  for( std::vector< double>::const_iterator vitr = second_vector.begin(); vitr != second_vector.end(); ++vitr)
 		  {
-			  write.width( 14);
+			  write.precision(3);
+			  write.width( 8);
 			  write << *vitr << "  ";
 		  }
 	  }
@@ -702,10 +722,60 @@ void WriteAlignedProfiles
 		  DebugWriteNoFlush( "gap");
 		  for( size_t i = 0; i < number_profiles; ++i)
 		  {
-			  write.width( 14);
+			  write.width( 8);
 			  write << GAP_VALUE << "  ";
 		  }
 	  }
+
+	  if( itr->first != std::numeric_limits< int>::max())
+	  {
+		  write.width(6);
+		  write << itr->first+1 << " ";
+		  write.width( 3);
+		  write << FIRST[ itr->first].GetType() << " ";
+	  }
+	  else
+	  {
+		  write.width( 6);
+		  write << GAP_VALUE << " ";
+		  write.width( 3);
+		  write << GAP_VALUE << " ";
+	  }
+	  if( itr->second != std::numeric_limits< int>::max())
+	  {
+		  write.width( 6);
+		  write << itr->second+1 << " ";
+		  write.width( 3);
+		  write << SECOND[ itr->second].GetType() << " ";
+	  }
+	  else
+	  {
+		  write.width( 6);
+		  write << GAP_VALUE << " ";
+		  write.width( 3);
+		  write << GAP_VALUE << " ";
+	  }
+	  if(  itr->first != std::numeric_limits< int>::max() && itr->second != std::numeric_limits< int>::max() && FIRST[ itr->first].GetType() == SECOND[ itr->second].GetType() )
+	  {
+		  write << " *";
+	  }
+	  else
+	  {
+		  write << "  ";
+	  }
+	  if( ContainsFirst( ANCHORS, itr->first+1 ) )
+	  {
+		  write << "  a   ";
+	  }
+	  else
+	  {
+		  write << "      ";
+	  }
+	  if( ContainsSecond( ANCHORS, itr->second+1 ) )
+	  {
+		  write << "a";
+	  }
+
 	  write << "" << std::endl;
   }
 
@@ -789,7 +859,7 @@ void WriteAlignment( CommandLineManager &CMD, AlignmentVariables &VARS)
 		  if ( VARS.alignment_output_format == "clustalw")
 		  {
 			  DebugWrite( "write aligned sequences in clustalw format");
-			  WriteAlignedSequencesInClustalwFormat( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence, VARS.first_fasta_id, VARS.second_fasta_id, VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty);
+			  WriteAlignedSequencesInClustalwFormat( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence, VARS.first_fasta_id, VARS.second_fasta_id, VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, VARS.anchors);
 			  DebugWrite( "done");
 		  }
 		  else if ( VARS.alignment_output_format == "fasta")
@@ -801,7 +871,7 @@ void WriteAlignment( CommandLineManager &CMD, AlignmentVariables &VARS)
 		  else
 		  {
 			  DebugWrite( "write aligned sequences in clustalw format");
-			  WriteAlignedSequencesInClustalwFormat( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence, VARS.first_fasta_id, VARS.second_fasta_id, VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty);
+			  WriteAlignedSequencesInClustalwFormat( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence, VARS.first_fasta_id, VARS.second_fasta_id, VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, VARS.anchors);
 			  DebugWrite( "done");
 		  }
 	  }
@@ -817,7 +887,7 @@ void WriteAlignment( CommandLineManager &CMD, AlignmentVariables &VARS)
 		  {
 			  VARS.gap_value =  CMD.GetFirstArgument( "profile_gap_value_for_plotting");
 		  }
-		  WriteAlignedProfiles( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence,  VARS.outputfile_aligned_profiles , VARS.gap_extension_penalty, VARS.gap_value, VARS.last_element, VARS.scores, VARS.write_profiles_header1, VARS.write_profiles_header2 );
+		  WriteAlignedProfiles( VARS.score_and_alignment, VARS.first_sequence, VARS.second_sequence,  VARS.outputfile_aligned_profiles , VARS.gap_extension_penalty, VARS.gap_value, VARS.last_element, VARS.scores, VARS.anchors, VARS.write_profiles_header1, VARS.write_profiles_header2 );
 		  DebugWrite( "done");
 	  }
 
@@ -878,7 +948,7 @@ void WriteAlignment( CommandLineManager &CMD, AlignmentVariables &VARS)
 
 			  if ( VARS.alignment_output_format == "clustalw")
 			  {
-				  WriteAlignedSequencesInClustalwFormat( aligned_pair, VARS.first_msa[ ids[ 0]], VARS.second_msa[ ids[ 1]], "seq_of_msa1", "seq_of_msa2", VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, false); //60 is just for printing the alignment
+				  WriteAlignedSequencesInClustalwFormat( aligned_pair, VARS.first_msa[ ids[ 0]], VARS.second_msa[ ids[ 1]], "seq_of_msa1", "seq_of_msa2", VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, VARS.anchors, false); //60 is just for printing the alignment
 			  }
 			  else if ( VARS.alignment_output_format == "fasta")
 			  {
@@ -886,7 +956,7 @@ void WriteAlignment( CommandLineManager &CMD, AlignmentVariables &VARS)
 			  }
 			  else
 			  {
-				  WriteAlignedSequencesInClustalwFormat( aligned_pair, VARS.first_msa[ ids[ 0]], VARS.second_msa[ ids[ 1]], "seq_of_msa1", "seq_of_msa2", VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, false); //60 is just for printing the alignment
+				  WriteAlignedSequencesInClustalwFormat( aligned_pair, VARS.first_msa[ ids[ 0]], VARS.second_msa[ ids[ 1]], "seq_of_msa1", "seq_of_msa2", VARS.outputfile_aligned_sequences, VARS.line_length, VARS.gap_extension_penalty, VARS.anchors, false); //60 is just for printing the alignment
 			  }
 		  }
 		  else

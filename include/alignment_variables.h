@@ -130,6 +130,8 @@ struct AlignmentVariables
 	  std::vector< double>
 		  weights;
 
+	  std::vector< Triplet<int,int,double> >
+	  	  anchors;
 };
 
 void SetDefaults( AlignmentVariables &NUT)
