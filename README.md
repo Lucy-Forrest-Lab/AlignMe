@@ -15,22 +15,22 @@ Lucy Forrest
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
-Refer to docs/INSTALL_all.txt 
+Refer to `doc/INSTALL_all.txt`
 
 ## How to install
 - change directory to the appropriate folder in your terminal 
-- type "make"
+- type `make`
 - the executable is created in this folder and ready to use 
 
 ## How to use
-- have a look at the manual docs/AlignMe_manual.pdf and try out some examples
-- scripts/use_best_parameters.pl can be used for running AlignMePST jobs if PSSM, secondary structure predictions, and transmembrane predictions are available.
+- have a look at the [online manual](https://lucy-forrest-lab.github.io/AlignMe/) and try out some examples
+- to run AlignMePST jobs, use `scripts/use_best_parameters.pl`. This script assumes that PSSM, secondary structure predictions, and transmembrane predictions are available.
 
 ## Online server
 Our online server is available at [http://www.bioinfo.mpg.de/AlignMe/](http://www.bioinfo.mpg.de/AlignMe/)
 
 If you have questions about the usage of this program or discovered a 
-bug, then please post a message on github or write to: AlignMe@rzg.mpg.de 
+bug, then please post a message on github or write to: <AlignMe@rzg.mpg.de>
 
 ## How can I cite AlignMe?
 If you have used AlignMe in your work, please cite:  
