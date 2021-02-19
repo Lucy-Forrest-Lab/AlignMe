@@ -15,12 +15,13 @@ CXX = g++
 
 NAME = alignme1.2.exe
 
-CPPFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated -I /usr/local/
+CXXFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated
 
-LDLIBS = -L /usr/local/lib
+LDLIBS = -L/usr/local/lib
+LDFLAGS = -static
 
 $(NAME): $(OBJ)
-	$(CXX) -o $(NAME) $(OBJ)
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
 
 clean:
 	rm -f $(NAME)
