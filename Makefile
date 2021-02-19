@@ -15,6 +15,7 @@ CXX = g++
 
 NAME = alignme1.2.exe
 
+INCFLAGS = -I/usr/local/include -I/usr/include/boost169 # Based on CentOS 7 install
 CXXFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated
 
 LDLIBS = -L/usr/local/lib
@@ -22,6 +23,12 @@ LDFLAGS = -static
 
 $(NAME): $(OBJ)
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(LDLIBS) -o $(NAME) $(OBJ)
+
+%.o: %.cc
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c -o $@ $<
+
+%.o: %.cpp
+	$(CXX) $(CXXFLAGS) $(INCFLAGS) -c -o $@ $<
 
 clean:
 	rm -f $(NAME)
