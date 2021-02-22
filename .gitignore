@@ -1,3 +1,7 @@
-
+*.o
+*~
+test
 .DS_Store
 */.DS_Store
+.project
+.cproject

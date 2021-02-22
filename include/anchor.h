@@ -57,8 +57,8 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 		anchors.push_back( Triplet<int,int,double>( ii, jj, shift_penalty));
 //		ii -= 1;
 //		jj -= 1;
-		ii += 1;  // first residue id is 0
-		jj += 1;
+//		ii += 1;  // first residue id is 0
+//		jj += 1;
 		shift_penalty *= -1;  // using positive values in file!
 
 		if( ii >= MATRIX.GetNumberOfRows() || jj >= MATRIX.GetNumberOfColumns())
