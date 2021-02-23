@@ -16,9 +16,9 @@ The main AlignMe code is quite straightforward to compile. However, to run in P,
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
+    This can be the most difficult part, so you can also create transmembrane predictions using the AlignMe server for use as inputs
 
-
-### STEP 1: INSTALLATION OF BLAST 2.2.17 
+### STEP 1: INSTALL OF BLAST 2.2.17 
 Open your terminal and enter bash mode  
 `bash`
 
@@ -73,6 +73,42 @@ tar xvzf blast-2.2.17-x64-linux.tar.gz
 mv blast-2.2.17 $prefix_path
 rm  blast-2.2.17-x64-linux.tar.gz 
 ```
+
+### STEP 2: INSTALL PSIPRED 3.2 
+Download psipred32.tar.gz   from [http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/](http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/)  to your $tmpdir (/home/me/tmp/)
+
+```
+psipred_install_dir=$prefix_path/psipred3.2/;
+[[ -d $psipred_install_dir ]] || mkdir -pv $psipred_install_dir;
+cd $tmpdir 
+mv psipred32.tar.gz $psipred_install_dir
+cd $psipred_install_dir
+tar xvzf psipred32.tar.gz
+cd src
+make
+make install 
+```
+
+Download databases for PSIPRED: 
+```
+[[ -d $prefix_db_path/psipred   ]] || mkdir -pv $prefix_db_path/psipred;
+wget  -O $prefix_db_path/psipred/uniref90.fasta "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.pal "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.pal"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.00.phr "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.phr"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.00.pin "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.pin"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.00.psq "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.psq"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.01.phr "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.phr"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.01.pin "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.pin"
+wget  -O $prefix_db_path/psipred/uniref90.fasta.01.psq "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.psq"
+```
+
+Modfiy the file runspipred which is stored in `$psipred_install_dir` 
+open the file in a text editor `$psipred_install_dir/runspipred` 
+change: set dbname = uniref90filt  to set dbname =  $prefix_db_path/psipred/uniref90.fasta  (example: dbname = /home/me/db/psipred/uniref90.fasta)
+change: set datadir = ./data to  $prefix_path/blast-2.2.17  (example: set ncbidir = /home/me/software/blast-2.2.17/bin) 
+change: set execdir = ./bin to $psipred_install_dir/bin
+change: set datadir = ./data to $psipred_install_dir/data
+change: $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk >& $tmproot.blast   to  $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk -Q $basename.pssm >& $tmproot.blast
 
 ### STEP 2: INSTALLATION of OCTOPUS 
 This is sometimes the most challenging step
@@ -134,7 +170,7 @@ wget  -O $tmpdir/Octopus_for_AlignMe.tar.gz "http://www.bioinfo.mpg.de/AlignMe/d
 Extract Octopus_for_AlignMe.tar.gz to  $topology_predictors_install_dir/spoctopus/
 
 Adjust folders in this file so that they fit to your local configuration:
-Open $`topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`
+Open `$topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`
 Change: octopusdir=/home/me/software/topology_predictors/spoctopus
 Change: workingdir=`/bin/mktemp -d /home/me/software/topology_predictors/BLOCTOPUS_XXXXXXXXXX` || exit 1
 
@@ -143,41 +179,6 @@ Open `$topology_predictors_install_dir/spoctopus/modhmmblast_modified/run_psibla
 Change: blastfolder=/home/me/software/blast-2.2.17/bin/
 Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified
 
-### STEP 3: INSTALLATION OF PSIPRED 3.2 
-Download psipred32.tar.gz   from [http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/](http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/)  to your $tmpdir (/home/me/tmp/)
-
-```
-psipred_install_dir=$prefix_path/psipred3.2/;
-[[ -d $psipred_install_dir ]] || mkdir -pv $psipred_install_dir;
-cd $tmpdir 
-mv psipred32.tar.gz $psipred_install_dir
-cd $psipred_install_dir
-tar xvzf psipred32.tar.gz
-cd src
-make
-make install 
-```
-
-Download databases for PSIPRED: 
-```
-[[ -d $prefix_db_path/psipred   ]] || mkdir -pv $prefix_db_path/psipred;
-wget  -O $prefix_db_path/psipred/uniref90.fasta "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.pal "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.pal"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.00.phr "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.phr"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.00.pin "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.pin"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.00.psq "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.00.psq"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.01.phr "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.phr"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.01.pin "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.pin"
-wget  -O $prefix_db_path/psipred/uniref90.fasta.01.psq "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.psq"
-```
-
-Modfiy the file runspipred which is stored in `$psipred_install_dir` 
-open the file in a text editor `$psipred_install_dir/runspipred` 
-change: set dbname = uniref90filt  to set dbname =  $prefix_db_path/psipred/uniref90.fasta  (example: dbname = /home/me/db/psipred/uniref90.fasta)
-change: set datadir = ./data to  $prefix_path/blast-2.2.17  (example: set ncbidir = /home/me/software/blast-2.2.17/bin) 
-change: set execdir = ./bin to $psipred_install_dir/bin
-change: set datadir = ./data to $psipred_install_dir/data
-change: $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk >& $tmproot.blast   to  $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk -Q $basename.pssm >& $tmproot.blast
 
 ### STEP 4: Testing - Generate Inputs for AlignMePST 
 Two fasta files are required as input for AlignMe. They have to be formatted like this:
