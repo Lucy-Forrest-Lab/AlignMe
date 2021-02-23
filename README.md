@@ -6,7 +6,8 @@ René Staritzbichler
 Marcus Stamm  
 Kamil Khafizov  
 Edoardo Sarti  
-Lucy Forrest  
+Lucy R. Forrest  
+Giacomo Fiorin
 
 ## Required external libraries
 [Boost](https://www.boost.org) library headers, namely shared_ptr.hpp
