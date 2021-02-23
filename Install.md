@@ -10,15 +10,13 @@ The main AlignMe code is quite straightforward to compile. However, to run in P,
 - type `make`
 - the `alignme` executable is created in this folder and ready to use 
 
---
-
 ## Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
     This can be the most difficult part, so you can also create transmembrane predictions using the AlignMe server for use as inputs
 
-### STEP 1: INSTALL OF BLAST 2.2.17 
+### STEP 1: PREPARATIONS
 Open your terminal and enter bash mode  
 `bash`
 
@@ -48,25 +46,27 @@ gengetopt=`which gengetopt`; # Have gengetopt in path
 gengetopt_install_dir=`dirname $gengetopt`; # or specify its location directly
 ```
 
-Folder in which files are downloaded that are needed for the installation  
+Define an alias for a temporary folder into which files are to be downloaded, e.g.:
 ```
 tmpdir=/home/me/tmp/
 [[ -d $tmpdir ]] || mkdir -pv $tmpdir;
 ```
 
-Main folder in which to install the software:  
+Define an alias for the folder into which all software will be installed, e.g. 
 `prefix_path=/home/me/software` 
 
-Main folder that contains the databases:  
-`prefix_db_path=/home/me/db
+Define an alias for the folder that will hold the static sequence databases, e.g.:
+`prefix_db_path=/home/me/db`
 
-Subfolders for the software:
+Define aliases for subfolders for the OCTOPUS software:
 ```
 modhmm_install_dir=$prefix_path/modhmm/;
 topology_predictors_install_dir=$prefix_path/topology_predictors;
 ```
 
-Download BLAST from [http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/release/2.2.17/](http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/release/2.2.17/) to your $tmpdir (/home/me/tmp/). e.g. for `blast-2.2.17-x64-linux.tar.gz`
+### STEP 2: INSTALL BLAST
+
+Download BLAST from [NCBI ftp site](http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/release/2.2.17/) to your $tmpdir. We tested v2.2.17:
 ```
 cd $tmpdir 
 tar xvzf blast-2.2.17-x64-linux.tar.gz 
@@ -75,7 +75,7 @@ rm  blast-2.2.17-x64-linux.tar.gz
 ```
 
 ### STEP 2: INSTALL PSIPRED 3.2 
-Download psipred32.tar.gz   from [http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/](http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old/)  to your $tmpdir (/home/me/tmp/)
+Download psipred32.tar.gz from [UCL server](http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old_versions/) to your $tmpdir:
 
 ```
 psipred_install_dir=$prefix_path/psipred3.2/;
@@ -89,7 +89,7 @@ make
 make install 
 ```
 
-Download databases for PSIPRED: 
+Download databases for PSIPRED. Currently these instructions look for files on the AlignMe server. If this doesn't work, you may need to obtain your own versions of the databases from NCBI.
 ```
 [[ -d $prefix_db_path/psipred   ]] || mkdir -pv $prefix_db_path/psipred;
 wget  -O $prefix_db_path/psipred/uniref90.fasta "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta"
@@ -102,25 +102,25 @@ wget  -O $prefix_db_path/psipred/uniref90.fasta.01.pin "http://www.bioinfo.mpg.d
 wget  -O $prefix_db_path/psipred/uniref90.fasta.01.psq "http://www.bioinfo.mpg.de/AlignMe/db/uniref90.fasta.01.psq"
 ```
 
-Modfiy the file runspipred which is stored in `$psipred_install_dir` 
-open the file in a text editor `$psipred_install_dir/runspipred` 
-change: set dbname = uniref90filt  to set dbname =  $prefix_db_path/psipred/uniref90.fasta  (example: dbname = /home/me/db/psipred/uniref90.fasta)
-change: set datadir = ./data to  $prefix_path/blast-2.2.17  (example: set ncbidir = /home/me/software/blast-2.2.17/bin) 
-change: set execdir = ./bin to $psipred_install_dir/bin
-change: set datadir = ./data to $psipred_install_dir/data
-change: $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk >& $tmproot.blast   to  $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk -Q $basename.pssm >& $tmproot.blast
+Modify the file `runspipred` which is stored in `$psipred_install_dir` to define paths:
+- change: set dbname = uniref90filt  to set dbname =  $prefix_db_path/psipred/uniref90.fasta  (example: dbname = /home/me/db/psipred/uniref90.fasta)
+- change: set datadir = ./data to  $prefix_path/blast-2.2.17  
+- change: set execdir = ./bin to $psipred_install_dir/bin
+- change: set datadir = ./data to $psipred_install_dir/data
+- change: $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk >& $tmproot.blast   to  $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk -Q $basename.pssm >& $tmproot.blast
 
-### STEP 2: INSTALLATION of OCTOPUS 
-This is sometimes the most challenging step
+
+### STEP 3: INSTALL OCTOPUS 
+This install has two components: the HMM and the topology predictors.
 
 #### MODHMM 
-Download source code 
+Download source code:
 ```
 [[ -d $tmpdir/modhmm_src ]] || mkdir -pv $tmpdir/modhmm_src;
 svn co https://svn.sbc.su.se/repos/cbr/modhmm-projects/trunk/modhmm $tmpdir/modhmm_src;
 ```
 
-Build and install
+Build and install:
 ```
 [[ -d $tmpdir/modhmm_build ]] || mkdir -pv $tmpdir/modhmm_build;
 cd $tmpdir/modhmm_build;
@@ -130,14 +130,14 @@ make
 make install
 ```
 
-### TOPOLOGY PREDICTORS ###
-Download source code
+### TOPOLOGY PREDICTORS 
+Download source code:
 ```
 [[ -d $tmpdir/topology_predictors_src ]] || mkdir -pv $tmpdir/topology_predictors_src;
 svn co https://svn.sbc.su.se/repos/cbr/modhmm-projects/trunk/cmdline $tmpdir/topology_predictors_src;
 ```
 
-Build and install
+Build and install:
 ```
 [[ -d $tmpdir/topology_predictors_build ]] || mkdir -pv $tmpdir/topology_predictors_build;
 cd $tmpdir/topology_predictors_build;
@@ -153,7 +153,7 @@ cd $tmpdir
 rm * 
 ```
 
-Download databases for OCTOPUS <= NB these are currently pointing to the AlignMe server, but the files aren't available???
+Download databases for OCTOPUS. NB these are currently pointing to the AlignMe server; see instructions above if they are not found.
 ```
 [[ -d $prefix_db_path/octopus  ]] || mkdir -pv $prefix_db_path/octopus;
 wget  -O $prefix_db_path/octopus/uniref90.mem.fasta.phr "http://www.bioinfo.mpg.de/AlignMe/db/octopus/uniref90.mem.fasta.phr"
@@ -162,22 +162,20 @@ wget  -O $prefix_db_path/octopus/uniref90.mem.fasta.psq "http://www.bioinfo.mpg.
 
 ```
 
-Download a file that contains modifications that were need to obtain the same OCTOPUS predictions using the local version as those that can be obtained using their web server:
+Download source code that contains modifications that were need to obtain the same OCTOPUS predictions using the local version as those that can be obtained using their web server:
 ```
 wget  -O $tmpdir/Octopus_for_AlignMe.tar.gz "http://www.bioinfo.mpg.de/AlignMe/download/Octopus_for_AlignMe.tar.gz"
 ```
 
-Extract Octopus_for_AlignMe.tar.gz to  $topology_predictors_install_dir/spoctopus/
+Extract `Octopus_for_AlignMe.tar.gz` to `$topology_predictors_install_dir/spoctopus/`
 
-Adjust folders in this file so that they fit to your local configuration:
-Open `$topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`
-Change: octopusdir=/home/me/software/topology_predictors/spoctopus
-Change: workingdir=`/bin/mktemp -d /home/me/software/topology_predictors/BLOCTOPUS_XXXXXXXXXX` || exit 1
-
-Adjust folders in this file so that they fit to your local configuration:
-Open `$topology_predictors_install_dir/spoctopus/modhmmblast_modified/run_psiblast.sh`
-Change: blastfolder=/home/me/software/blast-2.2.17/bin/
-Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified
+Adjust folders in these files so that they fit to your local configuration:
+    - In `$topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`
+        - Change: octopusdir=/home/me/software/topology_predictors/spoctopus
+        - Change: workingdir=`/bin/mktemp -d /home/me/software/topology_predictors/BLOCTOPUS_XXXXXXXXXX` || exit 1
+    - In `$topology_predictors_install_dir/spoctopus/modhmmblast_modified/run_psiblast.sh`
+        - Change: blastfolder=/home/me/software/blast-2.2.17/bin/
+        - Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified
 
 
 ### STEP 4: Testing - Generate Inputs for AlignMePST 
@@ -257,5 +255,4 @@ perl $AlignMe_install_dir/use_best_parameters.pl \
      -output_alignment $alignment_file -output_profile $profile_file 
 ```
 
-This produces an
 
