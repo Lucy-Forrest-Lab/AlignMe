@@ -13,7 +13,7 @@ OBJ = \
 
 CXX = g++
 
-NAME = alignme1.2.exe
+NAME = alignme
 
 INCFLAGS = -I/usr/local/include -I/usr/include/boost169 # Based on CentOS 7 install
 CXXFLAGS = -Wall -O3 -fmessage-length=0 -Wno-deprecated
