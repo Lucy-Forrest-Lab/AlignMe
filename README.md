@@ -21,7 +21,7 @@ Refer to `doc/INSTALL_all.txt`
 ## How to install
 - change directory to the appropriate folder in your terminal 
 - type `make`
-- the executable is created in this folder and ready to use 
+- the `alignme` executable is created in this folder and ready to use 
 
 ## How to use
 - have a look at the [online manual](https://lucy-forrest-lab.github.io/AlignMe/) and try out some examples
