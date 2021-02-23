@@ -1,22 +1,26 @@
-# AlignMe Installation Instructions
+## AlignMe Installation Instructions
 
 The main AlignMe code is quite straightforward to compile. However, to run in P, PS or PST modes require inputs from PSI-BLAST sequence searches, PSIPRED secondary structure predictions and/or OCTOPUS transmembrane span predictions. Installing those can be challenging. Please see section below on [Optional external code](#optional-external-code)
 
-## Required external libraries
+### Required external libraries
 [Boost](https://www.boost.org) library headers, namely shared_ptr.hpp
 
-## How to install
+### How to install
 - change directory to the appropriate folder in your terminal 
 - type `make`
 - the `alignme` executable is created in this folder and ready to use 
 
-## Optional external code
+### Optional external code
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
-    This can be the most difficult part, so you can also create transmembrane predictions using the AlignMe server for use as inputs
 
-### STEP 1: PREPARATIONS
+---
+
+### Complete installation instructions
+If you wish to install all the dependencies, the following instructions should be of some help. However, some of these links are external code, so might be broken or difficult to install. Please let us know if you have any problems. 
+
+#### Step 1: Preparations
 Open your terminal and enter bash mode  
 `bash`
 
@@ -64,7 +68,7 @@ modhmm_install_dir=$prefix_path/modhmm/;
 topology_predictors_install_dir=$prefix_path/topology_predictors;
 ```
 
-### STEP 2: INSTALL BLAST
+#### Step 2: Install BLAST
 
 Download BLAST from [NCBI ftp site](http://mirrors.vbi.vt.edu/mirrors/ftp.ncbi.nih.gov/blast/executables/release/2.2.17/) to your $tmpdir. We tested v2.2.17:
 ```
@@ -74,7 +78,7 @@ mv blast-2.2.17 $prefix_path
 rm  blast-2.2.17-x64-linux.tar.gz 
 ```
 
-### STEP 2: INSTALL PSIPRED 3.2 
+#### Step 3: Install PSIPRED 3.2 
 Download psipred32.tar.gz from [UCL server](http://bioinfadmin.cs.ucl.ac.uk/downloads/psipred/old_versions/) to your $tmpdir:
 
 ```
@@ -110,10 +114,10 @@ Modify the file `runspipred` which is stored in `$psipred_install_dir` to define
 - change: $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk >& $tmproot.blast   to  $ncbidir/blastpgp -b 0 -j 3 -h 0.001 -d $dbname -i $tmproot.fasta -C $tmproot.chk -Q $basename.pssm >& $tmproot.blast
 
 
-### STEP 3: INSTALL OCTOPUS 
+#### Step 4: Install OCTOPUS 
 This install has two components: the HMM and the topology predictors.
 
-#### MODHMM 
+##### Install MODHMM 
 Download source code:
 ```
 [[ -d $tmpdir/modhmm_src ]] || mkdir -pv $tmpdir/modhmm_src;
@@ -130,7 +134,7 @@ make
 make install
 ```
 
-### TOPOLOGY PREDICTORS 
+##### Install Topology Predictors
 Download source code:
 ```
 [[ -d $tmpdir/topology_predictors_src ]] || mkdir -pv $tmpdir/topology_predictors_src;
@@ -147,13 +151,14 @@ make
 make install
 ```
 
-Clean up tmp folder
+Clean up tmp folder:
 ```
 cd $tmpdir 
 rm * 
 ```
 
-Download databases for OCTOPUS. NB these are currently pointing to the AlignMe server; see instructions above if they are not found.
+##### Get sequence databases for OCTOPUS
+NB these are currently pointing to the AlignMe server; see instructions above if they are not found.
 ```
 [[ -d $prefix_db_path/octopus  ]] || mkdir -pv $prefix_db_path/octopus;
 wget  -O $prefix_db_path/octopus/uniref90.mem.fasta.phr "http://www.bioinfo.mpg.de/AlignMe/db/octopus/uniref90.mem.fasta.phr"
@@ -162,7 +167,8 @@ wget  -O $prefix_db_path/octopus/uniref90.mem.fasta.psq "http://www.bioinfo.mpg.
 
 ```
 
-Download source code that contains modifications that were need to obtain the same OCTOPUS predictions using the local version as those that can be obtained using their web server:
+##### Download OCTOPUS fix
+Download source code containing modifications that were need to obtain the same OCTOPUS predictions using the local version as those that can be obtained using their web server:
 ```
 wget  -O $tmpdir/Octopus_for_AlignMe.tar.gz "http://www.bioinfo.mpg.de/AlignMe/download/Octopus_for_AlignMe.tar.gz"
 ```
@@ -178,7 +184,7 @@ Adjust folders in these files so that they fit to your local configuration:
         - Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified
 
 
-### STEP 4: Testing - Generate Inputs for AlignMePST 
+#### Step 5: Testing - Generate Inputs for AlignMePST 
 Two fasta files are required as input for AlignMe. They have to be formatted like this:
 ```
 >1KPL_A
@@ -210,8 +216,8 @@ $psipred_install_dir/runpsipred $AlignMe_input_dir/$fasta1
 $psipred_install_dir/runpsipred $AlignMe_input_dir/$fasta2
 ```
 
-Make an OCTOPUS prediction 
-You have to generate a file that contains the names of your fastas: 
+Make an OCTOPUS prediction:
+You need to generate a file containing the names of your sequences: 
 ```
 echo $fasta1_id > $AlignMe_input_dir/protnamefile.txt 
 echo $fasta2_id >> $AlignMe_input_dir/protnamefile.txt 
