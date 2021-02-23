@@ -31,7 +31,7 @@ beginning of a file that you do not want to include for the alignment.
 Change directory to the main AlignMe folder, or copy the Examples/ folder to your working directory and test the following command:
 
 ```
-alignme.exe -similarity_score_file ./examples/similarity_score_files/profile.txt \
+alignme -similarity_score_file ./examples/similarity_score_files/profile.txt \
             -output_aligned_profiles  my_aligned_profiles.aln
 ```
 

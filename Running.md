@@ -22,11 +22,11 @@ Jump to section on:
 
 To run AlignMe on the command line in a terminal use:  
 
-`alignme.exe`
+`alignme`
 
 To get an overview of available options, see [overview](Flag_overview.md), or call:  
 
-`./alignme.exe -help`
+`./alignme -help`
 
 The program reads a variety of flags that are explained in
 this manual, and that can be provided in any order. Flgas start with the

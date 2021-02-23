@@ -52,7 +52,7 @@ otherwise the program will quit with an error.
 Enter the folder AlignMe main folder and test the following command:
 
 ```
-alignme.exe -msa_file1 ./examples/bcct.fa -msa_file2 ./examples/deda.fa 
+alignme -msa_file1 ./examples/bcct.fa -msa_file2 ./examples/deda.fa 
 -similarity_score_file ./examples/simscore_msa.txt -fraction_allowed_gaps 0.5
 ```
 

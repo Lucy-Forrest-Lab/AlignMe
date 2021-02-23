@@ -116,7 +116,7 @@ The examples are:
 The simplest alignment uses the BLOSUM substitution matrix to align two sequences
 
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
               -similarity_score_file ./examples/similarity_scorefiles/matrix.txt
 ```
 
@@ -136,7 +136,7 @@ This example illustrates usage of the three required input flags, and creates an
 #### Pairwise alignment of 2 sequences based on a position specific substitution matrix
 At the next level of complexity, we compare two sequences using a PSSM.
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
               -similarity_score_file ./examples/similarity_scorefiles/PSSM.txt \
               -output_aligned_profiles my_aligned_PSSMs.aln
 ```
@@ -146,7 +146,7 @@ file **my_aligned_PSSMs.aln**. However, a second scoring type, called "ProfilePo
 in [section](3.1) and can be used with the following command:
 
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
               -similarity_score_file ./examples/similarity_scorefiles/PSSMprofile.txt \
               -output_aligned_profiles my_aligned_profile_PSSMs.aln
 ```
@@ -158,7 +158,7 @@ Note that only the file specified by the flag `-similarity_score_file` differs f
 #### Pairwise alignment of 2 sequences based on a hydrophobicity scale 
 For aligning two sequences based on a hydrophobicity scale, the basic command is as follows:
 ```
-./alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
               -similarity_score_file ./examples/similarity_scorefiles/scale.txt
 ```
 
@@ -168,7 +168,7 @@ for detailed information) to create an additional output file containing
 the aligned values of each sequence position. For example:
 
 ```
-alignme.exe -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta\_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
         -similarity_score_file ./examples/similarity_scorefiles/scale.txt \
         -output_aligned_profiles my_aligned_profiles.aln
 ```
@@ -187,7 +187,7 @@ PsiPred, but you can use any kind of program that creates a profile
 (i.e., transmembrane predictors, secondary structure predictors etc.).
 
 ```
-alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
+alignme -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fastas/2EI4_A.fa \
             -similarity_score_file  ./examples/similarity_scorefiles/profile.txt \
             -output_aligned_profiles my_aligned_profiles.aln
 ```
@@ -197,7 +197,7 @@ alignme.exe -fasta_file1 ./examples/fastas/1H2S_A.fa -fasta_file2 ./examples/fas
 #### Pairwise alignment of 2 sequences based on combined inputs 
 
 ```
-alignme.exe -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa \
+alignme -fasta_file1 ./examples/1KPL.fa -fasta_file2 ./examples/1OTS.fa \
             -similarity_score_file ./examples/similarity_scorefiles/combined.txt \
             -output_aligned_profiles my_aligned_profiles.aln
 ```
