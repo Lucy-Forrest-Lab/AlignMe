@@ -175,13 +175,13 @@ wget  -O $tmpdir/Octopus_for_AlignMe.tar.gz "http://www.bioinfo.mpg.de/AlignMe/d
 
 Extract `Octopus_for_AlignMe.tar.gz` to `$topology_predictors_install_dir/spoctopus/`
 
-Adjust folders in these files so that they fit to your local configuration:
-    - In `$topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`
-        - Change: octopusdir=/home/me/software/topology_predictors/spoctopus
-        - Change: workingdir=`/bin/mktemp -d /home/me/software/topology_predictors/BLOCTOPUS_XXXXXXXXXX` || exit 1
-    - In `$topology_predictors_install_dir/spoctopus/modhmmblast_modified/run_psiblast.sh`
-        - Change: blastfolder=/home/me/software/blast-2.2.17/bin/
-        - Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified
+Adjust folders in these files so that they fit to your local configuration:  
+    - In `$topology_predictors_install_dir/spoctopus/BLOCTOPUS_modified.sh`  
+        - Change: octopusdir=/home/me/software/topology_predictors/spoctopus  
+        - Change: workingdir=`/bin/mktemp -d /home/me/software/topology_predictors/BLOCTOPUS_XXXXXXXXXX` || exit 1  
+    - In `$topology_predictors_install_dir/spoctopus/modhmmblast_modified/run_psiblast.sh`  
+        - Change: blastfolder=/home/me/software/blast-2.2.17/bin/  
+        - Change: modhmmblast=/home/me/software/topology_predictors/spoctopus/modhmmblast_modified  
 
 
 #### Step 5: Testing - Generate Inputs for AlignMePST 
