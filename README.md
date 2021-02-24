@@ -16,12 +16,12 @@ Giacomo Fiorin
 [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PAGE_TYPE=BlastDocs&DOC_TYPE=Download) - for generating position specific substitution matrices  
 [PSIPRED](http://bioinf.cs.ucl.ac.uk/software_downloads/) - for generating secondary structure predictions  
 [OCTOPUS](http://octopus.cbr.su.se/index.php?about=download) - for generating transmembrane predictions  
-Refer to `doc/INSTALL_all.txt`
+For more details, refer to [install instructions](https://lucy-forrest-lab.github.io/AlignMe/Install.md)
 
 ## How to install
 - change directory to the appropriate folder in your terminal 
 - type `make`
-- the executable is created in this folder and ready to use 
+- the `alignme` executable is created in this folder and ready to use 
 
 ## How to use
 - have a look at the [online manual](https://lucy-forrest-lab.github.io/AlignMe/) and try out some examples
