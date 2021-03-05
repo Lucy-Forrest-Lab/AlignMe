@@ -19,6 +19,7 @@
 //!
 //! @author: Rene Staritzbichler, Marcus Stamm, Kamil Khafizov
 //! @date: 9.6.2011
+//! @author: Lucy Forrest - update version number 2021-03-05
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -29,7 +30,7 @@
 void WriteHelpForAlignPairs()
 {
 	  std::cout << "\n";
-	  std::cout << "This is the usage information for AlignMe Version 1.2\n";
+	  std::cout << "This is the usage information for AlignMe Version 1.2.2\n";
 	  std::cout << "\n";
 	  std::cout << "Flags for input files:\n";
 	  std::cout << "-similarity_score_file [file]         file containing information about the type \n";

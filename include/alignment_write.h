@@ -23,6 +23,7 @@
 //!
 //! @author: Rene Staritzbichler, Kamil Khafizov, Marcus Stamm
 //! @date: 18.3.2010
+//! @author: Lucy Forrest update version number 2021.03.05
 /////////////////////////////////////////////////////////////////////////
 
 
@@ -157,7 +158,7 @@ void WriteAlignedSequencesInClustalwFormat
 
   if( WRITE_CLUSTAL_HEADER)
   {
-	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.2\n\n";
+	  write << "CLUSTAL W formatted alignment obtained with AlignMe 1.2.2\n\n";
   }
 
   first_header.resize( 13, ' ');
