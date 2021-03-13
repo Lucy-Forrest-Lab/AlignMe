@@ -41,34 +41,29 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 	double
 		shift_penalty;
 	size_t
-		nr, ii, jj;
+		nr, anchor_pos_1, anchor_pos_2;
 	std::vector< Triplet<int,int,double> >
 		anchors;
 	STREAM >> nr;
 	for( size_t r = 0; r < nr; ++r)
 	{
-		STREAM >> ii >> jj >> shift_penalty;
-		if( ii == 0 || jj == 0)
+		STREAM >> anchor_pos_1 >> anchor_pos_2 >> shift_penalty;
+		if( anchor_pos_1 == 0 || anchor_pos_2 == 0)
 		{
 			std::cout << "Counting of the amino acids start with '1'." << std::endl;
 			std::cout << "anchors for the first residue have to be indicated by '1' " << std::endl;
 			exit( 2);
 		}
-		anchors.push_back( Triplet<int,int,double>( ii, jj, shift_penalty));
-//		ii -= 1;
-//		jj -= 1;
-//		ii += 1;  // first residue id is 0
-//		jj += 1;
-		shift_penalty *= -1;  // using positive values in file!
+		anchors.push_back( Triplet<int,int,double>( anchor_pos_1, anchor_pos_2, shift_penalty));
+		shift_penalty *= -1;  // using positive values on website, here they need to be negative, similar as a potential
 
-		if( ii >= MATRIX.GetNumberOfRows() || jj >= MATRIX.GetNumberOfColumns())
+		if( anchor_pos_1 >= MATRIX.GetNumberOfRows() || anchor_pos_2 >= MATRIX.GetNumberOfColumns())
 		{
 			std::cout << "provide pairs of values that match the lengths of the sequences:" << "\n";
-			std::cout << ii << " should not exceed the max value: " << MATRIX.GetNumberOfRows() - 1 << "\n";
-			std::cout << jj << " should not exceed the max value: " << MATRIX.GetNumberOfColumns() - 1 << "\nbye\n\n";
+			std::cout << anchor_pos_1 << " should not exceed the max value: " << MATRIX.GetNumberOfRows() - 1 << "\n";
+			std::cout << anchor_pos_2 << " should not exceed the max value: " << MATRIX.GetNumberOfColumns() - 1 << "\nbye\n\n";
 			exit( 2);
 		}
-		//std::cout << "anchors: " << ii << "  " << jj << "  " << shift_penalty << "\n";
 
 		for( size_t i = 0; i < MATRIX.GetNumberOfRows(); ++i)
 		{
@@ -76,21 +71,15 @@ BuildAnchorMatrix( std::istream &STREAM, Matrix< DynamicProgrammingMatrixElement
 			{
 				if
 				(
-				    ( i  < ii && j  > jj)
-				      || ( i  > ii && j  < jj)
-				      ||  ( i == ii && j  < jj)
-				      || ( i  < ii && j == jj)
+				    ( i  < anchor_pos_1 && j  > anchor_pos_2)
+				      || ( i  > anchor_pos_1 && j  < anchor_pos_2)
+				      ||  ( i == anchor_pos_1 && j  < anchor_pos_2)
+				      || ( i  < anchor_pos_1 && j == anchor_pos_2)
 				)
 				{
 					MATRIX( i, j).AddValue( shift_penalty);
-				//	std::cout << shift_penalty << "  ";
 				}
-//				else
-//				{
-//					std::cout << "0  "; debug
-//				}
 			}
-			//std::cout << "\n"; debug
 		}
 	}
 	return anchors;
