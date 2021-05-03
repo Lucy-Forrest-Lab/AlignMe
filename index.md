@@ -17,11 +17,15 @@ A webserver for running the AlignMe code, including transmembrane and secondary 
 #### Citing AlignMe
 If you use AlignMe for your research and study, please cite the following references:  
 
+##### For anchors:
+Staritzbichler, R, Sarti E, Yaklich, E, Aleksandrova, AA, Stamm, M, Khafizov, K, and LR Forrest
+[*PloS One* 16(4): e0239881](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0239881)
+
 ##### For pairwise alignments:  
-Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. **2013** "Alignment of Helical Membrane Protein Sequences Using AlignMe" [*PloS One* 8 (3):e57731](https://doi.org/10.1371/journal.pone.0057731)
+Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. **2013** "Alignment of Helical Membrane Protein Sequences Using AlignMe" [*PloS One* 8(3):e57731](https://doi.org/10.1371/journal.pone.0057731)
 
 ##### For the server or alignments using "Fast mode":  
 Stamm, M, Staritzbichler, R, Khafizov, K, and LR Forrest. **2014** "AlignMe\--a Membrane Protein Sequence Alignment Web Server" [*Nucleic Acids Research* 42 (Web Server issue): W246-51](https://doi.org/10.1093/nar/gku291)
 
 ##### For the alignment of two multiple-sequence alignments:  
-Khafizov, K, Staritzbichler, R, Stamm, M and L R. Forrest. **2010** "A Study of the Evolution of Inverted-Topology Repeats from LeuT-Fold Transporters Using AlignMe" [*Biochemistry* 49(50): 10702-10713](https://doi.org/10.1021/bi101256x)
+Khafizov, K, Staritzbichler, R, Stamm, M and LR Forrest. **2010** "A Study of the Evolution of Inverted-Topology Repeats from LeuT-Fold Transporters Using AlignMe" [*Biochemistry* 49(50): 10702-10713](https://doi.org/10.1021/bi101256x)
