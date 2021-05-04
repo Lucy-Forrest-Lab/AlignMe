@@ -39,6 +39,9 @@ If you have used AlignMe in your work, please cite:
 For pairwise alignments:  
 [Stamm M., Staritzbichler R., Khafizov K. and Forrest L.R. 2013 PLoS ONE](http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0057731)  
 
+For anchors:
+[Staritzbichler R., Sarti E., Yaklich E., Aleksandrova A., Stamm M., Khafizov K. and Forrest L.R.](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0239881)
+
 For the alignment of two MSAs:  
 [Khafizov K., Staritzbichler R., Stamm M. and Forrest L.R. 2010, Biochemistry](http://pubs.acs.org/doi/abs/10.1021/bi101256x)  
 
