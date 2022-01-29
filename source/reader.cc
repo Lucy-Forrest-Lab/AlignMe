@@ -1040,7 +1040,7 @@ void  ReadSimilarityScoreFile
 #ifdef SECURE
 			  if (splitter_size != 12 &&  type == "UniversalProfileSimilarity")
 			  {
-				  std::cerr << "ERROR: In the similarity_score_file  [" << SCORE_AND_PROFILE_FILE << "], a line about " << type <<" does not fulfill the correct formatting rules. The format for  " << type <<" has to be: weight: <double> type: "<< type <<" file: <filename> min_cutoff <double> \n";
+				  std::cerr << "ERROR: In the similarity_score_file  [" << SCORE_AND_PROFILE_FILE << "], a line about " << type <<" does not fulfill the correct formatting rules. The format for  " << type <<" has to be: weight: <double> type: "<< type <<" column: <col> headerlines: <nr> profile0: <file1>  profile1: <file2> \n";
 				  exit( -1);
 			  }
 			  else  if (splitter_size != 14 &&  type == "LinearNormalizedProfileSimilarity")

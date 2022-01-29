@@ -39,8 +39,8 @@ class DynamicProgrammingMatrixElement
 private:
 	double                                  m_Value;                                 //!<  the total similarity score at this element of the dynamic programming matrix
 	std::pair< size_t, size_t>              m_PreviousElementIndices;                //!<  indices of the previous element, the one with the best score
-	ShPtr< PearsonCorrelation>  m_Correlation;
-	std::vector<double>                     m_AffinePathWays;                          //!<  needed for Needleman Wunsch Affine Gap (2 shells)
+	ShPtr< PearsonCorrelation>              m_Correlation;                           // TODO: test pearson instead of distance
+	std::vector<double>                     m_AffinePathWays;                        //!<  needed for Needleman Wunsch Affine Gap (2 shells)
 
 public:
 

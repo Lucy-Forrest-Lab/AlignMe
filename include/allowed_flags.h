@@ -26,6 +26,7 @@ void DefineAllowedFlagsGeneral( std::map<std::string,std::string> &ALLOWED_FLAGS
 	  ALLOWED_FLAGS["profile_gap_value_for_plotting"] = "allowed";
 	  ALLOWED_FLAGS["alignment_output_format"] = "allowed";
 	  ALLOWED_FLAGS["anchors"] = "allowed";
+	  ALLOWED_FLAGS["3Dalign"] = "allowed";
 	  ALLOWED_FLAGS["help"] = "allowed";
 	  ALLOWED_FLAGS["-help"] = "allowed";
 	#ifdef SECURE

@@ -27,6 +27,8 @@
 
 
 // CHANGELOG
+// Version 1.3, 2022
+// - structure alignment
 // Version 1.2.1, 2020
 // - extended write, including anchors
 // Version 1.2, July 2015
@@ -84,7 +86,7 @@
 #include "../include/commands_defined.h"
 
 #include "../include/anchor.h"
-
+#include "../include/structure_alignment.h"
 
 // NOTES:
 // - fasta header for MSAs should contain only single strings
@@ -183,8 +185,20 @@ int main( const int argc, const char * argv[])
     }
   
 
-  /////////////////////////////////////////////
-  ////  PERFORM ALIGNMENT
+  ///////////////////////////////////////////////////
+  ////  PERFORM STRUCTURE ALIGNMENT - sum to matrix
+  ///////////////////////////////////////////////////
+
+  if( cmd.IsFlagSet( "3Dalign"))
+  {
+	  std::vector< std::string>
+	  	  pdbs = cmd.GetArguments( "3Dalign");
+	  BuildStructureAlignmentMatrix( pdbs, vars.dynamic_programing_matrix);
+  }
+
+
+  ///////////////////////////////////////////
+  ////  PERFORM SEQUENCE ALIGNMENT
   ///////////////////////////////////////////
 
 
