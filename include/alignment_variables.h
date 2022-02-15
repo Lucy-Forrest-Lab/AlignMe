@@ -70,6 +70,8 @@ struct AlignmentVariables
 		  outputfile_aligned_profiles,
 		  first_msa_file,
 		  second_msa_file,
+		  first_pdb_file,
+		  second_pdb_file,
 		  alignment_output_format,
 		  gap_value;
 
@@ -134,6 +136,7 @@ struct AlignmentVariables
 	  	  anchors;
 };
 
+inline
 void SetDefaults( AlignmentVariables &NUT)
 {
     NUT.gap_opening_penalty = 10.0;

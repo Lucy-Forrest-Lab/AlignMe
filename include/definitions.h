@@ -44,7 +44,8 @@
 // use when compiling msa_optimizer.cpp:
 #define POSITION_SPECIFIC_SIMILARITY
 
-#define Alignment std::vector< std::pair< int, int> >
+//#define Alignment std::vector< std::pair< int, int> >
+typedef std::vector< std::pair< int, int> > Alignment;
 
 #define ShPtr boost::shared_ptr
 
@@ -56,7 +57,9 @@
 // for alignment indices
 #define g_GapID std::numeric_limits< int>::max()
 
-#define MSA std::vector< Sequence>
+//#define MSA std::vector< Sequence>
+class Sequence;
+typedef std::vector< Sequence> MSA;
 
 enum SimilarityType { e_SequenceSimilarity, e_ProfileSimilarity, e_ProbabilityProfileSimilarity, e_PositionSpecificSimilarity, e_ProfileDependentSequenceSimilarity, e_LinearNormalizedProfileSimilarity};
 

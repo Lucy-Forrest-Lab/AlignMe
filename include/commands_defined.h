@@ -367,6 +367,11 @@ void ReadCommandsForAlignPairs( CommandLineManager &CMD, AlignmentVariables &VAR
 		  VARS.second_msa_file  = CMD.GetFirstArgument( "msa_file2");
 	  }
 
+	  if( CMD.IsFlagSet( "pdb_file1") && CMD.IsFlagSet( "pdb_file2"))
+	  {
+		  VARS.first_pdb_file = CMD.GetFirstArgument( "pdb_file1");
+		  VARS.second_pdb_file = CMD.GetFirstArgument( "pdb_file2");
+	  }
 
 	ReadGeneralCommands( CMD, VARS, inputs_correct);
 }

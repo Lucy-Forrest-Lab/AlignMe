@@ -2,61 +2,82 @@
  * structure_alignment.h
  *
  *  Created on: Jan 25, 2022
- *      Author: hildilab
+ *      Author: rene staritzbichler
  */
 
 #ifndef INCLUDE_STRUCTURE_ALIGNMENT_H_
 #define INCLUDE_STRUCTURE_ALIGNMENT_H_
 
+#include <vector>
+#include <map>
+
+#include "function.t.h"
+#include "amino_acid.h"
+
 #include "matrix.t.h"
 #include "dynamic_programing_matrix_element.h"
 #include "triplet.t.h"
 
-//#include "rmsd.h"
+#include "sequence.h"
+#include "alignment_variables.h"
 
+#include <Eigen/Dense>
 
-class 3DAlignScore
-: public Function
+// How to get domain alignment? potentially via filter when reading
+
+struct Rotation
 {
-private:
-	double                                              m_PrevScore;
-	int                                                 m_NrPrev;
-	ShPtr< Matrix< DynamicProgramingMatrixElement> >    m_DPM;
-	vec<V3>                                             m_First;
-	vec<V3>                                             m_Second;
-public:
-	3DAlignScore(){};
+	Eigen::Vector3d center1;
+	Eigen::Matrix3d rotation;
+	Eigen::Vector3d center2;
+
+	Rotation( const Eigen::Vector3d &C1, const Eigen::Matrix3d &ROT, const Eigen::Vector3d &C2);
+
+	Eigen::Vector3d
+	Position( const Eigen::Vector3d &POS);
+
+	std::vector< Eigen::Vector3d >
+	Position( const std::vector< Eigen::Vector3d >  &POS);
+
+	// Eigen::MatrixXd ??
 };
 
-
-void BuildStructureAlignmentMatrix( const std::vector<std::string> &FILES, Matrix< DynamicProgrammingMatrixElement> &MATRIX)
+class Align3DScore
+: public Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double>
 {
-	// read pdbs
-	// - sequence from ATOM section
-	// - pos into scorefct? (GAA, DPME)
-	// - filter: CA atoms! 1 per residue  || user defined
+private:
+	Matrix< DynamicProgrammingMatrixElement>            &m_Matrix;
+	Matrix<double>                                      m_RMSD;
+	std::vector<Eigen::Vector3d>                                             m_First;
+	std::vector<Eigen::Vector3d>                                             m_Second;
+public:
+	Align3DScore(  Matrix< DynamicProgrammingMatrixElement> & M, const std::vector<Eigen::Vector3d> &FIRST, const std::vector<Eigen::Vector3d> &SECOND);
 
-	ReadPDB( FILES[0], first_seq, first_pos);
-	ReadPDB( FILES[1], second_seq, second_pos);
+	virtual double operator() ( const std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid> &AA);
+};
 
-	3DAlignScore score;
+std::string&
+Remove( std::string &STR, char *TO_REMOVE);
 
-	NeedlemanWunsch ali( ...penalty, first_seq, second_seq, score, MATRIX);
+std::map< std::string, char>
+CreateAAMap();
 
-	ali.CalculateMatrix();
-	auto alignment = ali.TraceBack();
+char
+AA3to1( const std::string AA, const std::map< std::string, char> &MAP);
 
-	// score function:
-	// - store: vec<V3> first, second
-	// - vec<double> || double,int prev score and nr of aligned atoms, length equals diagonals(aligned) bits, gap set to zero
-	// - ptr to matrix to go back
-	// - operator()(GAA1, GAA2)    (normalize!)
-	//    - find out which path best scores comes from
-	// - calc rmsd
-	// needleman wunsch: calc matrix()
-	// - construct: Sequences, gaps, scorefct, ptr to matrix
+void
+ReadPDB( const std::string &NAME , std::vector< Eigen::Vector3d> &POS, Sequence &SEQ );
 
-}
+void
+WritePDB( const std::string &NAME , const std::vector< Eigen::Vector3d> &POS, const Rotation &ROT, const std::string &OUT );
+
+Rotation
+Superimpose( std::vector< Eigen::Vector3d> &A,  std::vector< Eigen::Vector3d> &B);
+
+double
+RMSD( const std::vector< Eigen::Vector3d> &A, const std::vector< Eigen::Vector3d> &B);
+
+void BuildStructureAlignmentMatrix( const AlignmentVariables &VARS, Matrix< DynamicProgrammingMatrixElement> &MATRIX);
 
 
 #endif /* INCLUDE_STRUCTURE_ALIGNMENT_H_ */

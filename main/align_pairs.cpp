@@ -193,7 +193,7 @@ int main( const int argc, const char * argv[])
   {
 	  std::vector< std::string>
 	  	  pdbs = cmd.GetArguments( "3Dalign");
-	  BuildStructureAlignmentMatrix( pdbs, vars.dynamic_programing_matrix);
+	  BuildStructureAlignmentMatrix( vars, vars.dynamic_programing_matrix);
   }
 
 

@@ -43,6 +43,8 @@ void DefineAllowedFlagsForAlignPairs( std::map<std::string,std::string> &ALLOWED
 	  ALLOWED_FLAGS["fasta_file2"] = "allowed";
 	  ALLOWED_FLAGS["msa_file1"] = "allowed";
 	  ALLOWED_FLAGS["msa_file2"] = "allowed";
+	  ALLOWED_FLAGS["pdb_file1"] = "allowed";
+	  ALLOWED_FLAGS["pdb_file2"] = "allowed";
 	  ALLOWED_FLAGS["fraction_allowed_gaps"] = "allowed";
 	  ALLOWED_FLAGS["extract_from_MSA_sequences_with_ids"] = "allowed";
 	  ALLOWED_FLAGS["output_extracted_sequences"] = "allowed";
