@@ -14,6 +14,8 @@
 
 #include <boost/format.hpp>
 
+#include "alignment_write.h"
+
 /*
 import numpy as np
 
@@ -50,19 +52,19 @@ Rotation::Rotation( const Eigen::Vector3d &C1, const Eigen::Matrix3d &ROT, const
 
 
 
-Eigen::Vector3d Rotation::Position( const Eigen::Vector3d &POS)
+Eigen::Vector3d Rotation::Position( const Eigen::Vector3d &POS) const
 {
 	Eigen::Vector3d
 		v = POS - center1;
 	v = rotation * v;
-	v -= center2;
+	v += center2;
 	return v;
 }
 
 
 
 std::vector< Eigen::Vector3d >
-Rotation::Position( const std::vector< Eigen::Vector3d >  &POS)
+Rotation::Position( const std::vector< Eigen::Vector3d >  &POS) const
 {
 	std::vector< Eigen::Vector3d >
 		v( POS.size());
@@ -87,6 +89,13 @@ Align3DScore::Align3DScore(  Matrix< DynamicProgrammingMatrixElement> & M, const
 
 double Align3DScore::operator() ( const std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid> &AA)
 {
+	///  ***********************************************************************
+	double base = 10;            ///    MAKE MEMBER !!! adjust to gap penalties
+	double default_return = 0.0; ///    MAKE MEMBER !!! use GAP PENALTY ????
+	double default_rmsd = 0;    ///    MAKE MEMBER !!! use GAP PENALTY ????
+	///  ***********************************************************************
+
+	std::cout << __FUNCTION__ << std::endl;
 	int
 		i = AA.first.GetSeqID(),
 		j = AA.second.GetSeqID(),
@@ -95,29 +104,59 @@ double Align3DScore::operator() ( const std::pair< GeneralizedAminoAcid, General
 	std::vector< Eigen::Vector3d>
 		pos1,
 		pos2;
+	if( i < 3 || j < 3 )
+//		if( i < 2 || j < 2 )
+	{
+		std::cout << "index: " << i << " " << j << std::endl;
+		m_RMSD(i,j) = default_rmsd;
+		return default_return;
+	}
 
+	std::cout << "push back 1st: " << i << " " << ip << " " << m_First.size() << std::endl;
 	pos1.push_back( m_First[i]);
-	pos1.push_back( m_First[ip]); // ??
+	pos1.push_back( m_First[ip--]); // ??
+	pos1.push_back( m_First[ip]);
 
-	pos1.push_back( m_Second[j]);
-	pos1.push_back( m_Second[jp]);
+	std::cout << "push back 2nd: " << j << " " << jp << " " << m_Second.size() << std::endl;
+	pos2.push_back( m_Second[j]);
+	pos2.push_back( m_Second[jp--]);
+	pos2.push_back( m_Second[jp]);
 
+	std::cout << "now: " << ip << " " << jp << std::endl;
+	int counter = 0;
+	std::cout << "loop" << std::endl;
 	do{
 		std::pair< size_t, size_t>
 			prev = m_Matrix(ip,jp).GetIndicesOfPreviousElement();
-		if( ip - prev.first == 1 && jp - prev.second == 1){
+		std::cout << "prev: " << prev.first << " " << prev.second << std::endl;
+		if( ip - prev.first == 1 && jp - prev.second == 1){                            ///  **********************************
+			std::cout << "add" << std::endl;
 			pos1.push_back( m_First[prev.first]);
 			pos2.push_back( m_Second[prev.second]);
+		}
+		else{
+			if( counter++ > 1){
+				break;}           	             ///  kills backward moving once 2 gaps are introduced  ??
 		}
 		ip = prev.first;
 		jp = prev.second;
 	} while( ip > 0 && jp > 0);
 
-	Superimpose( pos1, pos2);
-	double rmsd = RMSD( pos1, pos2);
-	m_RMSD(i,j) = rmsd;
-	return m_RMSD(i-1,j-1) - rmsd;
 
+	if( pos1.size() != pos2.size() || pos1.size() < 3)
+	{
+		std::cout << "WARNING: size issue in " << __FUNCTION__ << " " << pos1.size() << " " << pos2.size() << std::endl;
+		m_RMSD(i,j) = default_rmsd;
+		return default_return;
+	}
+	Rotation rot = Superimpose( pos1, pos2);
+	pos1 = rot.Position( pos1);
+	double rmsd = RMSD( pos1, pos2);
+	std::cout << __FUNCTION__ << " len: " << pos1.size() << " rmsd: " << rmsd << " ids: " << i << " " << j << std::endl;
+	m_RMSD(i,j) = rmsd;                    // store actual RMSD in matrix
+	std::cout << "assigned, max: " << m_RMSD.GetNumberOfRows() << " " << m_RMSD.GetNumberOfColumns() << std::endl;
+//		return m_RMSD(i-1,j-1) - rmsd;         // return diff with prev element as score  **********************************
+	return base * exp(-0.69315 * rmsd);         // lambda = ln2 / r1/2, ln2 = 0.69315, r1/2 = 1   **********************************
 }
 
 
@@ -190,6 +229,7 @@ ReadPDB( const std::string &NAME , std::vector< Eigen::Vector3d> &POS, Sequence 
 	char
 		prev_chain = '%', chain;
 
+	int count = 1;
 	while( std::getline( read, line))
 	{
 		if( line.substr( 0, 4) == "ATOM" && Erase( line.substr( 12, 4 ), " ") == "CA")
@@ -198,7 +238,7 @@ ReadPDB( const std::string &NAME , std::vector< Eigen::Vector3d> &POS, Sequence 
 			id = std::stoi( line.substr(22,4));
 			if( id != prev_id || prev_chain != chain)
 			{
-				SEQ.push_back( GeneralizedAminoAcid( SaveGet( line.substr( 17,3), aa ) ));
+				SEQ.push_back( GeneralizedAminoAcid( SaveGet( line.substr( 17,3), aa ), 0, count++ ));
 				POS.push_back( Eigen::Vector3d( std::stod( line.substr(30,8)), std::stod( line.substr( 38, 8)), std::stod( line.substr( 46, 8))));
 				prev_chain = chain;
 				prev_id = id;
@@ -213,7 +253,7 @@ ReadPDB( const std::string &NAME , std::vector< Eigen::Vector3d> &POS, Sequence 
 
 
 void
-WritePDB( const std::string &NAME , const std::vector< Eigen::Vector3d> &POS, const Rotation &ROT, const std::string &OUT )
+WriteRotatedPDB( const std::string &NAME /*, const std::vector< Eigen::Vector3d> &POS*/, const Rotation &ROT, const std::string &OUT )
 {
 	std::cout << __FUNCTION__ << std::endl;
 	std::ifstream in( NAME);
@@ -223,8 +263,6 @@ WritePDB( const std::string &NAME , const std::vector< Eigen::Vector3d> &POS, co
 	if( !out){ std::cerr << "ERROR: file not found: " << OUT << std::endl; exit(1);}
 	std::string
 		line;
-	std::vector< Eigen::Vector3d>::const_iterator
-		itr = POS.begin();
 
 	int
 		prev_id = -999999, id;
@@ -240,15 +278,9 @@ WritePDB( const std::string &NAME , const std::vector< Eigen::Vector3d> &POS, co
 		if( line.substr( 0, 4) == "ATOM" || line.substr(0,6) == "HETATM")
 		{
 				pos = Eigen::Vector3d( std::stod( line.substr(30,8)), std::stod( line.substr( 38, 8)), std::stod( line.substr( 46, 8)));
-//				std::cout << pos.transpose() << std::endl;
-				pos -= ROT.center1;
-//				std::cout << pos.transpose() << std::endl;
-				pos = ROT.rotation * pos;                //	mol2.row(i) = (rot * mol2.row(i).transpose()).transpose();
-
-//				std::cout << pos.transpose() << std::endl;
-				pos += ROT.center2;
-				if( count++ < 3){
-					std::cout << pos.transpose() << std::endl;}
+				pos = ROT.Position( pos);
+//				if( count++ < 3){
+//					std::cout << pos.transpose() << std::endl;}
 				out << line.substr(0, 30);
 				out << boost::format("%1$8.3f%2$8.3f%3$8.3f") % pos[0] % pos[1] % pos[2];
 				out << line.substr( 54, line.size() - 54 ) << std::endl;
@@ -318,7 +350,7 @@ void SwapRows( Eigen::Matrix3d &M, int R1, int R2)
 
 Rotation
 Superimpose(  std::vector< Eigen::Vector3d> &A,  std::vector< Eigen::Vector3d> &B)
-{  // replace with SVD implementation???
+{
 	std::cout << __FUNCTION__ << std::endl;
 
 	Eigen::Vector3d
@@ -331,10 +363,10 @@ Superimpose(  std::vector< Eigen::Vector3d> &A,  std::vector< Eigen::Vector3d> &
 //		mol1 = m1.transpose(),
 //		mol2 = m2.transpose();
 	Eigen::MatrixXd
-		mol1 = Eigen::Map<Eigen::MatrixXd>(A[0].data(), 10, 3),
-		mol2 = Eigen::Map<Eigen::MatrixXd>(B[0].data(), 10, 3);
+		mol1 = Eigen::Map<Eigen::MatrixXd>(A[0].data(), A.size(), 3),
+		mol2 = Eigen::Map<Eigen::MatrixXd>(B[0].data(), B.size(), 3);
 
-	for( int i = 0; i < 10; ++i)
+	for( int i = 0; i < A.size(); ++i)
 	{
 		mol1.row(i) = A[i];
 		mol2.row(i) = B[i];
@@ -433,6 +465,7 @@ Superimpose(  std::vector< Eigen::Vector3d> &A,  std::vector< Eigen::Vector3d> &
 double
 RMSD( const std::vector< Eigen::Vector3d> &A, const std::vector< Eigen::Vector3d> &B)
 {
+	std::cout << __FUNCTION__ << std::endl;
     // check size of vectors
     if( A.size() != B.size())
     {
@@ -451,6 +484,7 @@ RMSD( const std::vector< Eigen::Vector3d> &A, const std::vector< Eigen::Vector3d
 
 void BuildStructureAlignmentMatrix( const AlignmentVariables &VARS, Matrix< DynamicProgrammingMatrixElement> &MATRIX)
 {
+	std::cout << __FUNCTION__ << std::endl;
 	// read pdbs
 	// - sequence from ATOM section
 	// - pos into scorefct? (GAA, DPME)
@@ -464,10 +498,14 @@ void BuildStructureAlignmentMatrix( const AlignmentVariables &VARS, Matrix< Dyna
 		second_seq;
 	ReadPDB( VARS.first_pdb_file, first_pos, first_seq);
 	ReadPDB( VARS.second_pdb_file, second_pos, second_seq);
+	std::cout << "first 0: " << first_pos[0].transpose() << std::endl;
+	std::cout << "second 0: " << second_pos[0].transpose() << std::endl;
+	std::cout << "lengths: " << first_pos.size() << " " << first_seq.size() << " , " << second_pos.size() << " " << second_seq.size() << std::endl;
 
+	std::cout << "score" << std::endl;
 	ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >
 		score( new Align3DScore( MATRIX, first_pos, second_pos));
-
+	std::cout << "needle" << std::endl;
 	NeedlemanWunsch ali(
 			VARS.gap_opening_penalty,
 			VARS.gap_extension_penalty,
@@ -478,11 +516,39 @@ void BuildStructureAlignmentMatrix( const AlignmentVariables &VARS, Matrix< Dyna
 			score,
 			MATRIX);
 
-
+	std::cout << "calc matrix" << std::endl;
 	ali.CalculateMatrix();
-
+	std::cout << "trace back" << std::endl;
 	std::pair< double, std::vector< std::pair< int, int> > >
 		alignment = ali.TraceBack();
+
+	std::cout << "dyn prog matrix:" << std::endl;
+	MATRIX.Write( std::cout );
+	std::cout << std::endl;
+
+
+	std::cout << "final score: " << alignment.first << std::endl;
+
+	/// TODO MOVE THIS INTO BACK OF PROGRAMM TO INCLUDE SEQ ALIG !!!!  ****************************************************
+	std::cout << "alignment:" << std::endl;
+	std::vector< Eigen::Vector3d>
+		mol1, mol2;
+	for( std::vector< std::pair< int, int> >::const_iterator itr = alignment.second.begin(); itr != alignment.second.end(); ++itr)
+	{
+		std::cout << itr->first << " :: " << itr->second << std::endl;
+		if( itr->first < first_pos.size() && itr->second < second_pos.size())
+		{
+			mol1.push_back( first_pos[itr->first]);
+			mol2.push_back( second_pos[itr->second]);
+		}
+	}
+	Rotation rot = Superimpose( mol1, mol2);
+	WriteRotatedPDB( VARS.first_pdb_file, rot,  "aligned.pdb");
+	mol1 = rot.Position( mol1);
+	std::cout << "rmsd: " << RMSD( mol1, mol2) << std::endl;
+	WriteAlignedSequencesInClustalwFormat( alignment, first_seq, second_seq, ">first", ">second", "aligned3D.fa", 60, VARS.gap_extension_penalty, VARS.anchors);
+
+	///// **************************************88888
 
 	// score function:
 	// - store: std::vector<Eigen::Vector3d> first, second

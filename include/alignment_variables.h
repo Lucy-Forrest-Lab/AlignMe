@@ -30,6 +30,9 @@
 #include "function.t.h"
 #include <set>
 
+#include "matrix.t.h"
+#include "dynamic_programing_matrix_element.h"
+
 struct AlignNut
 {
 	std::vector< std::pair< int, int> >    m_Alignment;

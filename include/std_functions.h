@@ -207,6 +207,7 @@ std::istream& operator >> ( std::istream &STREAM, std::vector< double> &VEC)
   return STREAM;
 }
 
+template<>
 inline
 std::ostream& operator << ( std::ostream &STREAM, const std::vector< double> &VEC)
 {
@@ -237,6 +238,7 @@ std::istream& operator >> ( std::istream &STREAM, std::vector< size_t> &VEC)
   return STREAM;
 }
 
+template<>
 inline
 std::ostream& operator << ( std::ostream &STREAM, const std::vector< size_t> &VEC)
 {

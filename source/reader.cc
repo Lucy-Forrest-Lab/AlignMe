@@ -2032,6 +2032,7 @@ std::string ReadSequence( Sequence &SEQUENCE, const std::string &FASTA_FILE, std
 
   fasta_header = line.substr( 1, line.size() - 1);
   SEQUENCE.SetFastaHeader( fasta_header);
+  int count = 1;
 
   while( read)
   {
@@ -2056,7 +2057,7 @@ std::string ReadSequence( Sequence &SEQUENCE, const std::string &FASTA_FILE, std
 		  {
 			  if( *itr != ' ')
 			  {
-				  SEQUENCE.push_back( GeneralizedAminoAcid( *itr));
+				  SEQUENCE.push_back( GeneralizedAminoAcid( *itr, 0, count++));
 
 					// DEFINED_AMINO_ACIDS is a list in which all amino_acids that appear in the two sequences will be stored
 					// therefore a check takes place if the actual amino acid is already in the list or not

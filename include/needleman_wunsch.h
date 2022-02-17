@@ -49,7 +49,7 @@ private:
 	Sequence                                        m_FirstSequence;
 	Sequence                                        m_SecondSequence;
 	ShPtr< Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> >   m_Score;
-	Matrix< DynamicProgrammingMatrixElement> m_Matrix;
+	Matrix< DynamicProgrammingMatrixElement> &m_Matrix;
 
 public:
 

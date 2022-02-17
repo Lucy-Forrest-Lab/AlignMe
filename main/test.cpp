@@ -34,7 +34,8 @@ int main( int argc, char * argv[])
 	std::cout << pos2[1].transpose() << std::endl;
 	std::cout << pos2[2].transpose() << std::endl << std::endl;
 
-	WritePDB( argv[1], pos1, rot, argv[3]);
+	pos1 = rot.Position(pos1);
+	WriteRotatedPDB( argv[1], /*pos1,*/ rot, argv[3]);
 //	std::cout << "main rot: " << rot.rotation << std::endl;
 
 	std::vector< Eigen::Vector3d> pos;

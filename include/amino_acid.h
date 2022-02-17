@@ -56,18 +56,22 @@ public:
 #ifdef POSITION_SPECIFIC_SIMILARITY
 	,m_PSSM()
 #endif
-	{}
+	{
+		std::cout << "why me?" << std::endl;
+	}
 
 
 	// If a certain TYPE is given, than it will be added to the m_Type of the GAA (f.e. type AminoAcid A, G, I and so on)
-	GeneralizedAminoAcid( const char &TYPE, const size_t &SIZE = 0)
+	GeneralizedAminoAcid( const char &TYPE, const size_t &SIZE = 0, const size_t &ID = 0)
 	: m_Type( TYPE),
 	m_Profiles( SIZE, 0.0),
-	m_SeqID()
+	m_SeqID(ID)
 #ifdef POSITION_SPECIFIC_SIMILARITY
 	,m_PSSM()
 #endif
-	{}
+	{
+//		std::cout << __FUNCTION__ << " " << ID << std::endl;
+	}
 
 	GeneralizedAminoAcid( const GeneralizedAminoAcid &GAA)
 	: m_Type( GAA.m_Type),

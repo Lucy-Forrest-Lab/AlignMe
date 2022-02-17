@@ -31,10 +31,10 @@
 #include "../include/needleman_wunsch.h"
 #include <limits>
 
-// default constructor
-NeedlemanWunsch::NeedlemanWunsch()
-  : m_Matrix( 0, 0)
-{}
+//// default constructor
+//NeedlemanWunsch::NeedlemanWunsch()
+////  : m_Matrix(0,0)  // TODO CHECK THIS
+//{}
 
 
 // construct from data
@@ -70,6 +70,7 @@ NeedlemanWunsch::NeedlemanWunsch
 
 void NeedlemanWunsch::CalculateMatrix()
 {
+	std::cout << __FUNCTION__ << " " << m_Matrix.GetNumberOfRows() << " " << m_Matrix.GetNumberOfColumns() << std::endl;
   
 	// first element
 	m_Matrix( 0, 0) = DynamicProgrammingMatrixElement( 0.0, std::numeric_limits< size_t>::max(), std::numeric_limits< size_t>::max());

@@ -34,10 +34,10 @@ struct Rotation
 	Rotation( const Eigen::Vector3d &C1, const Eigen::Matrix3d &ROT, const Eigen::Vector3d &C2);
 
 	Eigen::Vector3d
-	Position( const Eigen::Vector3d &POS);
+	Position( const Eigen::Vector3d &POS) const;
 
 	std::vector< Eigen::Vector3d >
-	Position( const std::vector< Eigen::Vector3d >  &POS);
+	Position( const std::vector< Eigen::Vector3d >  &POS) const;
 
 	// Eigen::MatrixXd ??
 };
@@ -69,7 +69,7 @@ void
 ReadPDB( const std::string &NAME , std::vector< Eigen::Vector3d> &POS, Sequence &SEQ );
 
 void
-WritePDB( const std::string &NAME , const std::vector< Eigen::Vector3d> &POS, const Rotation &ROT, const std::string &OUT );
+WriteRotatedPDB( const std::string &NAME , /*const std::vector< Eigen::Vector3d> &POS,*/ const Rotation &ROT, const std::string &OUT );
 
 Rotation
 Superimpose( std::vector< Eigen::Vector3d> &A,  std::vector< Eigen::Vector3d> &B);

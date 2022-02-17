@@ -30,6 +30,8 @@
 #define MATRIX_H
 
 #include <cstddef>
+#include <iostream>
+#include <ostream>
 
 template< typename T>
 class Matrix

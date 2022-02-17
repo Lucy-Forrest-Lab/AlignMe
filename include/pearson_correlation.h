@@ -30,6 +30,8 @@
 #define PEARSON_CORRELATION_H_
 
 #include <cmath>
+#include <cassert>
+#include <vector>
 
 class PearsonCorrelation
 {
