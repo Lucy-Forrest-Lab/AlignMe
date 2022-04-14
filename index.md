@@ -3,8 +3,8 @@
 Please follow the links to learn more about how to use AlignMe:
 - [Introduction to AlignMe](Intro.md)
 - [Installation](Install.md)
-- [Running AlignMe Locally](Running_locally.md)
-- [Running AlignMe on the Server](Running_server.md)
+- [Running AlignMe on your local machine](Running_locally.md)
+- [Running AlignMe on the web server](Running_server.md)
 - [Release Notes](Release_Notes.md)
 
 ---
