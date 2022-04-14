@@ -18,21 +18,11 @@ Jump to section on:
 
 ### Getting started 
 
-To run AlignMe on the command line in a terminal use:  
+To access the AlignMe Web Server go to: 
 
-`alignme`
+https://www.bioinfo.mpg.de/AlignMe/
 
-To get an overview of available options, see [overview](Flag_overview.md), or call:  
 
-`./alignme -help`
-
-The program reads a variety of flags that are explained in
-this manual, and that can be provided in any order. Flgas start with the
- '-' symbol and expect a filename or a value to follow. There are
-[required flags](#Required-inputs) that have no default values defined and that will cause
-error messages when missing. The [optional flags](#Optional-flags) have default values, and
-these are printed as warnings when the flag is not given. (Look at the
-[examples section](#Examples.md) for more information about warnings.)
 
 ---
 
