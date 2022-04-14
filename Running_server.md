@@ -1,8 +1,8 @@
-# Running AlignMe
+# Running AlignMe on the Web Server
 
 Jump to section on:
 - [Getting started](#getting-started)
-- [Required inputs](#required-inputs)
+- [Pairwise Sequence Alignment](#pairwise-sequence-alignment)
    - [Sequence inputs](#sequence-inputs)
    - [Similarity score file](#similarity-score-file)
 - [Optional flags](#optional-flags)  
@@ -38,7 +38,7 @@ these are printed as warnings when the flag is not given. (Look at the
 
 ---
 
-### Required inputs
+### Pairwise Sequence Alignment
 
 There are three required inputs for every AlignMe calculation:
 1) the first [sequence or profile](#sequence-or-profile-inputs)
