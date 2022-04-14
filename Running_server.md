@@ -5,7 +5,7 @@ Jump to section on:
 - [Pairwise Sequence Alignment](#pairwise-sequence-alignment)
    - [Sequence inputs](#sequence-inputs)
    - [Similarity score file](#similarity-score-file)
-- [Optional flags](#optional-flags)  
+- [Align Multiple Sequence Alignments](#align-multiple-sequence-alignments)  
    - [Setting anchors](#anchors)
    - [Defining gap penalties](#gap-penalties)  
    - [Alignment algorithm](#alignment-algorithm)  
@@ -80,7 +80,7 @@ More details about similarity score files can be found in the [examples](#Exampl
 
 ---
 
-### Optional flags
+### Align Multiple Sequence Alignments
 
 #### Anchors
 Adding a list of positions that will be fixed can be carried out using this flag:
