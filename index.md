@@ -3,13 +3,14 @@
 Please follow the links to learn more about how to use AlignMe:
 - [Introduction to AlignMe](Intro.md)
 - [Installation](Install.md)
-- [Running AlignMe](Running.md)
+- [Running AlignMe Locally](Running_locally.md)
+- [Running AlignMe on the Server](Running_server.md)
 - [Release Notes](Release_Notes.md)
 
 ---
 
 #### Web Server
-A webserver for running the AlignMe code, including transmembrane and secondary structure predictions, is available at: 
+The webserver for running the AlignMe code, including transmembrane and secondary structure predictions, is available at: 
 <http://www.bioinfo.mpg.de/AlignMe>
 
 ---
