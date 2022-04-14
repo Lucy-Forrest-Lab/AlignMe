@@ -1,4 +1,4 @@
-# Running AlignMe
+# Running AlignMe on a Local Download
 
 Jump to section on:
 - [Getting started](#getting-started)
