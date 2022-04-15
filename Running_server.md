@@ -7,9 +7,8 @@ Jump to section on:
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
 - [Align Multiple Sequence Alignments](#align-multiple-sequence-alignments)   
-   - Alignment Parameters
-- Examples 
-   - Pairwise
+- [Examples](#examples) 
+   - [Pairwise](#pairwise)
    - Batch
    - MSA
    
@@ -79,3 +78,27 @@ This would align residue 18 in the first sequence with residue 48 in the seventh
 
 ### Align Multiple Sequence Alignments
 
+### Examples
+Below are some example inputs and outputs for runs on the AlignMe Web Server. 
+
+#### Pairwise
+
+For example, if we align two sequences pairwise in Fast Mode we these could be our inputs:
+
+Two sequences, in FASTA format:
+
+```
+>mELN
+MGQMVPPRSIQNEDFWKNPWDVGGLTVIGLFTSTFLLFVLFAVVFGYVEKAVFEEE
+
+>dsCLB
+MNEAKSLFTTFLILAFLLFLLYAFYEAAF
+```
+
+The anchor input:
+```
+29	7	1000
+32	10	1000
+36	14	1000
+40	18	1000
+```
