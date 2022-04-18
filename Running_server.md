@@ -67,22 +67,21 @@ If the user chooses to upload a file containing the anchor positions, each ancho
 e.g.: 
 `25  36 1000`
 
-The above example would align residue 25 in the first sequence with residue 36 of the second sequence with a relative strength of 1000. 
+The above example would align residue 25 in the first sequence with residue 36 of the second sequence with a relative strength of 1000. More information about anchors can be found in the corresponding article ([Staritzbichler et al 2020](PloS One 16(4): e0239881)).
 
-More detail can be found in the section on [Anchors](#Anchors.md).
 
 #### Batch Mode
 
-The AlignMe Web Server also allows the user to run many pairwise alignments at once, this is called Batch Mode. In order to use Batch Mode, instead of pasting individual sequences into each input box, the user can paste all of the sequences to be aligned into the box, or upload a file with multiple FASTA sequences. For the provided sets of sequences, every sequence in the first input will be aligned with every sequence in the second input, up to a maximum of 1000 total alignments per submission. Every alignment will be pairwise and will use the same set of parameters. The result page will provide the alignment and plots (based on which mode is selected) for the first set of sequences that were aligned. The rest of the results can be downloaded via links on the results page. 
+The AlignMe Web Server also allows the user to run many pairwise alignments at once, i.e., in batches. In order to run batches of alignments, instead of pasting individual sequences into each input textbox, the user can paste all of the sequences to be aligned into the textbox, or upload a file with multiple sequences. Sequences should be provied in [fasta format](https://lucy-forrest-lab.github.io/AlignMe/Formats.html#Fasta). When sets of sequences are provided, every sequence in the first input will be aligned with every sequence in the second input, up to a maximum of 1000 total alignments per submission. Every alignment will be pairwise and will use the same set of parameters. The results page will provide the alignment and plots (based on which mode is selected) for the first set of sequences that were aligned. The rest of the results can be downloaded via links provided on the results page. 
 
-Batch mode also allows the input of anchors. To use anchors in Batch Mode, the user must upload a file (cannot use the input boxes on the server) in the following format: 
+Batch mode also allows the input of anchors. To use anchors in Batch Mode, the input boxes cannot be used, and the user must upload a file containing the information about the anchors in the following format: 
 
 `position of sequence in input file: position_in_first_sequence   position of sequence in input file: position_in_second_sequence   strength`
 
 e.g.:
 `1:18 7:48 1000`
 
-This would align residue 18 in the first sequence with residue 48 in the seventh sequence with a relative strength of 1000.
+This example would align residue 18 in the first sequence with residue 48 in the seventh sequence with a relative strength of 1000.
 
 
 ---
