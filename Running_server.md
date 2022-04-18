@@ -10,7 +10,7 @@ Jump to section on:
 - Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
-   - [MSA](#msa)
+   - [Aligning two MSAs to match two family-averaged hydropathy profiles](#msa)
    
 
 
@@ -140,7 +140,7 @@ Sequence identity: 8.93%
 Matched Positions: 51.79%
 ```
 
-where the asterik indicates identical residues and the 'a' indicate an anchored position.
+where the * (asterisk) indicates identical residues and the letter 'a' indicates an anchored position.
 
 
 #### Batch Mode
@@ -165,7 +165,7 @@ MEVSQAASGTDGVRERRGSFEAGRRNQDEAPQSGMNGLPKHSYWLDLWLFILFDLALFVFVYLLP
 >hPLN
 MEKVQYLTRSAIRRASTIEMPQQARQKLQNLFINFCLILICLLLICIIVMLL
 ```
-Each sequence in the first input file will be aligned with each sequence in the second input file. Additionally, if we wanted to include anchors in the batch alignments, the following file can be uploaded (note: batch mode anchors cannot be input in the boxes on the server; it must be a file upload):
+Each sequence in the first input file will be aligned with every sequence in the second input file. Additionally, if we wanted to include anchors in the batch alignments, the following file can be uploaded (note: batch mode anchors cannot be input in the form on the server and must be input via file upload:
 
 ```
 1:49 1:37 1000
@@ -173,7 +173,7 @@ Each sequence in the first input file will be aligned with each sequence in the 
 1:49 3:31 1000
 ```
 
-where the 49th residue of the first sequence in the first input file would be aligned with the 37th residue of the first sequence, 49th residue of the second sequence, and 31st residue of the third sequence in the second input file. 
+where the 49th residue of the first sequence in the first input file would be aligned with the following residues in the second input file: the 37th residue of the first sequence, the 49th residue of the second sequence, and the 31st residue of the third sequence. 
 
 So in this case, out of the 9 alignments produced, 3 of them would contain anchored residues. For example, the first alignment would look like:
 
@@ -192,9 +192,9 @@ Matched Positions: 70.42%
 
 where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence
 
-#### MSA
+#### Aligning two MSAs to match two family-averaged hydropathy profiles
 
-If the use wishes to align two multiple sequence alignments they can use the following input:
+If the user wishes to align two multiple sequence alignments they can use the following input:
 
 First input file:
 ```
@@ -215,5 +215,5 @@ MPEIATISYPESKKNDEANSSHGNGNGVVQLNASQPENAAQNRPEWLELAESSNFLCHVFQCPLVNQLNASQPENAAQNR
 -METTPLNSQKQLSACEDGEDCQENGVLQKVVPTPGDKVESGQISNGYSAVPSPGAGDDTRHSIPATTTTLVAELHQGERETWGKKVDFLLSVIGYAVDLGNVWRFPYICYQNGGGAFLLPYTIMAIFGGIPLFYMELALGQYHRNGCIS--------IWR-KICPIFKGIGYAICIIAFYIASYYNTIMAWALYYLISSFTDQLPWTSCKNSWNTGNCTNYF------SEDNITWTL-HSTSPAEEFYTRHVLQIHRSKGLQD-LGGISW-QLALCIMLIFTVIYFSIWKGVKTSGKVVWVTATFPYIILSVLLVRGATLPG--AWRGVLFYLKPNWQKLLETGVWIDAAAQIFFSLGPGFGVLLAFASYNKFNNNCYQDALVTSVVNCMTSFVSG--FVIFTVLGYMAEMRNE-DVSEVAKDAGPSLLFITYAEAIANMPA-STFFAIIFFLMLITLGLDSTFAGLEGVITAVLDEFPHVWAK--RRERFVLAVVITC--FFGSLVTLTFGGAYVVKLLEEYAT-GPAVLTV-ALIEAVAVSWFYGITQFCRDVKEMLGFSPGWFWRICWVAISPLFLLFIICSFLMSPPQLRLFQ-YNYPYWSIILG--YCIGTSSFICIPTYIAYRLI--ITPGTFKERIIKSITPE----------------------TPTE-IPCGDIRLNAV---------------------
 
 ```
-The result will be a hydropathy plot showing the aligned hydropathy values of the two MSAs and a pairwise sequence alignment of the first sequence of each of the two MSAs.
+The result will be a hydropathy plot showing the aligned hydropathy values averaged over all sequences in each of the two MSAs. In addition, a pairwise sequence alignment will be provided for the first sequence of each of the two MSAs, to allow the hydropathy profile alignment to be interpreted in more detail. 
 
