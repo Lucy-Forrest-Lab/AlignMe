@@ -18,7 +18,7 @@ Jump to section on:
 ### Getting started 
 
 To access the AlignMe Web Server go to: 
-[https://www.bioinfo.mpg.de/AlignMe/](https://www.bioinfo.mpg.de/AlignMe/]
+[https://www.bioinfo.mpg.de/AlignMe/](https://www.bioinfo.mpg.de/AlignMe/)
 
 There are two major versions of AlignMe available for convenience as two separate tabs on the web server:
 1. Pair-wise alignments using [two primary sequences as input](#pairwise-sequence-alignment) 
