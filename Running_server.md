@@ -89,7 +89,9 @@ There are two required inputs for every pairwise AlignMe calculation:
 
 In contrast to the pairwise sequence alignments, the MSA-MSA alignments only have the option to run in the parameter optimized Fast mode which is based on substitution matrix & hydrophobicity scale. In addition to Fast mode, the user can also choose/upload their own substitution matrix, hydrophobicity scale, and gap penalties. 
 
-### Examples
+---
+
+### Examples of running on the AlignMe Web Server
 Below are some example inputs and outputs for runs on the AlignMe Web Server. 
 
 #### Pairwise
