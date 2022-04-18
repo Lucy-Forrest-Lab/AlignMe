@@ -38,7 +38,8 @@ The pair-wise alignments [section of the AlignMe web server](https://www.bioinfo
 There are three required inputs for every pairwise AlignMe calculation:
 1. the first sequence (can be uploaded or pasted into the corresponding textbox) 
 2. the second sequence (can be uploaded or pasted into the corresponding textbox) 
-3. selection of an optimized parameter mode (or user-defined parameters) 
+3. selection of an optimized parameter mode (or user-defined parameters)  
+
 The input sequences should be provided in [fasta format](https://lucy-forrest-lab.github.io/AlignMe/Formats.html#Fasta).
 
 The three above inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
