@@ -18,10 +18,13 @@ Jump to section on:
 ### Getting started 
 
 To access the AlignMe Web Server go to: 
+[https://www.bioinfo.mpg.de/AlignMe/](https://www.bioinfo.mpg.de/AlignMe/]
 
-https://www.bioinfo.mpg.de/AlignMe/
+There are two major versions of AlignMe available for convenience as two separate tabs on the web server:
+1. Pair-wise alignments using [two primary sequences as input](#pairwise-sequence-alignment) 
+2. Pair-wise alignment of [two families of sequences as input](#align-multiple-sequence-alignments). This option is often used for creating hydropathy profile alignments.
 
-All of the result outputs can be visualized on the AlignMe server as well as for download to your computer.
+All of the output results can be visualized on the AlignMe server as well as via download to your computer.
 
 
 ---
@@ -30,8 +33,8 @@ All of the result outputs can be visualized on the AlignMe server as well as for
 
 #### Alignment Inputs and Parameters
 There are three required inputs for every pairwise AlignMe calculation:
-1. the first sequence (can be uploaded or pasted into the specified box) 
-2. the second sequence (can be uploaded or pasted in to the specified box) 
+1. the first sequence (can be uploaded or pasted into the corresponding window) 
+2. the second sequence (can be uploaded or pasted into the corresponding window) 
 3. selection of an optimized parameter mode (or user-defined parameters) 
 
 These inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
