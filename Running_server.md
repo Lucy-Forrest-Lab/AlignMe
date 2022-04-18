@@ -83,7 +83,7 @@ e.g.:
 
 This example would align residue 18 in the first sequence with residue 48 in the seventh sequence with a relative strength of 1000.
 
-It is important to note that when running Batch Mode on the AlignMe Web Server the user must use the tools available on the Web Server when defining the parameters, so the hydrophobicity scale, PSSM, secondary structure prediction, or the transmembrane prediction must be generated during the AlignMe run and cannot be uploaded by the user.
+It is important to note that when running Batch Mode on the AlignMe Web Server the user must use the tools available on the Web Server when defining the parameters. Thus, the hydrophobicity scale, PSSM, secondary structure prediction, or the transmembrane prediction must be generated during the AlignMe run and cannot be uploaded by the user.
 
 
 ---
