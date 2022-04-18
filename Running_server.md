@@ -11,6 +11,7 @@ Jump to section on:
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
    - [Aligning two MSAs to match two family-averaged hydropathy profiles](#msa)
+- [MutationExplorer](#mutationexplorer)
    
 
 
@@ -217,3 +218,13 @@ MPEIATISYPESKKNDEANSSHGNGNGVVQLNASQPENAAQNRPEWLELAESSNFLCHVFQCPLVNQLNASQPENAAQNR
 ```
 The result will be a hydropathy plot showing the aligned hydropathy values averaged over all sequences in each of the two MSAs. In addition, a pairwise sequence alignment will be provided for the first sequence of each of the two MSAs, to allow the hydropathy profile alignment to be interpreted in more detail. 
 
+---
+
+### MutationExplorer
+
+
+### Mutation Explorer
+
+The AlignMe Web Server also contains an add-on to MutationExplorer which is hosted on http://proteinformatics.org/. This additon allows for the user to upload a PDB structure that corresponds to at least one of the sequences in the AlignMe alignment and then the user can visualize the structural context of differences in the sequence alignment. 
+
+MutationExplorer can be accessed on the AlignMe results page which will then redirect the user into a web-based “NGL” molecular viewer on the MutationExplorer site. 
