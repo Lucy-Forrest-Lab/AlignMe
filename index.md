@@ -3,7 +3,7 @@
 Please follow the links to learn more about how to use AlignMe:
 - [Introduction to AlignMe](Intro.md)
 - [Running AlignMe on the web server](Running_server.md)
-- [Installing AlignMe on your local machine](Install.md)
+- [Installing AlignMe](Install.md)
 - [Running AlignMe on your local machine](Running_locally.md)
 - [Release Notes](Release_Notes.md)
 
