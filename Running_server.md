@@ -6,7 +6,7 @@ Jump to section on:
    - [Alignment Inputs and Parameters](#alignment-inputs-and-parameters)
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
-- [Align Multiple Sequence Alignments](#align-multiple-sequence-alignments)   
+- [Align Multiple Sequence Alignments (Hydropathy Profile Alignments)](#align-multiple-sequence-alignments)   
 - Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
@@ -17,9 +17,7 @@ Jump to section on:
 
 ### Getting started 
 
-To access the AlignMe Web Server go to:  
-
-[https://www.bioinfo.mpg.de/AlignMe/](https://www.bioinfo.mpg.de/AlignMe/)
+To access the AlignMe Web Server go to: [https://www.bioinfo.mpg.de/AlignMe/](https://www.bioinfo.mpg.de/AlignMe/)
 
 There are two major versions of AlignMe available for convenience via the two tabs on the web server. The two versions, described in full in separate sections below, are:
 
