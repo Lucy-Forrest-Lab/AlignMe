@@ -11,7 +11,7 @@ Jump to section on:
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
    - [Aligning two MSAs to match two family-averaged hydropathy profiles](#msa)
-- [MutationExplorer](#mutationexplorer)
+- [Visualizing alignments in structure space](#visualizing-alignments-in-structure-space)
    
 
 
@@ -220,10 +220,7 @@ The result will be a hydropathy plot showing the aligned hydropathy values avera
 
 ---
 
-### MutationExplorer
-
-
-### Mutation Explorer
+### Visualizing alignments in structure space
 
 The AlignMe Web Server also contains an add-on to MutationExplorer which is hosted on http://proteinformatics.org/. This additon allows for the user to upload a PDB structure that corresponds to at least one of the sequences in the AlignMe alignment and then the user can visualize the structural context of differences in the sequence alignment. 
 
