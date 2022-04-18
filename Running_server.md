@@ -216,7 +216,12 @@ MPEIATISYPESKKNDEANSSHGNGNGVVQLNASQPENAAQNRPEWLELAESSNFLCHVFQCPLVNQLNASQPENAAQNR
 -METTPLNSQKQLSACEDGEDCQENGVLQKVVPTPGDKVESGQISNGYSAVPSPGAGDDTRHSIPATTTTLVAELHQGERETWGKKVDFLLSVIGYAVDLGNVWRFPYICYQNGGGAFLLPYTIMAIFGGIPLFYMELALGQYHRNGCIS--------IWR-KICPIFKGIGYAICIIAFYIASYYNTIMAWALYYLISSFTDQLPWTSCKNSWNTGNCTNYF------SEDNITWTL-HSTSPAEEFYTRHVLQIHRSKGLQD-LGGISW-QLALCIMLIFTVIYFSIWKGVKTSGKVVWVTATFPYIILSVLLVRGATLPG--AWRGVLFYLKPNWQKLLETGVWIDAAAQIFFSLGPGFGVLLAFASYNKFNNNCYQDALVTSVVNCMTSFVSG--FVIFTVLGYMAEMRNE-DVSEVAKDAGPSLLFITYAEAIANMPA-STFFAIIFFLMLITLGLDSTFAGLEGVITAVLDEFPHVWAK--RRERFVLAVVITC--FFGSLVTLTFGGAYVVKLLEEYAT-GPAVLTV-ALIEAVAVSWFYGITQFCRDVKEMLGFSPGWFWRICWVAISPLFLLFIICSFLMSPPQLRLFQ-YNYPYWSIILG--YCIGTSSFICIPTYIAYRLI--ITPGTFKERIIKSITPE----------------------TPTE-IPCGDIRLNAV---------------------
 
 ```
-The result will be a hydropathy plot showing the aligned hydropathy values averaged over all sequences in each of the two MSAs. In addition, a pairwise sequence alignment will be provided for the first sequence of each of the two MSAs, to allow the hydropathy profile alignment to be interpreted in more detail. 
+The result will be a hydropathy plot showing the aligned hydropathy values averaged over all sequences in each of the two MSAs: 
+
+<img width="795" alt="msa_msa_hydropathy_profile" src="https://user-images.githubusercontent.com/44010226/163870221-f14dd917-4639-4fbc-9e6e-f44f50858f55.png">
+
+In addition to the hydropathy plot, a pairwise sequence alignment will be provided for the first sequence of each of the two MSAs, to allow the hydropathy profile alignment to be interpreted in more detail. 
+
 
 ---
 
