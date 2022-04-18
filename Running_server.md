@@ -81,7 +81,7 @@ This would align residue 18 in the first sequence with residue 48 in the seventh
 
 The AlignMe Web Server allows the user to align two hydropathy profiles based on multiple sequence alignments (MSAs). This functionality then allows for the estimatmation of the structural similarity between two protein families rather than to align two multiple sequence alignments. 
 
-There are two required inputs for every pairwise AlignMe calculation:
+There are three required inputs for every MSA-MSA AlignMe calculation:
 
    1. the first multiple sequence alignment (can be uploaded or pasted into the specified box)
    2. the second second multiple sequence alignment (can be uploaded or pasted in to the specified box)
