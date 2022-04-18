@@ -19,7 +19,7 @@ The webserver for running the AlignMe code, including transmembrane and secondar
 If you use AlignMe for your research and study, please cite the following references:  
 
 ##### For anchors:
-Staritzbichler, R, Sarti E, Yaklich, E, Aleksandrova, AA, Stamm, M, Khafizov, K, and LR Forrest
+Staritzbichler, R, Sarti E, Yaklich, E, Aleksandrova, AA, Stamm, M, Khafizov, K, and LR Forrest **2021**
 [*PloS One* 16(4): e0239881](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0239881)
 
 ##### For pairwise alignments:  
