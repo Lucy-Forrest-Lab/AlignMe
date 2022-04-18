@@ -31,7 +31,7 @@ There are two major versions of AlignMe available for convenience via the two ta
 
 ### Pairwise Sequence Alignment
 
-The pair-wise alignments section of the AlignMe web server provides the most common type of alignment, in which two primary sequences are provided and aligned using one of a range of different descriptors, depending on the problem at hand. 
+The pair-wise alignments [section of the AlignMe web server](https://www.bioinfo.mpg.de/AlignMe/AlignMePW.html) provides the most common type of alignment, in which two primary sequences are provided and aligned using one of a range of different descriptors, depending on the problem at hand. 
 
 
 #### Alignment Inputs and Parameters
@@ -86,7 +86,7 @@ This would align residue 18 in the first sequence with residue 48 in the seventh
 
 ### Align Multiple Sequence Alignments
 
-The AlignMe Web Server allows the user to align two hydropathy profiles based on multiple sequence alignments (MSAs). This functionality then allows for the estimatmation of the structural similarity between two protein families rather than to align two multiple sequence alignments. 
+The second tab on the AlignMe Web Server allows the user to [align two hydropathy profiles based on multiple sequence alignments (MSAs)](https://www.bioinfo.mpg.de/AlignMe/AlignMe_MSA.html). This functionality then allows for the estimatmation of the structural similarity between two protein families rather than to align two multiple sequence alignments. 
 
 There are three required inputs for every MSA-MSA AlignMe calculation:
 
