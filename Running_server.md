@@ -6,12 +6,13 @@ Jump to section on:
    - [Alignment Inputs and Parameters](#alignment-inputs-and-parameters)
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
+- [Visualizing alignments in structure space](#visualizing-alignments-in-structure-space)
 - [Align Multiple Sequence Alignments (Hydropathy Profile Alignments)](#align-multiple-sequence-alignments)   
 - Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
-   - [Aligning two MSAs to match two family-averaged hydropathy profiles](#msa)
-- [Visualizing alignments in structure space](#visualizing-alignments-in-structure-space)
+   - [Aligning two MSAs to match two family-averaged hydropathy profiles](#aligning-two-msas-to-match-two-family-averaged-hydropathy-profiles)
+
    
 
 
@@ -193,6 +194,31 @@ Matched Positions: 70.42%
 
 where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence
 
+---
+
+
+### Visualizing alignments in structure space
+
+Sequence alignments are very insightful for understanding how positions in two sequences are related, but sequence alignments only provide 2D information about these positions - this is where structural protein data becomes important as it allows for the 3D visualization residue positions. In order to understand the AlignMe pairwise sequence alignments in a structural context, the add-on MutationExplorer can be utilized. MutationExplorer allows the user to visualize the AlignMe calculation result mapped onto the PDB structure of one or more of the sequences being compared. 
+
+The requirements for using MutationExplorer:
+
+   1. At least one PDB structure from the sequences being aligned (use the coordinate file)
+   2. The PDB sequence in the coordinate file must be identical to the aligned sequence
+
+If one structure is provided, the pairwise sequence alignment will be mapped onto the provided structure with a color scheme corresponding to the alignment. For example:
+
+- red: conserved residue
+- yellow: similar residue (within one of the five amino acid groups)
+- light blue: dissimilar residue
+- dark blue: not aligned due to a gap or in a different chain 
+
+If two structures are provided, the two structures will be superimposed according the the pairwise sequence alignment.
+
+MutationExplorer can be accessed on the AlignMe results page which will then redirect the user into a web-based “NGL” molecular viewer on the MutationExplorer site hosted at http://proteinformatics.org/. 
+
+---
+
 #### Aligning two MSAs to match two family-averaged hydropathy profiles
 
 If the user wishes to align two multiple sequence alignments they can use the following input:
@@ -222,25 +248,6 @@ The result will be a hydropathy plot showing the aligned hydropathy values avera
 
 In addition to the hydropathy plot, a pairwise sequence alignment will be provided for the first sequence of each of the two MSAs, to allow the hydropathy profile alignment to be interpreted in more detail. 
 
-
 ---
 
-### Visualizing alignments in structure space
-
-Sequence alignments are very insightful for understanding how positions in two sequences are related, but sequence alignments only provide 2D information about these positions - this is where structural protein data becomes important as it allows for the 3D visualization residue positions. In order to understand the AlignMe pairwise sequence alignments in a structural context, the add-on MutationExplorer can be utilized. MutationExplorer allows the user to visualize the AlignMe calculation result mapped onto the PDB structure of one or more of the sequences being compared. 
-
-The requirements for using MutationExplorer:
-
-   1. At least one PDB structure from the sequences being aligned (use the coordinate file)
-   2. The PDB sequence in the coordinate file must be identical to the aligned sequence
-
-If one structure is provided, the pairwise sequence alignment will be mapped onto the provided structure with a color scheme corresponding to the alignment. For example:
-
-- red: conserved residue
-- yellow: similar residue (within one of the five amino acid groups)
-- light blue: dissimilar residue
-- dark blue: not aligned due to a gap or in a different chain 
-
-If two structures are provided, the two structures will be superimposed according the the pairwise sequence alignment.
-
-MutationExplorer can be accessed on the AlignMe results page which will then redirect the user into a web-based “NGL” molecular viewer on the MutationExplorer site hosted at http://proteinformatics.org/. 
+[Return to home page](index.md)
