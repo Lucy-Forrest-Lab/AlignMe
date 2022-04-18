@@ -7,7 +7,7 @@ Jump to section on:
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
 - [Align Multiple Sequence Alignments](#align-multiple-sequence-alignments)   
-- Examples
+- Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
    - [MSA](#msa)
