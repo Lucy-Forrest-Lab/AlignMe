@@ -222,6 +222,20 @@ The result will be a hydropathy plot showing the aligned hydropathy values avera
 
 ### Visualizing alignments in structure space
 
-The AlignMe Web Server also contains an add-on to MutationExplorer which is hosted on http://proteinformatics.org/. This additon allows for the user to upload a PDB structure that corresponds to at least one of the sequences in the AlignMe alignment and then the user can visualize the structural context of differences in the sequence alignment. 
+Sequence alignments are very insightful for understanding how positions in two sequences are related, but sequence alignments only provide 2D information about these positions - this is where structural protein data becomes important as it allows for the 3D visualization residue positions. In order to understand the AlignMe pairwise sequence alignments in a structural context, the add-on MutationExplorer can be utilized. MutationExplorer allows the user to visualize the AlignMe calculation result mapped onto the PDB structure of one or more of the sequences being compared. 
 
-MutationExplorer can be accessed on the AlignMe results page which will then redirect the user into a web-based “NGL” molecular viewer on the MutationExplorer site. 
+The requirements for using MutationExplorer:
+
+   1. At least one PDB structure from the sequences being aligned (use the coordinate file)
+   2. The PDB sequence in the coordinate file must be identical to the aligned sequence
+
+If one structure is provided, the pairwise sequence alignment will be mapped onto the provided structure with a color scheme corresponding to the alignment. For example:
+
+- red: conserved residue
+- yellow: similar residue (within one of the five amino acid groups)
+- light blue: dissimilar residue
+- dark blue: not aligned due to a gap or in a different chain 
+
+If two structures are provided, the two structures will be superimposed according the the pairwise sequence alignment.
+
+MutationExplorer can be accessed on the AlignMe results page which will then redirect the user into a web-based “NGL” molecular viewer on the MutationExplorer site hosted at http://proteinformatics.org/. 
