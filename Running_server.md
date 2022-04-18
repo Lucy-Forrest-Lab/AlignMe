@@ -26,8 +26,6 @@ There are two major versions of AlignMe available for convenience via the two ta
 1. Pair-wise alignments using [two primary sequences as input](#pairwise-sequence-alignment) 
 2. Pair-wise alignment of [two families of sequences as input](#align-multiple-sequence-alignments), used to create hydropathy profile alignments.
 
-All of the output results can be visualized on the AlignMe server as well as via download to your computer.
-
 
 ---
 
