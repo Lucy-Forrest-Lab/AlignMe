@@ -7,7 +7,7 @@ Jump to section on:
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
 - [Align Multiple Sequence Alignments](#align-multiple-sequence-alignments)   
-- [Examples]
+- Examples
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
    - [MSA](#msa)
@@ -79,7 +79,7 @@ This would align residue 18 in the first sequence with residue 48 in the seventh
 
 ### Align Multiple Sequence Alignments
 
-The AlignMe Web Server allows the user to align two hydropathy profiles based on multiple sequence alignments (MSAs). This functionality then allows for the estimatmation of the structural similarity between two protein families rather than to align two multiple sequence alignments. 
+The AlignMe Web Server allows the user to align two hydropathy profiles based on multiple sequence alignments (MSAs). This functionality then allows for the estimatmation of the structural similarity between two protein families rather than to align two multiple sequence alignments. In contrast to the pairwise sequence alignments, the MSA-MSA alignments only have the option to run in the parameter optimized Fast mode which is based on substitution matrix & hydrophobicity scale. In addition to Fast mode, the user can also choose/upload their own substitution matrix, hydrophobicity scale, and gap penalties. 
 
 ### Examples
 Below are some example inputs and outputs for runs on the AlignMe Web Server. 
