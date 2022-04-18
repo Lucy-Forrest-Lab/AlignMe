@@ -41,7 +41,7 @@ There are three required inputs for every pairwise AlignMe calculation:
 The input sequences should be provided in [fasta format](https://lucy-forrest-lab.github.io/AlignMe/Formats.html#Fasta).
 
 The three above inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
-1. Fast: based on a substituion matrix (VTML) and hydrophobicity scale (HWvH)
+1. Fast: based on an amino acid substitution matrix (VTML) and hydrophobicity scale (HWvH)
 2. P Mode: based on a Position Specific Substitution Matrix (PSSM) which is generated during the AlignMe run 
 3. PS Mode: based on a PSSM and secondary structure prediction which are both generated during the AlignMe run
 4. PST Mode: based on a PSSM, secondary structure prediction, and a transmembrane prediction all of which are generated during the AlignMe run.  
