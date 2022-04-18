@@ -2,7 +2,7 @@
 
 Alignments can be optimized by including expert knowledge. Any number of anchors can be defined for positions in pairs of sequences that are known to belong together. 
 
-Each anchor has to be given as a line in the anchor file, following the scheme described in the [Formats section](#formats.md):  
+Each anchor has to be given as a line in the anchor file, following the scheme described in the [Formats section](#Formats.md):  
 `position_in_first_sequence   position_in_second_sequence   strength`
 
 e.g.: 
