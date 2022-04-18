@@ -30,9 +30,9 @@ All of the result outputs can be visualized on the AlignMe server as well as for
 
 #### Alignment Inputs and Parameters
 There are three required inputs for every pairwise AlignMe calculation:
-1) the first sequence (can be uploaded or pasted into the specified box)
-2) the second sequence (can be uploaded or pasted in to the specified box)
-3) selection of an optimized parameter mode (or user-defined parameters)
+1. the first sequence (can be uploaded or pasted into the specified box) 
+2. the second sequence (can be uploaded or pasted in to the specified box) 
+3. selection of an optimized parameter mode (or user-defined parameters) 
 
 These inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
 1. Fast: based on a substituion matrix (VTML) and hydrophobicity scale (HWvH)
