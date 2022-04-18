@@ -31,7 +31,7 @@ There are two major versions of AlignMe available for convenience via the two ta
 
 ### Pairwise Sequence Alignment
 
-The pair-wise alignments [section of the AlignMe web server](https://www.bioinfo.mpg.de/AlignMe/AlignMePW.html) provides the most common type of alignment, in which two primary sequences are provided and aligned using one of a range of different descriptors, depending on the problem at hand. 
+The pair-wise alignments [section of the AlignMe web server](https://www.bioinfo.mpg.de/AlignMe/AlignMePW.html) provides the most common type of alignment, in which two primary sequences are aligned using one of a range of different descriptors, depending on the problem at hand. 
 
 
 #### Alignment Inputs and Parameters
@@ -39,8 +39,9 @@ There are three required inputs for every pairwise AlignMe calculation:
 1. the first sequence (can be uploaded or pasted into the corresponding textbox) 
 2. the second sequence (can be uploaded or pasted into the corresponding textbox) 
 3. selection of an optimized parameter mode (or user-defined parameters) 
+The input sequences should be provided in [fasta format](https://lucy-forrest-lab.github.io/AlignMe/Formats.html#Fasta).
 
-These inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
+The three above inputs can be combined to run AlignMe in a number of different modes. There are four modes with optimized parameters (including gap opening and extension parameters) that the user can choose:
 1. Fast: based on a substituion matrix (VTML) and hydrophobicity scale (HWvH)
 2. P Mode: based on a Position Specific Substitution Matrix (PSSM) which is generated during the AlignMe run 
 3. PS Mode: based on a PSSM and secondary structure prediction which are both generated during the AlignMe run
