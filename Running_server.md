@@ -215,7 +215,7 @@ Sequence identity: 12.68%
 Matched Positions: 70.42%
 ```
 
-where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence
+where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence.
 
 ---
 
