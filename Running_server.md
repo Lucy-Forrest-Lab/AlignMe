@@ -11,8 +11,9 @@ Jump to section on:
 - Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
+   - [Visualize a pairwise alginment in structure space](#visualize-a-pairwise-alignment-in-structure-space)
    - [Aligning two MSAs to match two family-averaged hydropathy profiles](#aligning-two-msas-to-match-two-family-averaged-hydropathy-profiles)
-
+   
    
 
 ### Getting started 
@@ -217,6 +218,8 @@ Matched Positions: 70.42%
 
 where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence.
 
+---
+#### Visualize a pairwise alignment in structure space
 ---
 
 
