@@ -237,7 +237,7 @@ The alignment can then be submitted (using any parameter mode defined in the [pa
 
 ![image](https://user-images.githubusercontent.com/44010226/166109567-aba44797-efd9-4542-995a-3c62ee57bac1.png)
 
-Once the query is submitted, MutationExplorer will be opened with the two structures superposed on one another in accordance to the pairwse alignment and will be shown in an NGL viewer. The user can then continue to explore the structural context of the alignment in more detail.
+Once the query is submitted, MutationExplorer will be opened and the two structures superposed on one another in accordance to the pairwse alignment will be shown in an NGL viewer. The user can then continue to explore the structural context of the alignment in more detail.
 
 
 ![image](https://user-images.githubusercontent.com/44010226/166109652-42760801-6f8f-4da3-92ce-a10b7fdbfb73.png)
