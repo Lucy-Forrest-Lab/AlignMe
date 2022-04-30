@@ -6,12 +6,12 @@ Jump to section on:
    - [Alignment Inputs and Parameters](#alignment-inputs-and-parameters)
    - [Anchors](#anchors)
    - [Batch Mode](#batch-mode)
-- [Visualizing alignments in structure space](#visualizing-alignments-in-structure-space)
+- [Visualize alignments in structure space](#visualize-alignments-in-structure-space)
 - [Align Multiple Sequence Alignments (Hydropathy Profile Alignments)](#align-multiple-sequence-alignments)   
 - Examples of running on the AlignMe Web Server
    - [Pairwise](#pairwise)
    - [Batch](#batch-mode)
-   - [Visualize a pairwise alginment in structure space](#visualize-a-pairwise-alignment-in-structure-space)
+   - [Visualizing a pairwise alignment in structure space](#visualizing-a-pairwise-alignment-in-structure-space)
    - [Aligning two MSAs to match two family-averaged hydropathy profiles](#aligning-two-msas-to-match-two-family-averaged-hydropathy-profiles)
    
    
@@ -85,7 +85,7 @@ This example would align residue 18 in the first sequence with residue 48 in the
 It is important to note that when running Batch Mode on the AlignMe Web Server the user must use the tools available on the Web Server when defining the parameters. Thus, the hydrophobicity scale, PSSM, secondary structure prediction, or the transmembrane prediction must be generated during the AlignMe run and cannot be uploaded by the user.
 
 ---
-### Visualizing alignments in structure space
+### Visualize alignments in structure space
 
 Sequence alignments are very insightful for understanding how positions in two sequences are related, but sequence alignments only provide 2D information about these positions - this is where structural protein data becomes important as it allows for the 3D visualization residue positions. In order to understand the AlignMe pairwise sequence alignments in a structural context, the add-on MutationExplorer can be utilized. MutationExplorer allows the user to visualize the AlignMe calculation result mapped onto the PDB structure of one or more of the sequences being compared. 
 
@@ -219,7 +219,30 @@ Matched Positions: 70.42%
 where we can see, indicated by the 'a', that the 49th residue in the mALN sequence is aligned to the 37th residue in the mELN sequence.
 
 ---
-#### Visualize a pairwise alignment in structure space
+#### Visualizing a pairwise alignment in structure space
+
+The user can visualize the pairwise AlignMe result in the context of structure using MutationExplorer and the following example input can be used:
+
+Use the “Generate example input” option on the main pairwise alignment page which will automatically populate in the sequence input boxes with two sequences: 4GD3_A and 2ZT9_A.
+
+```
+>4GD3_ChainA
+VVSHYVFEAPVRIWHWLTVLCMAVLMVTGYFIGKPLPSVSGEATYLFYMGYIRLIHFSAGMVFTVVLLMRIYWAFVGNRYSRQGVWYEIRWYLFLPIAQAAMFGYFLMSVFMIITGFALYSEHSQYAIFAPFRYVVEFFYWTGGNSMDIHSWHRLGMWLIGAFVIGHVYMALREDIMSD
+
+>2ZT9_ChainA
+MANVYDWFEERLEIQAIAEDVTSKYVPPHVNIFYCLGGITLVCFLIQFATGFAMTFYYKPTVAEAYSSVQYIMNEVNFGWLIRSIHRWSASMMVLMMILHVFRVYLTGGFKKPRELTWVSGVILAVITVSFGVTGYSLPWDQVGYWAVKIVSGVPEAIPVVGVLISDLLRGGSSVGQATLTRYYSAHTFVLPWLIAVFMLFHFLMIRKQGISGPL
+
+```
+The alignment can then be submitted (using any parameter mode defined in the [pairwise sequence alignment](#pairwise-sequence-alignment) section). Once the result page is loaded, t user can then select MutationExplorer and enter the two PDB IDs 4GD3 and 2ZT9 into the respective input boxes and submit the query. See image below for details.
+
+![image](https://user-images.githubusercontent.com/44010226/166109567-aba44797-efd9-4542-995a-3c62ee57bac1.png)
+
+Once the query is submitted, MutationExplorer will be opened with the two structures superposed on one another in accordance to the pairwse alignment and will be shown in an NGL viewer. The user can then continue to explore the structural context of the alignment in more detail.
+
+
+![image](https://user-images.githubusercontent.com/44010226/166109652-42760801-6f8f-4da3-92ce-a10b7fdbfb73.png)
+
+
 ---
 
 
