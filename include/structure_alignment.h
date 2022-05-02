@@ -46,8 +46,8 @@ class Align3DScore
 : public Function< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double>
 {
 private:
-	Matrix< DynamicProgrammingMatrixElement>            &m_Matrix;
-	Matrix<double>                                      m_RMSD;
+	Matrix< DynamicProgrammingMatrixElement>                                &m_Matrix;
+	Matrix<double>                                                           m_RMSD;
 	std::vector<Eigen::Vector3d>                                             m_First;
 	std::vector<Eigen::Vector3d>                                             m_Second;
 public:
