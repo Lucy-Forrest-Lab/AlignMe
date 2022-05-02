@@ -1091,8 +1091,8 @@ void  ReadSimilarityScoreFile
 			  ReadUniversalProfile( FIRST, first_file, column, header_lines);
 			  ReadUniversalProfile( SECOND, second_file, column, header_lines);
 
-			  WRITE_PROFILES_HEADER1.push_back(" based on profile " + first_file + ", extracted column: "+mystr::NumericalValueToString(column)+"\n");
-			  WRITE_PROFILES_HEADER2.push_back(" based on profile " + second_file + ", extracted column: "+mystr::NumericalValueToString(column)+"\n");
+			  WRITE_PROFILES_HEADER1.push_back("profile " + first_file + ",  column: "+mystr::NumericalValueToString(column)+"\n");
+			  WRITE_PROFILES_HEADER2.push_back("profile " + second_file + ", column: "+mystr::NumericalValueToString(column)+"\n");
 
 			  if( type == "UniversalProfileSimilarity")
 			  {
@@ -1308,8 +1308,8 @@ void  ReadSimilarityScoreFile
 			  ReadScale( FIRST, file, sliding_window_type, window_size, DEFINED_AMINO_ACIDS, threshold);
 			  ReadScale( SECOND, file, sliding_window_type, window_size, DEFINED_AMINO_ACIDS, threshold);
 
-			  WRITE_PROFILES_HEADER1.push_back(" based on scale " +  file + " for sequence "+  FIRST_FASTA_ID + " using windowtype " + sliding_window_type + " with size " + mystr::NumericalValueToString(window_size)+"\n");
-			  WRITE_PROFILES_HEADER2.push_back(" based on scale " +  file + " for sequence "+  SECOND_FASTA_ID + " using windowtype "+ sliding_window_type + " with size " + mystr::NumericalValueToString(window_size)+"\n");
+			  WRITE_PROFILES_HEADER1.push_back( file + " scale for "+  FIRST_FASTA_ID + " using a " + mystr::NumericalValueToString(window_size) "-residue "+ sliding_window_type + " window\n");
+			  WRITE_PROFILES_HEADER2.push_back( file + " scale for "+  SECOND_FASTA_ID + " using a " + mystr::NumericalValueToString(window_size) "-residue "+ sliding_window_type + " window\n");
 
 			  if( type == "ScaleSimilarity")
 			  {

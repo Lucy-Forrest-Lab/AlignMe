@@ -584,7 +584,7 @@ void WriteAlignedProfiles
   DebugWrite("Second profiles size " << SECOND[0].GetProfiles().size());
 
   cc = 1;
-  write << "#Column " << cc++ << " is the position within the alignment.\n";
+  write << "#Column  "  << ":  the position within the alignment\n";
 
   SumFunction< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> *
 	  sum = ( SumFunction< std::pair< GeneralizedAminoAcid, GeneralizedAminoAcid>, double> *) SCORES.get();
@@ -621,21 +621,22 @@ void WriteAlignedProfiles
 */
   for (size_t i = 0; i < WRITE_PROFILES_HEADER1.size(); ++i)
   {
-	  write << "#Column " << cc++ << " " << WRITE_PROFILES_HEADER1[i];
+	  write << "#Column " << std::right << std::setw(2) << c++ << ":  " << WRITE_PROFILES_HEADER1[i];
   }
 
   for (size_t i = 0; i < WRITE_PROFILES_HEADER2.size(); ++i)
   {
-	  write << "#Column " << cc++ << " " << WRITE_PROFILES_HEADER2[i];
+	  write << "#Column " << std::right << std::setw(2) << c++ << ":  " << WRITE_PROFILES_HEADER2[i];
   }
-  write << "#Column " << cc++ << " is the residue id within the first sequence.\n";
-  write << "#Column " << cc++ << " is the one letter amino acid type of the first sequence.\n";
-  write << "#Column " << cc++ << " is the residue id within the second sequence.\n";
-  write << "#Column " << cc++ << " is the one letter amino acid type of the second sequence.\n";
-  write << "#Column " << cc++ << " denotes positions with identical amino acids by '*'\n";
-  write << "#Column " << cc++ << " denotes anchors as 'a' for the first sequence  - IF ANY.\n";
-  write << "#Column " << cc++ << " denotes anchors as 'a' for the second sequence - IF ANY.\n";
-  write << "#Please note that gaps are represented by: "<< GAP_VALUE << "\n  " << std::endl;
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  residue id within the first sequence\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  one letter amino acid type of the first sequence\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  residue id within the second sequence\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  one letter amino acid type of the second sequence\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  conserved positions ('*')\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  anchors for the first sequence  ('a')\n";
+  write << "#Column " << std::right << std::setw(2) << c++ << ":  anchors for the second sequence ('a')\n";
+  write << "#Conservation and anchors are shown only if applicable" << std::endl;
+  write << "#Gaps are represented by: "<< GAP_VALUE << "\n  " << std::endl;
 
   cc = 0;
   for( ; itr != alignment.end(); ++itr, ++cc)
